@@ -1,0 +1,80 @@
+@import '../../../../styles/const/colors.css';
+@import '../../../../styles/fonts/rubik.css';
+
+.input__parent {
+  font-family: 'Rubik', sans-serif;
+  border: 1px solid var(--main-color-secondary);
+  border-radius: 4px;
+  height: 40px;
+  background: var(--main-color-onPrimary);
+  width: 100%;
+}
+.input__container {
+  padding: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: text;
+  justify-content: space-between;
+  input {
+    width: 80%;
+    margin-left: 8px;
+    height: 100%;
+    border: 0;
+    outline: none;
+    font-family: 'Rubik', sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+    &::placeholder {
+      font-family: 'Rubik', sans-serif;
+      line-height: 1.5;
+      color: var(--grayScale-color-hard);
+      font-size: 16px;
+    }
+  }
+}
+
+.pop__open {
+  box-shadow: var(--shadow-secondary-m);
+  height: 100%;
+}
+.search__elements {
+  margin-top: 5px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  li {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    height: 24px;
+    width: 100%;
+
+    span {
+      width: 24px;
+      height: 24px;
+    }
+    &:hover {
+      background-color: var(--main-color-secondary);
+      color: var(--main-color-onSecondary);
+      cursor: pointer;
+      svg{
+      color: var(--main-color-onSecondary);
+
+      }
+    }
+    &:last-child {
+      margin-bottom: 8px;
+    }
+  }
+  p {
+    margin: 0 16px;
+    margin-bottom: 8px;
+    b {
+      margin: 0px 4px;
+    }
+  }
+}

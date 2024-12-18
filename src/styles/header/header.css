@@ -1,0 +1,11 @@
+.header__left {
+  display: flex;
+  gap: 16px;
+}
+
+.button__container {
+  width: 140px;
+}
+.search__inner {
+  width: 376px;
+}

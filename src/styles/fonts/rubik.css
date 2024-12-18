@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Rubik'), local('Rubik-Regular'), url('../../assets/fonts/static/Rubik-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Rubik-Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Rubik Bold'), local('Rubik-Bold'), url('../../assets/fonts/static/Rubik-Bold.ttf') format('truetype');
+}

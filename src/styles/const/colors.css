@@ -1,0 +1,28 @@
+:root {
+  --main-color-bgPage: #fbf8ec;
+
+  --main-color-background: #f4f4f2;
+  --main-color-onBackground: #291e0f;
+
+  --main-color-surface: #ffffff;
+  --main-color-onSurface: #414141;
+
+  --main-color-primary: #ff6633;
+  --main-color-primaryMuted: #fcd5ba;
+  --main-color-onPrimary: #ffffff;
+
+  --main-color-secondary: #70c05b;
+  --main-color-secondaryMuted: #e5ffde;
+  --main-color-onSecondary: #ffffff;
+
+  --grayScale-color-lightest: #f3f2f1;
+  --grayScale-color-light: #bfbfbf;
+  --grayScale-color-hard: #8f8f8f;
+  --grayScale-color-hardest: #606060;
+
+  --pallete-color-success: #008c49;
+  --pallete-color-info: #1cb9fc;
+  --pallete-color-warning: #fca21c;
+  --pallete-color-error: #d80000;
+  --pallete-color-onError: #f2f2f2;
+}

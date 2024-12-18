@@ -1,0 +1,39 @@
+.vertical {
+  .icon__horizontal,
+  .icon__znak {
+    display: none;
+  }
+  .icon__vertical {
+    display: block;
+  }
+}
+.horizontal {
+  .icon__vertical,
+  .icon__znak {
+    display: none;
+  }
+  .icon__horizontal {
+    display: block;
+  }
+}
+.znak {
+  .icon__horizontal,
+  .icon__vertical {
+    display: none;
+  }
+  .icon__znak {
+    display: block;
+  }
+}
+
+.icon__horizontal {
+  height: 32px;
+}
+
+.icon__vertical{
+  height: 44px;
+  width: 64px;
+}
+.icon__znak{
+  height: 40px;
+}

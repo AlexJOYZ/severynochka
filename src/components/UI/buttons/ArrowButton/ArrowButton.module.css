@@ -1,0 +1,33 @@
+.button__arrow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+
+.icon{
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+.button__content {
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+
+.right {
+  transform: rotate(180deg);
+}
+.up {
+  transform: rotate(90deg);
+}
+.left {
+  transform: rotate(360deg);
+}
+.down {
+  transform: rotate(-90deg);
+}
+.icon-btn {
+  .button__content {
+    display: none;
+  }
+}
