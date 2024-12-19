@@ -1,11 +1,19 @@
+header{
+  height: 72px;
+}
+
 .header__left {
   display: flex;
   gap: 16px;
+}
+.header__right{
+  display: flex;
+  gap: 24px;
 }
 
 .button__container {
   width: 140px;
 }
 .search__inner {
-  width: 376px;
+  width: 375px;
 }

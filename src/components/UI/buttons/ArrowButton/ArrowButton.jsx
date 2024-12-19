@@ -1,5 +1,4 @@
-import { ArrowIcon } from '../../icons/ArrowIcon';
-import { Button } from '../Button/Button';
+import { ArrowIcon } from '../../icons/inputIcons/ArrowIcon';
 
 import cl from '../Button/Button.module.css';
 

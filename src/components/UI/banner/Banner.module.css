@@ -1,0 +1,20 @@
+/* @import '../icons/banners/Size=1440\,\ type=about-us.png'; */
+
+.banner{
+  background-image: '../icons/banners/about-360.png';
+
+}
+
+.banner-default {
+  background-image: '../icons/banners/Size=1440\,\ type=about-us.png';
+  .about {
+    display: none;
+  }
+}
+.banner-about {
+  background-image: '../icons/banners/Size=1440\,\ type=about-us.png';
+
+  .default {
+    display: none;
+  }
+}

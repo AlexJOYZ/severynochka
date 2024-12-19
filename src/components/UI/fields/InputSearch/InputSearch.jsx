@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import cl from './InputSearch.module.css';
-import { MenuIcon } from '../../icons/MenuIcon';
-import { SearchIcon } from '../../icons/SearchIcon';
+import { MenuIcon } from '../../icons/inputIcons/MenuIcon';
+import { SearchIcon } from '../../icons/inputIcons/SearchIcon';
 import { Typography } from '../../Typography/Typography';
 
 export const InputSearch = ({ ...props }) => {
   const [value, setValue] = useState('');
+  const [strongStr, setStrongStr] = useState('');
   const [isPopUp, setIsPopUp] = useState(false);
   const [products, setProducts] = useState([
     { title: 'Молоко', id: 1, isCategory: false },
@@ -16,21 +17,25 @@ export const InputSearch = ({ ...props }) => {
     { title: 'Молоко, сыр, яйцо', id: 4, isCategory: true },
   ]);
   const [searchingProducts, setSearchingProducts] = useState([]);
+  let searchPattern = '';
 
   const changeValue = (event) => {
     setValue(event.target.value);
-    const searchPattern = new RegExp(`${event.target.value.toLowerCase()}`, 'gm');
+    searchPattern = new RegExp(`${event.target.value.toLowerCase()}`, 'gm');
     setIsPopUp(true);
     setSearchingProducts(
       products.filter((product) => searchPattern.test(product.title.toLowerCase())),
     );
+    searchingProducts.map((product) => {
+      let str = '';
+      product.title.split('').map((s) => {
+        if (event.target.value.toLowerCase().includes(s.toLowerCase())) {
+          str += s;
+        }
+      });
+      setStrongStr(str);
+    });
     console.log(...searchingProducts);
-  };
-
-  const hightLight = (props) => {
-    const {filter, str} = props
-    if (!filter) return str
-    const 
   };
 
   return (
@@ -49,16 +54,32 @@ export const InputSearch = ({ ...props }) => {
       </div>
       {isPopUp && (
         <div className={`${cl.search__elements}`}>
-          {searchingProducts.map((searchingProduct) => (
-            <li key={searchingProduct.id}>
-              {searchingProduct.title}
-              {searchingProduct.isCategory && (
-                <span>
-                  <MenuIcon />
-                </span>
-              )}
-            </li>
-          ))}
+          {searchingProducts.map((searchingProduct) => {
+            // searchingProduct.title.split(searchPattern).map((s, i, array) => {
+            //   if (i < array.length - 1) {
+            //     const str = searchingProduct.title.match(searchPattern).shift();
+
+            //     searchingProduct.title = (
+            //       <>
+            //         {s}
+            //         <span style={{ backgroundColor: 'red' }}>{str}</span>
+            //       </>
+            //     );
+            //     console.log('@', searchingProduct.title,str);
+            //   }
+            // });
+            return (
+              <li key={searchingProduct.id}>
+                {searchingProduct.title}
+                <strong>{strongStr}</strong>
+                {searchingProduct.isCategory && (
+                  <span>
+                    <MenuIcon />
+                  </span>
+                )}
+              </li>
+            );
+          })}
           {!searchingProducts.length && (
             <p>
               По запросу

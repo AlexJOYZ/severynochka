@@ -12,7 +12,6 @@ export const IconButton = ({
   position = 'left',
   type = 'default',
   Icon,
-  iconColor,
   ...props
 }) => {
   return (
