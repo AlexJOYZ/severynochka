@@ -1,12 +1,19 @@
-header{
-  height: 72px;
+.header__container {
+  box-shadow: var(--shadow-default-s);
+  position: relative;
+  z-index: 20;
+  margin-bottom: 4px;
+}
+
+header {
+  max-height: 72px;
 }
 
 .header__left {
   display: flex;
   gap: 16px;
 }
-.header__right{
+.header__right {
   display: flex;
   gap: 24px;
 }
@@ -16,4 +23,5 @@ header{
 }
 .search__inner {
   width: 375px;
+  position: relative;
 }

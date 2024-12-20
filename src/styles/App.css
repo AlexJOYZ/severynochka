@@ -1,6 +1,7 @@
 .container {
-  margin: 0 auto;
-  width: fit-content;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .grid {
   display: flex;

@@ -1,20 +1,17 @@
-/* @import '../icons/banners/Size=1440\,\ type=about-us.png'; */
-
-.banner{
-  background-image: '../icons/banners/about-360.png';
-
+.banner {
+  width: 100%;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.banner-default {
-  background-image: '../icons/banners/Size=1440\,\ type=about-us.png';
-  .about {
-    display: none;
-  }
+.default {
+  background-image: url('../icons/banners/general-1440.png');
 }
-.banner-about {
-  background-image: '../icons/banners/Size=1440\,\ type=about-us.png';
+.about {
+  background-image: url('../icons/banners/about-1440.png');
+}
 
-  .default {
-    display: none;
-  }
+@media (max-width: 768px) {
+  
 }

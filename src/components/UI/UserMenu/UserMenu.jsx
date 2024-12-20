@@ -1,5 +1,5 @@
 import cl from './UserMenu.module.css'
-import icon from'../icons/userIcons/avatar.png'
+import icon from'../../../assets/icons/userIcons/avatar.png'
 
 import { ArrowButton } from '../buttons/ArrowButton/ArrowButton';
 import { Typography } from '../Typography/Typography';

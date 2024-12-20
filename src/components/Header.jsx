@@ -13,26 +13,28 @@ import { UserMenu } from './UI/UserMenu/UserMenu';
 
 export const Header = () => {
   return (
-    <header>
-      <Flex>
-        <Logo type='horizontal' />
-        <div className='header__left'>
-          <div className='button__container'>
-            <IconButton accent='secondary' Icon={MenuIcon} position='left' size='m'>
-              Label
-            </IconButton>
+    <div className='container header__container'>
+      <header>
+        <Flex>
+          <Logo type='horizontal' />
+          <div className='header__left'>
+            <div className='button__container'>
+              <IconButton accent='secondary' Icon={MenuIcon} position='left' size='m'>
+                Каталог
+              </IconButton>
+            </div>
+            <div className='search__inner'>
+              <InputSearch maxLength='30' />
+            </div>
           </div>
-          <div className='search__inner'>
-            <InputSearch maxLength='30' />
+          <div className='header__right'>
+            <MenuButton Icon={FavoritesIcon}>Избранное</MenuButton>
+            <MenuButton Icon={OrderIcon}>Заказы</MenuButton>
+            <MenuButton Icon={CartIcon}>Корзина</MenuButton>
+            <UserMenu />
           </div>
-        </div>
-        <div className='header__right'>
-          <MenuButton Icon={FavoritesIcon}>Избранное</MenuButton>
-          <MenuButton Icon={OrderIcon}>Заказы</MenuButton>
-          <MenuButton Icon={CartIcon}>Корзина</MenuButton>
-          <UserMenu />
-        </div>
-      </Flex>
-    </header>
+        </Flex>
+      </header>
+    </div>
   );
 };

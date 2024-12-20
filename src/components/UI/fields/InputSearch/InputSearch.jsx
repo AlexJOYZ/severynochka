@@ -47,8 +47,10 @@ export const InputSearch = ({ ...props }) => {
           type='text'
           value={value}
           placeholder='Найти товар'
+          maxLength='14'
           onChange={(e) => changeValue(e)}
           onBlur={() => setIsPopUp(false)}
+
         />
         <SearchIcon />
       </div>

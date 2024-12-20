@@ -4,9 +4,9 @@
   font-family: 'Rubik', sans-serif;
   border: 1px solid var(--main-color-secondary);
   border-radius: 4px;
-  height: 40px;
   background: var(--main-color-onPrimary);
   width: 100%;
+  position: absolute;
 }
 .input__container {
   padding: 8px;
@@ -35,7 +35,7 @@
 
 .pop__open {
   box-shadow: var(--shadow-secondary-m);
-  height: 100%;
+  height: fit-content;
 }
 .search__elements {
   margin-top: 5px;
@@ -43,6 +43,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex-wrap: wrap;
   li {
     padding: 0 16px;
     display: flex;
@@ -60,9 +61,8 @@
       background-color: var(--main-color-secondary);
       color: var(--main-color-onSecondary);
       cursor: pointer;
-      svg{
-      color: var(--main-color-onSecondary);
-
+      svg {
+        color: var(--main-color-onSecondary);
       }
     }
     &:last-child {

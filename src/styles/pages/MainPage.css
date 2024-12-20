@@ -1,0 +1,6 @@
+.main__content{
+  padding-top: 80px;
+
+  height: 1000px;
+  background-color: var(--main-color-bgPage);
+}

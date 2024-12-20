@@ -19,7 +19,7 @@ export const ArrowButton = ({
       {...props}
     >
       <span className={classes.button__content}>{children}</span>
-      <ArrowIcon className={`${classes[direction]} ${classes.icon} ${classes.svg__arrow}`} />
+      <ArrowIcon className={`${classes[direction]} ${classes.icon}`} />
     </button>
   );
 };
