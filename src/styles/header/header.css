@@ -2,11 +2,17 @@
   box-shadow: var(--shadow-default-s);
   position: relative;
   z-index: 20;
+  width: 100%;
   margin-bottom: 4px;
+  padding: 0 200px;
 }
 
 header {
+  max-width: 1208px;
   max-height: 72px;
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
 }
 
 .header__left {
@@ -18,6 +24,9 @@ header {
   gap: 24px;
 }
 
+.header__logo{
+  margin-right: 26px;
+}
 .button__container {
   width: 140px;
 }

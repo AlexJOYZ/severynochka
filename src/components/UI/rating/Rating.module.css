@@ -1,0 +1,21 @@
+.rating {
+  position: relative;
+  width: 80px;
+}
+
+.star {
+  display: flex;
+  position: relative;
+  /* z-index: 3; */
+}
+.star__cover {
+  overflow: hidden;
+  width: 50%;
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  bottom: 0px;
+  right: 0;
+  display: flex;
+}

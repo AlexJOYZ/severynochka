@@ -1,14 +1,26 @@
-import '../styles/pages/MainPAge.css'
+import '../styles/pages/MainPAge.css';
 
 import { Banner } from '../components/UI/banner/Banner';
-import { Typography } from '../components/UI/Typography/Typography';
+import { SectionProducts } from '../components/Layout/SectionProducts/SectionProducts';
 
 export const MainPage = () => {
+  const sectionNew = {
+    title: 'Акции',
+    titleBtn: 'акции',
+    products: [
+      {
+        title: 'Молоко',
+        id: 1,
+      },
+    ],
+  };
   return (
     <main>
       <Banner />
-      <div className="container main__content">
-        <Typography as='p' size='s' type='text'>ddjdj</Typography>
+      <div className='container main__content'>
+        <div className='container__inner'>
+          <SectionProducts productSection={sectionNew} />
+        </div>
       </div>
     </main>
   );

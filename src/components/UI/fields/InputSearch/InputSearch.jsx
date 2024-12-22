@@ -50,7 +50,6 @@ export const InputSearch = ({ ...props }) => {
           maxLength='14'
           onChange={(e) => changeValue(e)}
           onBlur={() => setIsPopUp(false)}
-
         />
         <SearchIcon />
       </div>
