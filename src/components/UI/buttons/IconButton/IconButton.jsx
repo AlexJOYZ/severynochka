@@ -12,15 +12,16 @@ export const IconButton = ({
   position = 'left',
   type = 'default',
   Icon,
+  className = '',
   ...props
 }) => {
   return (
     <button
-      className={`${cl.button} ${styles.icon__btn} ${cl[accent]} ${cl[size]} ${cl[decoration]}`}
+      className={`${cl.button} ${styles.icon__btn} ${classes[type]} ${cl[accent]} ${cl[size]} ${styles[size]} ${cl[decoration]} ${className}`}
       {...props}
     >
       {position === 'left' ? <Icon className={classes.icon} color='white' /> : ''}
-      <span  className={`${classes.button__content}` }>{children}</span>
+      <span className={classes.button__content}>{children}</span>
       {position === 'right' ? <Icon className={classes.icon} /> : ''}
     </button>
   );

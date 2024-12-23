@@ -2,4 +2,14 @@
   display: flex;
   gap: 8px;
   align-items: center;
+  justify-content: center;
+  &.l{
+    padding: 14px;
+  }
+  &.m{
+    padding: 8px;
+  }
+  &.s{
+    padding: 4px;
+  }
 }

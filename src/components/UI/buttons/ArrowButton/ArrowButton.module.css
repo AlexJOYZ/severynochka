@@ -27,6 +27,7 @@
   transform: rotate(-90deg);
 }
 .icon-btn {
+  gap: 0px;
   .button__content {
     display: none;
   }

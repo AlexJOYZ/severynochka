@@ -1,16 +1,18 @@
 .rating {
   position: relative;
-  width: 80px;
+  width: 86px;
+  align-items: center;
 }
+
 
 .star {
   display: flex;
   position: relative;
-  /* z-index: 3; */
+  gap: 4px;
+
 }
 .star__cover {
   overflow: hidden;
-  width: 50%;
   position: absolute;
   z-index: 2;
   left: 0;
@@ -18,4 +20,6 @@
   bottom: 0px;
   right: 0;
   display: flex;
+  align-items: center;
+  gap: 4px;
 }

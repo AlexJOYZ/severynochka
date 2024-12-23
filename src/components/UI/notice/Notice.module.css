@@ -1,0 +1,40 @@
+.notice {
+  width: 100%;
+  display: flex;
+  border-radius: 4px;
+  font-family: 'Rubik', sans-serif;
+  user-select: none;
+  line-height: 1.5;
+  width: fit-content;
+  &.m {
+    padding: 4px 8px;
+    font-size: 16px;
+  }
+  &.s {
+    padding: 3px 8px;
+    font-size: 12px;
+  }
+
+  &.primary {
+    background-color: var(--main-color-primary);
+    color: var(--main-color-onPrimary);
+  }
+  &.gray {
+    background-color: var(--grayScale-color-lightest);
+  }
+  &.error {
+    background-color: var(--pallete-color-error);
+    color: var(--main-color-onPrimary);
+  }
+  &.secondary {
+    background-color: var(--main-color-secondary);
+    color: var(--main-color-onSecondary);
+  }
+  &.success {
+    background-color: var(--pallete-color-success);
+    color: var(--main-color-onSecondary);
+  }
+}
+.icon-text {
+  gap: 4px;
+}
