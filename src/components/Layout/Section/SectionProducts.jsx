@@ -1,11 +1,11 @@
 import '../../../styles/sectionProducts/sectionProducts.css';
 
 import { ArrowButton } from '../../UI/buttons/ArrowButton/ArrowButton';
-import { ItemCard } from '../../UI/cards/ItemCard/ItemCard';
 import { Typography } from '../../UI/Typography/Typography';
+import { SectionItems } from './SectionItems/SectionItems';
 
-export const SectionProducts = ({ productSection }) => {
-  const { title, titleBtn, products } = productSection;
+export const Section = ({ section, type = 'product' }) => {
+  const { title, titleBtn, items } = section;
   return (
     <section className='section'>
       <div className='section__header'>
@@ -18,11 +18,7 @@ export const SectionProducts = ({ productSection }) => {
           </ArrowButton>
         </div>
       </div>
-      <div className='section__content'>
-        {products.map((product) => (
-          <ItemCard key={product.id} item={product} />
-        ))}
-      </div>
+      <SectionItems items={items} type = {type}/>
     </section>
   );
 };

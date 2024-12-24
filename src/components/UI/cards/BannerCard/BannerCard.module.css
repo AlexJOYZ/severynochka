@@ -1,0 +1,35 @@
+.banner__card {
+  border-radius: 4px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  height: 200px;
+  .banner__img {
+    img {
+      border-radius: 10px;
+    }
+  }
+}
+.banner__text {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+.card {
+  background-color: var(--main-color-primaryMuted);
+  .banner__img {
+    img {
+      transform: rotate(14deg);
+      box-shadow: 4px 8px 16px 0 rgba(255, 102, 51, 0.2);
+    }
+  }
+}
+.promotion {
+  background-color: var(--main-color-secondaryMuted);
+  position: relative;
+  
+}

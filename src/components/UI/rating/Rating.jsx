@@ -3,7 +3,7 @@ import styles from './Rating.module.css';
 import { RatingIcon } from '../icons/rating/RatingIcon';
 
 export const Rating = ({ rating,className='' }) => {
-  const widthStar = 17.2
+  const widthStar = 17.4
   const widthCover = rating * widthStar;
   return (
     <div className={className}>

@@ -1,5 +1,12 @@
-.main__content{
+.main__content {
   padding-top: 80px;
-  height: 1000px;
+  padding-bottom: 80px;
   background-color: var(--main-color-bgPage);
+}
+
+.main__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  width: 100%;
 }
