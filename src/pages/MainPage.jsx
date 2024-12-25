@@ -3,6 +3,7 @@ import '../styles/pages/MainPAge.css';
 import { Banner } from '../components/UI/banner/Banner';
 import { Section } from '../components/Layout/Section/SectionProducts';
 import { SpecialOffers } from '../components/Layout/SpecialOffers/SpecialOffers';
+import { MapSection } from '../components/Layout/MapSection/MapSection';
 
 export const MainPage = () => {
   const sectionPromotion = {
@@ -20,7 +21,7 @@ export const MainPage = () => {
       },
       {
         title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
-        id: 1,
+        id: 2,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: false,
         rating: 4.8,
@@ -29,7 +30,7 @@ export const MainPage = () => {
       },
       {
         title: 'Молоко ПРОСТОКВАШИНО паст. питьевое цельное отборное',
-        id: 1,
+        id: 3,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: true,
         rating: 4,
@@ -38,7 +39,7 @@ export const MainPage = () => {
       },
       {
         title: 'Молоко ПРОСТОКВАШИНО паст. питьевое цельное отборное',
-        id: 1,
+        id: 4,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: true,
         rating: 4,
@@ -62,7 +63,7 @@ export const MainPage = () => {
       },
       {
         title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
-        id: 1,
+        id: 2,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: false,
         rating: 4.8,
@@ -71,7 +72,7 @@ export const MainPage = () => {
       },
       {
         title: 'Молоко ПРОСТОКВАШИНО паст. питьевое цельное отборное',
-        id: 1,
+        id: 3,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: true,
         rating: 4,
@@ -80,7 +81,7 @@ export const MainPage = () => {
       },
       {
         title: 'Молоко ПРОСТОКВАШИНО паст. питьевое цельное отборное',
-        id: 1,
+        id: 4,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: true,
         rating: 4,
@@ -104,7 +105,7 @@ export const MainPage = () => {
       },
       {
         title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
-        id: 1,
+        id: 2,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: false,
         rating: 4.8,
@@ -113,7 +114,7 @@ export const MainPage = () => {
       },
       {
         title: 'Молоко ПРОСТОКВАШИНО паст. питьевое цельное отборное',
-        id: 1,
+        id: 3,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: true,
         rating: 4,
@@ -122,7 +123,7 @@ export const MainPage = () => {
       },
       {
         title: 'Молоко ПРОСТОКВАШИНО паст. питьевое цельное отборное',
-        id: 1,
+        id: 4,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: true,
         rating: 4,
@@ -140,6 +141,7 @@ export const MainPage = () => {
           <Section section={sectionNovelty} />
           <Section section={sectionBuy} />
           <SpecialOffers />
+          <MapSection />
         </div>
       </div>
     </main>

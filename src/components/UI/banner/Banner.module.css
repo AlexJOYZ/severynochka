@@ -6,10 +6,10 @@
 }
 
 .default {
-  background-image: url('../icons/banners/general-1440.png');
+  background-image: url('../../../assets/icons/banners/general-1440.png');
 }
 .about {
-  background-image: url('../icons/banners/about-1440.png');
+  background-image: url('../../../assets/icons/banners/about-1440.png');
 }
 
 @media (max-width: 768px) {

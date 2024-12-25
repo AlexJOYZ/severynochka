@@ -1,7 +1,5 @@
 import styles from './ProductCard.module.css';
 
-import pancakesImg from '../../../../assets/icons/cards/pancakes-img.svg';
-
 import { Rating } from '../../rating/Rating';
 import { Typography } from '../../Typography/Typography';
 import { Button } from '../../buttons/Button/Button';
@@ -17,7 +15,7 @@ export const ProductCard = ({ item }) => {
   const itemRef = useRef();
   const btnRef = useRef();
 
-  const itemPriceWithDiscount =  (item.price - item.price * (item.discount / 100)).toFixed(2);
+  const itemPriceWithDiscount = (item.price - item.price * (item.discount / 100)).toFixed(2);
 
   const isItemHovering = useHover(itemRef);
   const isBtnHovering = useHover(btnRef);

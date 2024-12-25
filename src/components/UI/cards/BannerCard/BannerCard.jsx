@@ -1,11 +1,18 @@
 import styles from './BannerCard.module.css';
 
+import { useRef } from 'react';
+import { useHover } from '../../../../hooks/useHover';
+
 import { Typography } from '../../Typography/Typography';
 
-import cardIcon from './card.jpg';
-import promotionIcon from './promotion.png';
+import cardIcon from '../../../../assets/icons/cards/BannerCard/card.jpg';
+import promotionIcon from '../../../../assets/icons/cards/BannerCard/promotion.png';
+import { DesignPromotion } from './DesignPromotion';
 
 export const BannerCard = ({ type }) => {
+  const ref = useRef();
+  const isHovering = useHover(ref);
+
   const bannerObject = {
     card: {
       title: 'Оформите карту «Северяночка»',
@@ -21,7 +28,10 @@ export const BannerCard = ({ type }) => {
   const banner = bannerObject[type];
 
   return (
-    <div className={`${styles.banner__card} ${styles[type]}`}>
+    <div
+      className={`${styles.banner__card} ${styles[type]} ${isHovering && styles.hover}`}
+      ref={ref}
+    >
       <div className={styles.banner__text}>
         <Typography as='h3' variant='header' size='s'>
           {banner.title}
@@ -32,7 +42,7 @@ export const BannerCard = ({ type }) => {
       </div>
       <div className={styles.banner__img}>
         <img src={banner.imgUrl} alt='banner image' />
-        <Typography as='p'></Typography>
+        {type === 'promotion' && <DesignPromotion />}
       </div>
     </div>
   );

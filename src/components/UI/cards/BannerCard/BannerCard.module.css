@@ -6,6 +6,7 @@
   justify-content: space-between;
   width: 50%;
   height: 200px;
+  cursor: pointer;
   .banner__img {
     img {
       border-radius: 10px;
@@ -21,6 +22,9 @@
 }
 .card {
   background-color: var(--main-color-primaryMuted);
+  &.hover {
+    box-shadow: var(--shadow-primary-m);
+  }
   .banner__img {
     img {
       transform: rotate(14deg);
@@ -30,6 +34,79 @@
 }
 .promotion {
   background-color: var(--main-color-secondaryMuted);
-  position: relative;
-  
+  .banner__img {
+    position: relative;
+    img {
+      position: relative;
+      z-index: 5;
+    }
+    svg{
+      position: absolute;
+      z-index: 4;
+    }
+  }
+  &.hover {
+    box-shadow: var(--shadow-secondary-m);
+  }
+}
+.img__currency_1 {
+  top: 2px;
+  left: 10px;
+  height: 55px;
+}
+.img__currency_2 {
+  top: 10px;
+  right: -3px;
+  height: 52px;
+}
+.img__currency_3 {
+  bottom: 30px;
+  right: 5px;
+  height: 33px;
+}
+.img__currency_4 {
+  bottom: 30px;
+  left: 8px;
+  height: 30px;
+}
+
+.img__plus_1{
+  bottom: 70px;
+  right: -15px;
+  height: 39px;
+}
+.img__plus_2{
+  bottom: 70px;
+  left: -10px;
+  height: 31px;
+}
+.img__plus_3{
+  top: 3px;
+  right: 70px;
+  height: 26px;
+}
+.img__plus_4{
+  top: 39px;
+  left: -29px;
+  height: 17px;
+}
+.img__plus_5{
+  bottom: 22px;
+  left: -36px;
+  height: 11px;
+}
+.img__plus_6{
+  top: -1px;
+  right: -3px;
+  height: 11px;
+}
+.img__plus_7{
+  bottom: 10px;
+  right: -30px;
+  height: 11px;
+}
+.img__plus_8{
+  bottom: 25px;
+  right: 70px;
+  height: 11px;
 }
