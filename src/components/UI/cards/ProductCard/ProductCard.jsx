@@ -1,4 +1,5 @@
 import styles from './ProductCard.module.css';
+import cl from '../card.module.css';
 
 import { Rating } from '../../rating/Rating';
 import { Typography } from '../../Typography/Typography';
@@ -27,11 +28,11 @@ export const ProductCard = ({ item }) => {
   return (
     <article
       ref={itemRef}
-      className={`${styles.card} ${isItemHovering ? styles.card__active : ''} ${
+      className={`${cl.card} ${isItemHovering ? cl.card__active : ''} ${
         !!item.discount ? '' : styles.card__prod
       }`}
     >
-      <div className={styles.card__img}>
+      <div className={cl.card__img}>
         <img src={item.imgUrl} />
         <div
           className={`${styles.button__container} ${isBtnHovering ? styles.btn__hover : ''} ${

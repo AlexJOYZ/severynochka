@@ -1,0 +1,13 @@
+.newsCard__content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsCard__date {
+  color: var(--grayScale-color-hard) ;
+}
+.button__container{
+  width: 150px;
+}

@@ -1,24 +1,31 @@
-import { load } from '@2gis/mapgl';
 import { useEffect } from 'react';
-import { MAP_API_KEY } from '../../../const/MapKey';
+
+import styles from './Map.module.css';
+
+import { load } from '@2gis/mapgl';
+
+import { MAP_API_KEY, MAP_INITIAL_COORDINATES } from '../../../const/Map';
 import { MapWrapper } from './MapWrapper';
 
-export const Map = () => {
+export const Map = ({ coordinates }) => {
   useEffect(() => {
     let map;
     load().then((mapglAPI) => {
       map = new mapglAPI.Map('map-container', {
-        center: [55.31878, 25.235],
-        zoom: 13,
+        center: coordinates.center ?? MAP_INITIAL_COORDINATES,
+        zoom: 18,
         key: MAP_API_KEY,
+      });
+      const marker = new mapglAPI.Marker(map, {
+        coordinates: coordinates.center ?? MAP_INITIAL_COORDINATES,
       });
     });
 
     return () => map && map.destroy();
-  }, []);
+  }, [coordinates]);
 
   return (
-    <div style={{ width: '100%', height: '354px' }}>
+    <div className={styles.map}>
       <MapWrapper />
     </div>
   );

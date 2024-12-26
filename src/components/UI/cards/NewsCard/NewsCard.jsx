@@ -1,8 +1,38 @@
+import { useRef } from 'react';
 
-export const NewsCard = () => {
+import { useHover } from '../../../../hooks/useHover';
+
+import styles from '../card.module.css';
+import cl from './NewsCard.module.css';
+
+import { Button } from '../../buttons/Button/Button';
+import { Typography } from '../../Typography/Typography';
+
+export const NewsCard = ({ item }) => {
+  const cardRef = useRef();
+  const isHovering = useHover(cardRef);
+
   return (
-    <div>
-      
-    </div>
-  )
+    <article ref={cardRef} className={`${styles.card} ${isHovering && `${styles.card__active}`}`}>
+      <div className={styles.card__img}>
+        <img src={item.imgUrl} alt='news image' />
+      </div>
+      <div className={cl.newsCard__content}>
+        <Typography className={cl.newsCard__date} as='span' variant='text' size='xs'>
+          {item.date}
+        </Typography>
+        <Typography as='h4' variant='header' size='xs'>
+          {item.title}
+        </Typography>
+        <Typography as='p' variant='text' size='s'>
+          {item.subTitle}
+        </Typography>
+        <div className={cl.button__container}>
+          <Button accent='secondary' decoration='default' size='m' disabled={!isHovering}>
+            Подробнее
+          </Button>
+        </div>
+      </div>
+    </article>
+  );
 };

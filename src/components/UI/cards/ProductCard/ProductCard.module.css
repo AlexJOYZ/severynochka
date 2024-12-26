@@ -1,12 +1,3 @@
-.card {
-  width: 25%;
-  background-color: var(--main-color-surface);
-  border-radius: 4px;
-  box-shadow: var(--shadow-default-xs);
-}
-.card__active{
-  box-shadow: var(--shadow-primary-m);
-}
 .card__prod{
   .notice{
     display: none;
@@ -16,16 +7,6 @@
   }
   .price__text{
     opacity: 0;
-  }
-}
-
-.card__img {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  img {
-    object-fit: cover;
-    max-width: 100%;
   }
 }
 .button__container {

@@ -132,16 +132,57 @@ export const MainPage = () => {
       },
     ],
   };
+
+  const sectionNews = {
+    title: 'Статьи',
+    titleBtn: 'статьи',
+    items: [
+      {
+        id: 1,
+        title: 'Режим использования масок и перчаток на территории магазинов',
+        subTitle:
+          'Подробная информация о режимах использования масок и перчаток на территории магазинов "ЛЕНТА". Информация обновляется каждый будний день.',
+        imgUrl: 'https://i.postimg.cc/wx5h4ZKd/image-5.png',
+        date:'2024-06-05T08:41:00Z'
+      },
+      {
+        id: 2,
+        title: 'Режим использования масок и перчаток на территории магазинов',
+        subTitle:
+          'Подробная информация о режимах использования масок и перчаток на территории магазинов "ЛЕНТА". Информация обновляется каждый будний день.',
+        imgUrl: 'https://i.postimg.cc/wx5h4ZKd/image-5.png',
+        date:'2024-01-05T08:41:00Z'
+      },
+      {
+        id: 3,
+        title: 'Режим использования масок и перчаток на территории магазинов',
+        subTitle:
+          'Подробная информация о режимах использования масок и перчаток на территории магазинов "ЛЕНТА". Информация обновляется каждый будний день.',
+        imgUrl: 'https://i.postimg.cc/wx5h4ZKd/image-5.png',
+        date:'2023-06-05T08:41:00Z'
+      },
+      {
+        id: 4,
+        title: 'Режим использования масок и перчаток на территории магазинов',
+        subTitle:
+          'Подробная информация о режимах использования масок и перчаток на территории магазинов "ЛЕНТА". Информация обновляется каждый будний день.',
+        imgUrl: 'https://i.postimg.cc/wx5h4ZKd/image-5.png',
+        date:'2022-06-05T08:41:00Z'
+      },
+    ],
+  };
+
   return (
     <main>
       <Banner />
       <div className='container main__content'>
         <div className='container__inner main__inner'>
-          <Section section={sectionPromotion} />
-          <Section section={sectionNovelty} />
-          <Section section={sectionBuy} />
+          <Section type='product' section={sectionPromotion} />
+          <Section type='product' section={sectionNovelty} />
+          <Section type='product' section={sectionBuy} />
           <SpecialOffers />
           <MapSection />
+          <Section type='news' section={sectionNews} />
         </div>
       </div>
     </main>
