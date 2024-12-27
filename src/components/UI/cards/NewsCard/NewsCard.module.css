@@ -1,13 +1,25 @@
+.newsCard {
+  position: relative;
+  width: 33.33333%;
+  height: auto;
+}
+
 .newsCard__content {
   padding: 10px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 10px;
+  p{
+    margin-bottom: 50px;
+  }
 }
 
 .newsCard__date {
-  color: var(--grayScale-color-hard) ;
+  color: var(--grayScale-color-hard);
 }
-.button__container{
+.button__container {
+  position: absolute;
+  bottom: 10px;
   width: 150px;
 }

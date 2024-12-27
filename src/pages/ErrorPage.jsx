@@ -1,9 +1,9 @@
-import { Link, useRouteError } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { Typography } from '../components/UI/Typography/Typography';
 import '../styles/pages/ErrorPage.css';
 
 export const ErrorPage = () => {
-  const error = useRouteError();
+  const error = useLoaderData();
   console.error(error);
   return (
     <div className='modal'>

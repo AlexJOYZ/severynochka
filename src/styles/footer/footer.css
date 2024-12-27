@@ -1,0 +1,29 @@
+footer {
+  background-color: #f9f4e2;
+  background-image: url(../../assets/icons/footer/footerBG.svg);
+  padding: 24px 0px;
+}
+.footer__container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__left{
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+.footer__right{
+  display: flex;
+  gap: 40px;
+}
+.footer__social{
+  display: flex;
+  gap: 16px;
+}
+.footer__tel{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+

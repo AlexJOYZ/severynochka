@@ -9,9 +9,7 @@ export const Layout = () => {
     <>
       <Header />
       <Outlet />
-      <div className='container'>
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 };

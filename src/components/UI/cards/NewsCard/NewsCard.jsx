@@ -12,14 +12,19 @@ export const NewsCard = ({ item }) => {
   const cardRef = useRef();
   const isHovering = useHover(cardRef);
 
+  const dateNews = new Date(item.date).toLocaleDateString('ru');
+
   return (
-    <article ref={cardRef} className={`${styles.card} ${isHovering && `${styles.card__active}`}`}>
+    <article
+      ref={cardRef}
+      className={`${styles.card} ${cl.newsCard} ${isHovering && `${styles.card__active}`}`}
+    >
       <div className={styles.card__img}>
         <img src={item.imgUrl} alt='news image' />
       </div>
       <div className={cl.newsCard__content}>
         <Typography className={cl.newsCard__date} as='span' variant='text' size='xs'>
-          {item.date}
+          {dateNews}
         </Typography>
         <Typography as='h4' variant='header' size='xs'>
           {item.title}
