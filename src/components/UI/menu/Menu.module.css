@@ -1,0 +1,15 @@
+.menu {
+  position: absolute;
+  top: calc(100%);
+  left: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: grid;
+  width: 100vw;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 40px;
+  row-gap:24px;
+  background-color: var(--main-color-surface);
+  z-index: 5;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+}

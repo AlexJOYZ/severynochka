@@ -5,10 +5,31 @@
   align-items: center;
   margin: 11px 0px;
   cursor: pointer;
+  .cart__length{
+    display: none;
+    border-radius: 4px;
+    background-color: var(--main-color-primary);
+    padding: 2px 4px;
+    color: var(--main-color-onPrimary);
+    position: absolute;
+    top: -7px;
+    right: -6px;
+  }
+}
+.menuButton__img{
+  position: relative;
 }
 .hover {
   p {
     transition: all 0.2s;
     color: var(--main-color-primary);
+  }
+}
+
+
+.cart{
+
+  .cart__length{
+    display: block;
   }
 }

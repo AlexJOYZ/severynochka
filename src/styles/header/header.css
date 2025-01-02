@@ -28,6 +28,17 @@ header {
 }
 .button__container {
   width: 140px;
+
+}
+.menu__open{
+  display: inline-block;
+}
+.menu__container{
+  position: absolute;
+  top: 57%;
+  left: 0;
+  height: 30px;
+  width: 100vw;
 }
 .search__inner {
   width: 375px;

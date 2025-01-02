@@ -1,3 +1,9 @@
+import { useRef, useState } from 'react';
+
+import { useDispatch } from 'react-redux';
+
+import { addCartAction, removeCartAction } from '../../../../store/reducers/cartReducer';
+
 import styles from './ProductCard.module.css';
 import cl from '../card.module.css';
 
@@ -7,11 +13,16 @@ import { Button } from '../../buttons/Button/Button';
 import { FavoritesIcon } from '../../icons/MenuButtons/FavoritesIcon';
 import { IconButton } from '../../buttons/IconButton/IconButton';
 import { Notice } from '../../notice/Notice';
-import { useRef, useState } from 'react';
 import { useHover } from '../../../../hooks/useHover';
+import { MinusIconBtn } from '../../icons/card/MinusIconBtn';
+import { PlusIconBtn } from '../../icons/card/PlusIconBtn';
 
 export const ProductCard = ({ item }) => {
   const [isFavorite, setIsFavorite] = useState(item.isFavorite);
+  const [isCart, setCart] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+
+  const dispatch = useDispatch();
 
   const itemRef = useRef();
   const btnRef = useRef();
@@ -23,6 +34,17 @@ export const ProductCard = ({ item }) => {
 
   const clickFavoriteBtn = () => {
     setIsFavorite(!isFavorite);
+  };
+
+  const addProductInCart = () => {
+    setCart(true);
+    setCartCount((prev) => prev + 1);
+    dispatch(addCartAction(item));
+  };
+  const removeProductInCart = () => {
+    if (cartCount===1) setCart(false);
+    setCartCount((prev) => prev - 1);
+    dispatch(removeCartAction(item.id));
   };
 
   return (
@@ -71,13 +93,29 @@ export const ProductCard = ({ item }) => {
         </Typography>
         <Rating rating={item.rating} className={styles.card__item} />
         <div className={`${styles.card__button} ${styles.card__item}`}>
-          <Button
-            size='m'
-            decoration={`${isItemHovering ? 'default' : 'outline'}`}
-            accent={`${isItemHovering ? 'primary' : 'secondary'}`}
-          >
-            В корзину
-          </Button>
+          {isCart ? (
+            <IconButton
+              position='both'
+              IconLeft={MinusIconBtn}
+              leftClick={removeProductInCart}
+              rightClick={addProductInCart}
+              IconRight={PlusIconBtn}
+              size='m'
+              decoration='default'
+              accent='secondary'
+            >
+              {cartCount}
+            </IconButton>
+          ) : (
+            <Button
+              size='m'
+              decoration={`${isItemHovering ? 'default' : 'outline'}`}
+              accent={`${isItemHovering ? 'primary' : 'secondary'}`}
+              onClick={addProductInCart}
+            >
+              В корзину
+            </Button>
+          )}
         </div>
       </div>
     </article>

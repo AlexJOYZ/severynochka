@@ -11,7 +11,11 @@ export const IconButton = ({
   decoration = 'default',
   position = 'left',
   type = 'default',
-  Icon,
+  Icon = null,
+  IconLeft = null,
+  leftClick=null,
+  rightClick=null,
+  IconRight = null,
   className = '',
   ...props
 }) => {
@@ -20,9 +24,15 @@ export const IconButton = ({
       className={`${cl.button} ${styles.icon__btn} ${classes[type]} ${cl[accent]} ${cl[size]} ${styles[size]} ${cl[decoration]} ${className}`}
       {...props}
     >
-      {position === 'left' ? <Icon className={classes.icon} color='white' /> : ''}
+      {position === 'left' && position !== 'both' && (
+        <Icon className={classes.icon} color='white' />
+      )}
+      {!!IconLeft && <IconLeft onClick={leftClick} className={classes.icon} color='white' />}
       <span className={classes.button__content}>{children}</span>
-      {position === 'right' ? <Icon className={classes.icon} /> : ''}
+      {!!IconRight && <IconRight onClick={rightClick} className={classes.icon} color='white' />}
+      {position === 'right' && position !== 'both' && (
+        <Icon className={classes.icon} color='white' />
+      )}
     </button>
   );
 };
