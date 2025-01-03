@@ -10,14 +10,6 @@ import { Vacancy } from './pages/Vacancy';
 import { Orders } from './pages/Orders';
 import { Cart } from './pages/Cart';
 
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <Layout />,
-//     errorElement: <ErrorPage />,
-//     children: [{ element: <MainPage />, index: true }],
-//   },
-// ]);
 
 export const App = () => {
   return (

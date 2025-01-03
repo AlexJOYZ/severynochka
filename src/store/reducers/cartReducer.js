@@ -12,7 +12,7 @@ export const cartReducer = (state = initialCart, action) => {
     case ADD_CART:
       return { ...state, items: [...state.items, action.payload] };
     case REMOVE_CART:
-      return { ...state, items: removeProductFromCart(state.items, action.payload) };
+      return { ...state, items: [...removeProductFromCart(state.items, action.payload)] };
     default:
       return state;
   }

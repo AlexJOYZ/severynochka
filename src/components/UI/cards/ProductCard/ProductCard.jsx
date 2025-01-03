@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addCartAction, removeCartAction } from '../../../../store/reducers/cartReducer';
 
@@ -20,7 +20,9 @@ import { PlusIconBtn } from '../../icons/card/PlusIconBtn';
 export const ProductCard = ({ item }) => {
   const [isFavorite, setIsFavorite] = useState(item.isFavorite);
   const [isCart, setCart] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const countProduct = useSelector(
+    (state) => state.cart.items.filter((product) => product.id === item.id).length,
+  );
 
   const dispatch = useDispatch();
 
@@ -38,14 +40,16 @@ export const ProductCard = ({ item }) => {
 
   const addProductInCart = () => {
     setCart(true);
-    setCartCount((prev) => prev + 1);
     dispatch(addCartAction(item));
   };
   const removeProductInCart = () => {
-    if (cartCount===1) setCart(false);
-    setCartCount((prev) => prev - 1);
+    if (countProduct === 1) setCart(false);
     dispatch(removeCartAction(item.id));
   };
+
+  useEffect(() => {
+    setCart(countProduct !== 0);
+  }, [countProduct]);
 
   return (
     <article
@@ -104,7 +108,7 @@ export const ProductCard = ({ item }) => {
               decoration='default'
               accent='secondary'
             >
-              {cartCount}
+              {countProduct}
             </IconButton>
           ) : (
             <Button

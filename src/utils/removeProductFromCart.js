@@ -1,9 +1,8 @@
-export const removeProductFromCart = (mas, id=0) => {
-  let index;
+export const removeProductFromCart = (mas, id ) => {
+  let index=0;
   mas.forEach((item, i) => {
-    if (item.id === id) index = i;
+    if (item.id === id && !!item.id) index = i;
   });
   mas.splice(index, 1);
   return mas;
 };
-console.log(removeProductFromCart([],0))

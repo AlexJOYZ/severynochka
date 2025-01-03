@@ -3,7 +3,7 @@ import cl from './MenuButton.module.css';
 import { Typography } from '../../Typography/Typography';
 import { useRef } from 'react';
 import { useHover } from '../../../../hooks/useHover';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const MenuButton = ({ type = 'default', children, Icon }) => {
   const ref = useRef();

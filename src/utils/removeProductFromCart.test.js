@@ -18,6 +18,9 @@ describe('removeProductFromCart', () => {
     expect(removeProductFromCart(mas, 2)).not.toEqual(expectedMas);
   });
   test('Пустой массив', () => {
-    expect(removeProductFromCart([], 2)).toEqual(expectedMas);
+    expect(removeProductFromCart([], 2)).toEqual([]);
+  });
+  test('Массив чисел вместо объектов', () => {
+    expect(removeProductFromCart([1,2,3], 1)).toEqual([2,3]);
   });
 });
