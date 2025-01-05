@@ -1,19 +1,39 @@
-import cl from './UserMenu.module.css'
-import icon from'../../../assets/icons/userIcons/avatar.png'
+import cl from './UserMenu.module.css';
+import icon from '../../../assets/icons/userIcons/avatar.png';
 
-import { ArrowButton } from '../buttons/ArrowButton/ArrowButton';
+import { Dropdown } from '../dropdown/Dropdown';
+import { IconButton } from '../buttons/IconButton/IconButton';
+import { LogOutIcon } from '../icons/header/LogOutIcon';
+import { useState } from 'react';
 import { Typography } from '../Typography/Typography';
 
 export const UserMenu = () => {
+  const [isOpen, setOpen] = useState(false);
+
+  const openDropdown = (event) => {
+    setOpen(!isOpen);
+  };
   return (
-    <div className={cl.menu__container}>
+    <div className={`${cl.menu__container} ${isOpen?`${cl.opened}`:''}`}>
       <img className={cl.user__avatar} src={icon} alt='avatar' />
-      <Typography as='p' variant='text' size='s'>
-        Алексей
-      </Typography>
-      <div className={cl.button__container}>
-        <ArrowButton type='icon-btn' decoration='no' accent='primary' size='m' direction='down' />
-      </div>
+      <Dropdown value={isOpen} onClick={openDropdown} label='Алексей' className={cl.menu__dropdown}>
+        <Dropdown label='Профиль'>
+          <li className=''>dfdsd</li>
+          <li className=''>dfdfs</li>
+          <li className=''>dsfdsfd</li>
+        </Dropdown>
+        <IconButton
+          accent='grayscale'
+          className={cl.btn__logout}
+          Icon={LogOutIcon}
+          position='right'
+          decoration='no'
+        >
+          <Typography as='span' size='s' variant='text'>
+            Выйти
+          </Typography>
+        </IconButton>
+      </Dropdown>
     </div>
   );
 };

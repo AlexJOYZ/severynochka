@@ -1,0 +1,34 @@
+.dropdown {
+  position: relative;
+  
+}
+.dropdown > .dropdown__content {
+  .dropdown__content {
+    padding: 0;
+    box-shadow: none;
+    position: initial;
+  }
+}
+
+.dropdown__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.button__container {
+  width: 40px;
+}
+
+.dropdown__content {
+  padding: 8px;
+  top: 100%;
+  left: 0;
+  right: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--main-color-onPrimary);
+}

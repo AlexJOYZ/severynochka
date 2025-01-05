@@ -4,12 +4,37 @@
   gap: 10px;
   align-items: center;
   user-select: none;
+  position: relative;
+  z-index: 100;
+  span{
+    text-align: left;
+  }
+
+}
+.opened{
+  box-shadow: var(--shadow-default-m);
+
 }
 .user__avatar{
   border-radius: 50%;
   width: 40px;
   height: 40px;
 }
-.button__container{
-  width: 40px;
+.menu__dropdown{
+  ul{
+    top:calc(100% + 2px);
+    left: -58px;
+    right: -8px;
+    border-radius: 0px 0px 4px 4px;
+    box-shadow: var(--shadow-default-m);
+  }
+}
+.btn__logout{
+  svg{
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    position: relative;
+    left: -6px;
+  }
 }
