@@ -4,10 +4,13 @@ import styles from './Map.module.css';
 
 import { load } from '@2gis/mapgl';
 
-import { MAP_API_KEY, MAP_INITIAL_COORDINATES } from '../../../const/Map';
+import {  MAP_INITIAL_COORDINATES } from '../../../const/Map';
 import { MapWrapper } from './MapWrapper';
 
+
+
 export const Map = ({ coordinates }) => {
+  const MAP_API_KEY = import.meta.env.VITE_2GIS_TOKEN
   useEffect(() => {
     let map;
     load().then((mapglAPI) => {

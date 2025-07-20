@@ -1,0 +1,37 @@
+.date__input__container {
+  position: relative;
+}
+
+.input__container {
+  cursor: pointer;
+  position: relative;
+
+  * {
+    cursor: pointer;
+  }
+  &:has(label) {
+    .input__icon {
+      position: absolute;
+      top: 75%;
+      right: 8px;
+      transform: translateY(-70%);
+    }
+  }
+}
+
+.input__icon {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+}
+.calendar__container {
+  position: absolute;
+  z-index: 10002;
+  background-color: var(--main-color-surface);
+  box-shadow: var(--shadow-default-l);
+  border-radius: 10px;
+  padding: 5px 10px;
+  right: 0;
+  margin-top: 0.35rem;
+}

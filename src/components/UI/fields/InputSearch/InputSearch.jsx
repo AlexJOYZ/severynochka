@@ -1,6 +1,7 @@
-import { useCallback, useState } from 'react';
+import {  useState } from 'react';
 
 import cl from './InputSearch.module.css';
+
 import { MenuIcon } from '../../icons/inputIcons/MenuIcon';
 import { SearchIcon } from '../../icons/inputIcons/SearchIcon';
 import { Typography } from '../../Typography/Typography';

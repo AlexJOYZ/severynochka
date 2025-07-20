@@ -1,15 +1,15 @@
-.icon__btn{
+.icon__btn {
   display: flex;
-  gap: 8px;
   align-items: center;
   justify-content: center;
-  &.l{
+  &.l {
     padding: 14px;
   }
-  &.m{
+  &.m {
     padding: 8px;
   }
-  &.s{
+  &.s {
     padding: 4px;
   }
 }
+

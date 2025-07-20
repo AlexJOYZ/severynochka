@@ -7,10 +7,10 @@ import { NavLink } from 'react-router-dom';
 
 export const Logo = ({ type, className='' }) => {
   return (
-    <NavLink to='/' className={`${classes.logo} ${classes[type]} ${className}`}>
+    <div className={`${classes.logo} ${classes[type]} ${className}`}>
       <img src={logoHorizontal} className={classes.icon__horizontal} />
       <img src={logoVertical} className={classes.icon__vertical} />
       <img src={logoZnak} className={classes.icon__znak} />
-    </NavLink>
+    </div>
   );
 };

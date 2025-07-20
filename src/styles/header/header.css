@@ -21,6 +21,7 @@ header {
 .header__right {
   display: flex;
   gap: 24px;
+  align-items: center;
 }
 
 .header__logo{
@@ -43,4 +44,8 @@ header {
 .search__inner {
   width: 375px;
   position: relative;
+}
+.button__container{
+  width: 157px;
+  height: fit-content;
 }

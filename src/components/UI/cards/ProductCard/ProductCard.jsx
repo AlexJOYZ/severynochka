@@ -20,6 +20,8 @@ import { PlusIconBtn } from '../../icons/card/PlusIconBtn';
 export const ProductCard = ({ item }) => {
   const [isFavorite, setIsFavorite] = useState(item.isFavorite);
   const [isCart, setCart] = useState(false);
+
+
   const countProduct = useSelector(
     (state) => state.cart.items.filter((product) => product.id === item.id).length,
   );
@@ -46,6 +48,8 @@ export const ProductCard = ({ item }) => {
     if (countProduct === 1) setCart(false);
     dispatch(removeCartAction(item.id));
   };
+
+  
 
   useEffect(() => {
     setCart(countProduct !== 0);

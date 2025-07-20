@@ -1,8 +1,11 @@
-.tabs{
+.tabs__label {
+  color: var(--grayScale-color-hard);
+}
+.tabs__content {
   display: flex;
   gap: 24px;
   margin-bottom: 24px;
-  button{
+  button {
     width: fit-content;
   }
 }

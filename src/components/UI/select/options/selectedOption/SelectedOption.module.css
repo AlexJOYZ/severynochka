@@ -1,0 +1,18 @@
+.selected__option{
+  background-color: var(--main-color-primary);
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  border-radius: 4px;
+  max-width: fit-content;
+  span{
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+  }
+}
+.close__icon{
+  color: #fff;
+}

@@ -1,2 +1,1 @@
-export const MAP_API_KEY = '62450cfc-b636-476b-bb37-325435bb02a0'
 export const MAP_INITIAL_COORDINATES = [104.31672, 52.27004]

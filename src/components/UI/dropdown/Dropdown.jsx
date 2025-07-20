@@ -8,14 +8,13 @@ export const Dropdown = ({
   label,
   children,
   className = '',
-  value = false,
-  setValue,
+  value = null,
+  setValue = null,
   ...props
 }) => {
   const [isOpen, setOpen] = useState(false);
 
-  const showContent = (event) => {
-    event.stopPropagation()
+  const showContent = () => {
     if (!!setValue) setValue(!value);
     else setOpen(!isOpen);
   };

@@ -3,6 +3,9 @@
   
 }
 .dropdown > .dropdown__content {
+  .dropdown{
+    box-shadow: none;
+  }
   .dropdown__content {
     padding: 0;
     box-shadow: none;
@@ -22,6 +25,8 @@
 }
 
 .dropdown__content {
+  box-shadow: var(--shadow-default-m);
+
   padding: 8px;
   top: 100%;
   left: 0;

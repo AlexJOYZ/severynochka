@@ -8,17 +8,23 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "server": "npx mock-config-server "
   },
   "dependencies": {
     "@2gis/mapgl": "^1.54.1",
     "@redux-devtools/extension": "^3.3.0",
+    "@types/react-input-mask": "^3.0.6",
     "axios": "^1.7.9",
+    "jsonwebtoken": "^9.0.2",
+    "mock-config-server": "^4.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-input-mask": "^2.0.4",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.28.0",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
@@ -31,6 +37,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "babel-jest": "^29.7.0",
+    "concurrently": "^9.1.2",
     "eslint": "^8.57.0",
     "eslint-plugin-jest": "^28.10.0",
     "eslint-plugin-react": "^7.34.3",

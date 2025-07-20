@@ -4,8 +4,7 @@
   align-items: center;
 }
 
-
-.icon{
+.icon {
   flex-shrink: 0;
   flex-grow: 0;
 }
@@ -30,5 +29,9 @@
   gap: 0px;
   .button__content {
     display: none;
+  }
+  .icon {
+    flex-shrink: 1;
+    flex-grow: 1;
   }
 }

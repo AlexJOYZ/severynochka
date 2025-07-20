@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import '../../../styles/header/header.css';
 
@@ -11,20 +11,38 @@ import { MenuButton } from '../../UI/buttons/MenuButton/MenuButton';
 import { FavoritesIcon } from '../../UI/icons/MenuButtons/FavoritesIcon';
 import { OrderIcon } from '../../UI/icons/MenuButtons/OrderIcon';
 import { CartIcon } from '../../UI/icons/MenuButtons/CartIcon';
-import { UserMenu } from '../../UI/UserMenu/UserMenu';
 import { Menu } from '../../UI/menu/Menu';
 import { useHover } from '../../../hooks/useHover';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkAuth } from '../../../store/asyncActions/auth';
+import { Button } from '../../UI/buttons/Button/Button';
+import { useFetching } from '../../../hooks/useFetch';
+import { Typography } from '../../UI/Typography/Typography';
+import { UserMenu } from '../UserMenu/UserMenu';
+import { AuthForm } from '../authFrom/AuthForm';
 
 export const Header = () => {
+  const [isModal, setIsModal] = useState(false);
+
   const categoryRef = useRef();
   const menuRef = useRef();
+
+  const dispatch = useDispatch();
+
+  const authData = useSelector((store) => store.account);
 
   const isCategoryHovering = useHover(categoryRef);
   const isMenuHovering = useHover(menuRef);
 
+  const { fetching, isLoading, error } = useFetching(async () => {
+    dispatch(checkAuth());
+  });
+
   const isMenu = isCategoryHovering || isMenuHovering;
 
-  console.log(isMenu);
+  useEffect(() => {
+    fetching();
+  }, [authData]);
 
   return (
     <div className='header__container'>
@@ -44,7 +62,7 @@ export const Header = () => {
             </Link>
             {isMenu && (
               <div className='menu__container' ref={menuRef}>
-                <Menu props={''} />
+                <Menu />
               </div>
             )}
           </div>
@@ -64,9 +82,28 @@ export const Header = () => {
               Корзина
             </MenuButton>
           </Link>
-          <UserMenu />
+          {isLoading && (
+            <Typography as='h3' variant='text-bold' size='m'>
+              Loading...
+            </Typography>
+          )}
+          {authData.isAuth ? (
+            <UserMenu user={authData.user} />
+          ) : (
+            <div className='button__container'>
+              <Button
+                onClick={() => setIsModal(true)}
+                accent='primary'
+                size='m'
+                decoration='default'
+              >
+                Войти
+              </Button>
+            </div>
+          )}
         </div>
       </header>
+      {isModal && <AuthForm setIsModal={setIsModal} />}
     </div>
   );
 };

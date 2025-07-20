@@ -1,0 +1,15 @@
+.option {
+  padding: 8px;
+  padding-left: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ 
+}
+
+.option__hover {
+  background-color: var(--main-color-primaryMuted);
+
+  span {
+    color: var(--main-color-primary);
+  }
+}
