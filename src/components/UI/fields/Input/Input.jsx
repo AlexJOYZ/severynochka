@@ -1,7 +1,10 @@
 import { useRef } from 'react';
-import { Typography } from '../../Typography/Typography';
-import cl from './Input.module.css';
+
 import { useFocus } from '../../../../hooks/useFocus';
+
+import cl from './Input.module.css';
+
+import { Typography } from '../../Typography/Typography';
 
 export const Input = ({
   value,

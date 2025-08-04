@@ -1,0 +1,90 @@
+.tooltip__container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tooltip__innner {
+  position: absolute;
+  z-index: 10200;
+}
+
+.up {
+  top: calc(100% + 2px);
+  .tooltip__triangle {
+    top: -4px;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+.down {
+  top: 0;
+  transform: translate(0, -100%);
+  .tooltip__triangle {
+    bottom: -4px;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(180deg);
+  }
+}
+.left {
+  right: 0;
+  transform: translate(calc(100% + 4px), 0);
+
+  .tooltip__triangle {
+    left: -7px;
+    top: 50%;
+    transform: translate(0, -50%) rotate(-90deg);
+  }
+}
+.right {
+  left: 0;
+  transform: translate(calc(-100% - 4px), 0);
+
+  .tooltip__triangle {
+    right: -7px;
+    top: 50%;
+    transform: translate(0, -50%) rotate(90deg);
+  }
+}
+
+.tooltip {
+  position: relative;
+  padding: 8px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 10100;
+  user-select: none;
+}
+.error {
+  background-color: var(--pallete-color-error);
+  .tooltip__text,
+  .tooltip__icon {
+    color: var(--pallete-color-onError);
+  }
+  .tooltip__triangle {
+    border-bottom-color: var(--pallete-color-error);
+  }
+}
+.light {
+  background-color: #f4f6fb;
+  .tooltip__text {
+    color: #151515;
+  }
+  .tooltip__icon {
+    color: var(--main-color-onSurface);
+  }
+  .tooltip__triangle {
+    border-bottom-color: #f4f6fb;
+  }
+}
+.tooltip__triangle {
+  position: absolute;
+  z-index: 10101;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 4px solid;
+}

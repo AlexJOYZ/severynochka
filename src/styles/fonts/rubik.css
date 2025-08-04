@@ -10,3 +10,9 @@
   font-weight: 700;
   src: local('Rubik Bold'), local('Rubik-Bold'), url('../../assets/fonts/static/Rubik-Bold.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Rubik-Fake';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Rubik Fake'), local('Rubik-Fake'), url('../../assets/fonts/static/Rubik-Fake.ttf') format('truetype');
+}

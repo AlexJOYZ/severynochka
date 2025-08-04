@@ -1,0 +1,1 @@
+export const TIMER__DEFAULT__VALUE = 60

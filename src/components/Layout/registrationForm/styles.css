@@ -2,15 +2,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80vw;
+  width: 60vw;
 }
 .registration__header {
   margin-bottom: 40px;
 }
-.registration__form-step-1 {
+.registration__form__step {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 40px;
+  align-items: center;
+}
+.registration__form__step__2 {
+  gap: 32px;
 }
 .registration__form__section__header {
   margin-bottom: 24px;
@@ -24,7 +28,8 @@
   row-gap: 16px;
 }
 .registration__form__input,
-.select__container {
+.select__container,
+.button__container__primary {
   width: 260px;
 }
 .registration__form__tabs {
@@ -33,4 +38,34 @@
   padding: 4px;
   background-color: var(--grayScale-color-lightest);
   border-radius: 4px;
+}
+.button__primary {
+  background-color: var(--main-color-primaryMuted);
+  color: var(--main-color-primary);
+}
+.button__container__login {
+  width: 121px;
+  margin-bottom: 40px;
+}
+.registration__code__input__container,.registration__prevButton__container {
+  width: 110px;
+}
+.registration__code__input {
+  input {
+    -webkit-text-security:squire;
+    font-family: 'Rubik-Fake', sans-serif;
+    line-height: 1.5;
+  }
+}
+.registration__button__repeat{
+  color: var(--main-color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  user-select: none;
+}
+.registration__text__timer{
+  width: 300px;
+}
+.registration__prevButton__container{
+  margin-bottom: 40px;
 }

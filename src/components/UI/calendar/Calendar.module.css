@@ -1,5 +1,6 @@
 .calendar__container {
   min-width: 18rem;
+  padding: 0.5rem;
 }
 
 .calendar__header {

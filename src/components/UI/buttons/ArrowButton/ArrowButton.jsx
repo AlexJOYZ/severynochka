@@ -10,6 +10,7 @@ export const ArrowButton = ({
   size,
   decoration = 'default',
   direction = 'right',
+  iconPosition = 'right',
   type = 'default',
   ...props
 }) => {
@@ -18,8 +19,11 @@ export const ArrowButton = ({
       className={`${cl.button} ${classes.button__arrow} ${classes[type]} ${cl[accent]} ${cl[size]} ${cl[decoration]}`}
       {...props}
     >
+      {iconPosition === 'left' && <ArrowIcon className={`${classes[direction]} ${classes.icon}`} />}
       <span className={classes.button__content}>{children}</span>
-      <ArrowIcon className={`${classes[direction]} ${classes.icon}`} />
+      {iconPosition === 'right' && (
+        <ArrowIcon className={`${classes[direction]} ${classes.icon}`} />
+      )}
     </button>
   );
 };

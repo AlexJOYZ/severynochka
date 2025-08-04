@@ -5,7 +5,7 @@ import styles from './InputDate.module.css';
 import { Calendar } from '../../calendar/Calendar';
 import { CalendarIcon } from '../../icons/inputIcons/CalendarIcon';
 import { Input } from '../Input/Input';
-import { MAX_LENGTH } from '../../../../const/validations';
+import { MAX_LENGTH } from '../../../../const/registration/validations';
 import { formateDate } from '../../../../utils/helpers/date';
 import { useClickOutside } from '../../../../hooks/useClickOutside';
 
