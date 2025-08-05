@@ -8,24 +8,47 @@ import { Typography } from '../../UI/Typography/Typography';
 import { useForm } from '../../../hooks/useForm';
 import { REGIONS } from '../../../const/registration/regions';
 
+const registrationFormValidateSchema = {
+  telephone: (value) => validateIsEmpty(value),
+  dateOfBirthday: new Date(),
+  surname: (value) => validateIsEmpty(value),
+  name: (value) => validateIsEmpty(value),
+  password: '',
+  passwordRepeat: '',
+  cardNumber: '',
+  email: '',
+  phoneCode: '',
+};
+
 export const RegistrationForm = ({ setStage }) => {
   const [step, setStep] = useState(0);
 
-  const { values, setFieldValue,setIsSubmiting } = useForm({
-    telephone: '',
-    dateOfBirthday: new Date(),
-    surname: '',
-    name: '',
-    region: REGIONS[0],
-    locality: REGIONS[0].localities[0],
-    password: '',
-    passwordRepeat: '',
-    gender: { title: 'Мужской' },
-    cardNumber: '',
-    email: '',
-    hasNotCardLoyalty: false,
-    phoneCode: '',
-  });
+  const {
+    values,
+    setFieldValue,
+    setIsSubmiting,
+    isShowTooltips,
+    setIsShowTooltips,
+    errors,
+    setFieldsErrors,
+  } = useForm(
+    {
+      telephone: '',
+      dateOfBirthday: new Date(),
+      surname: '',
+      name: '',
+      region: REGIONS[0],
+      locality: REGIONS[0].localities[0],
+      password: '',
+      passwordRepeat: '',
+      gender: { title: 'Мужской' },
+      cardNumber: '',
+      email: '',
+      hasNotCardLoyalty: false,
+      phoneCode: '',
+    },
+    registrationFormValidateSchema,
+  );
   const registrationSteps = [
     <RegistrationStepOneForm
       valuesFields={values}
@@ -41,7 +64,7 @@ export const RegistrationForm = ({ setStage }) => {
     />,
   ];
 
-    // console.log(field, value);
+  // console.log(field, value);
 
   return (
     <div className='registration__form' on>

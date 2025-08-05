@@ -31,7 +31,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, valuesFields, setFi
         </Typography>
         <div className='registration__form__section__content'>
           <div className='registration__form__input'>
-            <Tooltip theme='light' direction='right' isWithIcon={true} label='Label'>
+            <Tooltip  theme='light' direction='right' isWithIcon={true} label='Label'>
               <ReactInputMask
                 value={valuesFields.telephone}
                 onChange={(e) => {

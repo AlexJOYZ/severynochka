@@ -6,24 +6,26 @@ const getIsShowTooltips = (initialValues) => {
   return obj;
 };
 
-export const useForm = (initialValues) => {
+export const useForm = (initialValues, validateSchema) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(null);
 
   const [isShowTooltips, setIsShowTooltips] = useState(getIsShowTooltips(initialValues));
   const [isSubmiting, setIsSubmiting] = useState(false);
 
-  console.log(values);
-  console.log('isShowTooltips', isShowTooltips);
+  console.log('values',values);
+  console.log('errors',errors);
 
   const setFieldValue = (field, value) => {
-    setValues((valuesPrev) => {
-      return { ...valuesPrev, [field]: value };
-    });
+    setValues((valuesPrev) => ({ ...valuesPrev, [field]: value }));
+    if (!validateSchema || (!!validateSchema && !!validateSchema[field])) return;
+    const error = validateSchema[field](value);
+    setErrors((errorsPrev) => ({ ...errorsPrev, [field]: error }));
   };
 
   const setFieldsErrors = () => {};
   const handleSubmit = () => {
+    
     setIsSubmiting(true);
   };
   return {
