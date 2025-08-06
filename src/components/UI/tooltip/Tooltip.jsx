@@ -20,7 +20,7 @@ export const Tooltip = ({
           <div className={classNames(styles.tooltip, styles[theme])}>
             {isWithIcon && <TooltipIcon className={styles.tooltip__icon} />}
             <Typography className={styles.tooltip__text} as='span' variant='text' size='s'>
-              {label}
+              {label ?? 'Label'}
             </Typography>
             <span className={styles.tooltip__triangle}></span>
           </div>

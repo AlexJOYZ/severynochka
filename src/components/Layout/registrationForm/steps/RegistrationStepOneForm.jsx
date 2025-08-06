@@ -12,11 +12,10 @@ import ReactInputMask from 'react-input-mask';
 import { REGIONS } from '../../../../const/registration/regions';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 
-export const RegistrationStepOneForm = ({ setStage, setStep, valuesFields, setFieldValue }) => {
+export const RegistrationStepOneForm = ({ setStage, setStep, state, functions }) => {
   // const [selectedRegion, selectRegion] = useState(null);
 
   const genders = [{ title: 'Мужской' }, { title: 'Женский' }];
-  
 
   return (
     <div className='registration__form__step'>
@@ -31,12 +30,17 @@ export const RegistrationStepOneForm = ({ setStage, setStep, valuesFields, setFi
         </Typography>
         <div className='registration__form__section__content'>
           <div className='registration__form__input'>
-            <Tooltip  theme='light' direction='right' isWithIcon={true} label='Label'>
+            <Tooltip
+              direction='up'
+              isShowTooltip={state.isShowTooltips.telephone}
+              isWithIcon={true}
+              label={state.errors?.telephone}
+            >
               <ReactInputMask
-                value={valuesFields.telephone}
+                value={state.values.telephone}
                 onChange={(e) => {
                   const telephone = e.target.value;
-                  setFieldValue('telephone', telephone);
+                  functions.setFieldValue('telephone', telephone);
                 }}
                 maskChar={null}
                 mask='+7 (999) 999-99-99'
@@ -51,80 +55,104 @@ export const RegistrationStepOneForm = ({ setStage, setStep, valuesFields, setFi
           <div className='registration__form__input'>
             <InputDate
               label='Дата рождения'
-              selectedDate={valuesFields.dateOfBirthday}
-              selectDate={(date) => setFieldValue('dateOfBirthday', date)}
+              selectedDate={state.values.dateOfBirthday}
+              selectDate={(date) => functions.setFieldValue('dateOfBirthday', date)}
             />
           </div>
           <div className='registration__form__input'>
-            <Input
-              size='m'
-              label='Фамилия'
-              value={valuesFields.surname}
-              onChange={(e) => {
-                const surname = e.target.value;
-                setFieldValue('surname', surname);
-              }}
-            />
+            <Tooltip
+              direction='up'
+              isShowTooltip={state.isShowTooltips.surname}
+              label={state.errors?.surname}
+            >
+              <Input
+                size='m'
+                label='Фамилия'
+                value={state.values.surname}
+                onChange={(e) => {
+                  const surname = e.target.value;
+                  functions.setFieldValue('surname', surname);
+                }}
+              />
+            </Tooltip>
           </div>
           <div className='select__container'>
             <Select
               onChange={(region) => {
-                setFieldValue('region', region);
-                setFieldValue('locality', region.localities[0]);
+                functions.setFieldValue('region', region);
+                functions.setFieldValue('locality', region.localities[0]);
               }}
-              selected={valuesFields.region}
+              selected={state.values.region}
               options={REGIONS}
               label='Регион'
             />
           </div>
           <div className='registration__form__input'>
-            <Input
-              size='m'
-              label='Имя'
-              value={valuesFields.name}
-              onChange={(e) => {
-                const name = e.target.value;
-                setFieldValue('name', name);
-              }}
-            />
+            <Tooltip
+              direction='up'
+              isShowTooltip={state.isShowTooltips.name}
+              label={state.errors?.name}
+            >
+              <Input
+                size='m'
+                label='Имя'
+                value={state.values.name}
+                onChange={(e) => {
+                  const name = e.target.value;
+                  functions.setFieldValue('name', name);
+                }}
+              />
+            </Tooltip>
           </div>
           <div className='select__container'>
             <Select
-              onChange={(locality) => setFieldValue('locality', locality)}
-              selected={valuesFields.locality}
-              options={valuesFields.region.localities}
+              onChange={(locality) => functions.setFieldValue('locality', locality)}
+              selected={state.values.locality}
+              options={state.values.region.localities}
               label='Населенный пункт'
             />
           </div>
           <div className='registration__form__input'>
-            <InputPassword
-              value={valuesFields.password}
-              onChange={(e) => {
-                const password = e.target.value;
-                setFieldValue('password', password);
-              }}
-              size='m'
-              label='Пароль'
-            />
+            <Tooltip
+              direction='up'
+              isShowTooltip={state.isShowTooltips.password}
+              label={state.errors?.password}
+            >
+              <InputPassword
+                value={state.values.password}
+                onChange={(e) => {
+                  const password = e.target.value;
+                  functions.setFieldValue('password', password);
+                }}
+                size='m'
+                label='Пароль'
+              />
+            </Tooltip>
           </div>
           <div className='registration__form__input'>
             <Tabs
               className='registration__form__tabs'
               label='Пол'
               tabs={genders}
-              setValue={(gender) => setFieldValue('gender', gender)}
+              setValue={(gender) => functions.setFieldValue('gender', gender)}
             />
           </div>
           <div className='registration__form__input'>
-            <InputPassword
-              value={valuesFields.passwordRepeat}
-              onChange={(e) => {
-                const passwordRepeat = e.target.value;
-                setFieldValue('passwordRepeat', passwordRepeat);
-              }}
-              size='m'
-              label='Повторить пароль'
-            />
+            <Tooltip
+              direction='up'
+              isShowTooltip={state.isShowTooltips.passwordRepeat}
+              label={state.errors?.passwordRepeat}
+            >
+              <InputPassword
+                value={state.values.passwordRepeat}
+                onChange={(e) => {
+                  const passwordRepeat = e.target.value;
+                  functions.setFieldValue('passwordRepeat', passwordRepeat);
+                }}
+                size='m'
+                label='Повторить пароль'
+              />
+            </Tooltip>
           </div>
         </div>
       </section>
@@ -139,41 +167,53 @@ export const RegistrationStepOneForm = ({ setStage, setStep, valuesFields, setFi
         </Typography>
         <div className='registration__form__section__content'>
           <div className='registration__form__input'>
-            <ReactInputMask
-              value={valuesFields.cardNumber}
-              onChange={(e) => setFieldValue('cardNumber', e.target.value)}
-              maskChar={null}
-              mask='9999 9999 9999 9999'
-              disabled={valuesFields.hasNotCardLoyalty}
+            <Tooltip
+              direction='up'
+              isShowTooltip={state.isShowTooltips.cardNumber && !state.values.hasNotCardLoyalty}
+              label={state.errors?.cardNumber}
             >
-              {(props) => (
-                <Input
-                  size='m'
-                  label='Номер карты'
-                  disabled={valuesFields.hasNotCardLoyalty}
-                  {...props}
-                />
-              )}
-            </ReactInputMask>
+              <ReactInputMask
+                value={state.values.cardNumber}
+                onChange={(e) => functions.setFieldValue('cardNumber', e.target.value)}
+                maskChar={null}
+                mask='9999 9999 9999 9999'
+                disabled={state.values.hasNotCardLoyalty}
+              >
+                {(props) => (
+                  <Input
+                    size='m'
+                    label='Номер карты'
+                    disabled={state.values.hasNotCardLoyalty}
+                    {...props}
+                  />
+                )}
+              </ReactInputMask>
+            </Tooltip>
           </div>
 
           <div className='registration__form__input'>
-            <Input
-              size='m'
-              label='E-mail'
-              value={valuesFields.email}
-              onChange={(e) => {
-                const email = e.target.value;
-                setFieldValue('email', email);
-              }}
-            />
+            <Tooltip
+              direction='up'
+              isShowTooltip={state.isShowTooltips.email}
+              label={state.errors?.email}
+            >
+              <Input
+                size='m'
+                label='E-mail'
+                value={state.values.email}
+                onChange={(e) => {
+                  const email = e.target.value;
+                  functions.setFieldValue('email', email);
+                }}
+              />
+            </Tooltip>
           </div>
 
           <Checkbox
             size='m'
             label='У меня нет карты лояльности'
-            value={valuesFields.hasNotCardLoyalty}
-            setValue={(value) => setFieldValue('hasNotCardLoyalty', value)}
+            value={state.values.hasNotCardLoyalty}
+            setValue={(value) => functions.setFieldValue('hasNotCardLoyalty', value)}
           />
         </div>
       </section>

@@ -13,30 +13,34 @@ export const useForm = (initialValues, validateSchema) => {
   const [isShowTooltips, setIsShowTooltips] = useState(getIsShowTooltips(initialValues));
   const [isSubmiting, setIsSubmiting] = useState(false);
 
-  console.log('values',values);
-  console.log('errors',errors);
+  console.log('values', values);
+  console.log('errors', errors);
 
   const setFieldValue = (field, value) => {
     setValues((valuesPrev) => ({ ...valuesPrev, [field]: value }));
-    if (!validateSchema || (!!validateSchema && !!validateSchema[field])) return;
+    console.log(!!validateSchema[field])
+    if (!validateSchema || (!!validateSchema && !validateSchema[field])) return;
     const error = validateSchema[field](value);
     setErrors((errorsPrev) => ({ ...errorsPrev, [field]: error }));
   };
 
   const setFieldsErrors = () => {};
   const handleSubmit = () => {
-    
     setIsSubmiting(true);
   };
   return {
-    values,
-    setFieldValue,
-    errors,
-    setFieldsErrors,
-    isSubmiting,
-    setIsSubmiting,
-    handleSubmit,
-    isShowTooltips,
-    setIsShowTooltips,
+    state: {
+      values,
+      errors,
+      isSubmiting,
+      isShowTooltips,
+    },
+    functions: {
+      setFieldValue,
+      setFieldsErrors,
+      setIsSubmiting,
+      handleSubmit,
+      setIsShowTooltips,
+    },
   };
 };

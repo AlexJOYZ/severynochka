@@ -8,15 +8,9 @@ import { Typography } from '../../../UI/Typography/Typography';
 import { IconButton } from '../../../UI/buttons/IconButton/IconButton';
 import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
 import { TIMER__DEFAULT__VALUE } from '../../../../const/registration';
-import { Notice } from '../../../UI/notice/Notice';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 
-export const RegistrationStepTwoForm = ({
-  setStep,
-  valuesFields,
-  setFieldValue,
-  setIsSubmiting,
-}) => {
+export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
   const [time, setTime] = useState(TIMER__DEFAULT__VALUE);
 
   useEffect(() => {
@@ -30,11 +24,15 @@ export const RegistrationStepTwoForm = ({
   return (
     <div className='registration__form__step registration__form__step__2'>
       <div className='registration__code__input__container'>
-        <Tooltip direction='left' isWithIcon label='Label'>
+        <Tooltip
+          direction='up'
+          isShowTooltip={state.isShowTooltips.phoneCode}
+          label={state.errors?.phoneCode}
+        >
           <ReactInputMask
             maskChar={null}
-            value={valuesFields.phoneCode}
-            onChange={(e) => setFieldValue('phoneCode', e.target.value)}
+            value={state.values.phoneCode}
+            onChange={(e) => functions.setFieldValue('phoneCode', e.target.value)}
             mask='99999'
           >
             {(props) => (
@@ -51,7 +49,7 @@ export const RegistrationStepTwoForm = ({
       </div>
       <div className='button__container__primary'>
         <Button
-          onClick={() => setIsSubmiting(true)}
+          onClick={() => (true)}
           accent='primary'
           size='l'
           className='button__primary'

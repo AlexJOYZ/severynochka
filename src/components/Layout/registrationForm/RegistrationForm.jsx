@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 
+import { useForm } from '../../../hooks/useForm';
+
 import './styles.css';
 
 import { RegistrationStepOneForm } from './steps/RegistrationStepOneForm';
 import { RegistrationStepTwoForm } from './steps/RegistrationStepTwoForm';
 import { Typography } from '../../UI/Typography/Typography';
-import { useForm } from '../../../hooks/useForm';
 import { REGIONS } from '../../../const/registration/regions';
 
 const registrationFormValidateSchema = {
@@ -23,15 +24,7 @@ const registrationFormValidateSchema = {
 export const RegistrationForm = ({ setStage }) => {
   const [step, setStep] = useState(0);
 
-  const {
-    values,
-    setFieldValue,
-    setIsSubmiting,
-    isShowTooltips,
-    setIsShowTooltips,
-    errors,
-    setFieldsErrors,
-  } = useForm(
+  const { state, functions } = useForm(
     {
       telephone: '',
       dateOfBirthday: new Date(),
@@ -51,20 +44,18 @@ export const RegistrationForm = ({ setStage }) => {
   );
   const registrationSteps = [
     <RegistrationStepOneForm
-      valuesFields={values}
-      setFieldValue={setFieldValue}
+      state={state}
+      functions={functions}
       setStage={setStage}
       setStep={setStep}
     />,
     <RegistrationStepTwoForm
-      valuesFields={values}
-      setFieldValue={setFieldValue}
+      state={state}
+      functions={functions}
       setStep={setStep}
-      setIsSubmiting={setIsSubmiting}
     />,
   ];
 
-  // console.log(field, value);
 
   return (
     <div className='registration__form' on>

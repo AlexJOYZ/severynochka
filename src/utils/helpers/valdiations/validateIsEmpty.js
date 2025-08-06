@@ -1,4 +1,4 @@
-export const validateIsEmpty = (value, message = '') => {
-  if (!value) return message;
+export const validateIsEmpty = (value, message = 'asa') => {
+  if (!value.trim()) return message;
   return null;
 };
