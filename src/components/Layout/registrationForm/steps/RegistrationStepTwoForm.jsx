@@ -11,22 +11,22 @@ import { TIMER__DEFAULT__VALUE } from '../../../../const/registration';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 
 export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
-  const [time, setTime] = useState(TIMER__DEFAULT__VALUE);
+  const [seconds, setSeconds] = useState(TIMER__DEFAULT__VALUE);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (time === 0) return clearInterval(timer);
-      setTime((prevTime) => prevTime - 1);
+      if (seconds === 0) return clearInterval(timer);
+      setSeconds((prevSeconds) => prevSeconds - 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, [time]);
+  }, [seconds]);
 
   return (
     <div className='registration__form__step registration__form__step__2'>
       <div className='registration__code__input__container'>
         <Tooltip
           direction='up'
-          isShowTooltip={state.isShowTooltips.phoneCode}
+          isShowTooltip={!!state.errors?.phoneCode}
           label={state.errors?.phoneCode}
         >
           <ReactInputMask
@@ -49,7 +49,7 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
       </div>
       <div className='button__container__primary'>
         <Button
-          onClick={() => (true)}
+          onClick={functions.handleSubmit}
           accent='primary'
           size='l'
           className='button__primary'
@@ -57,10 +57,10 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
           Подтвердить
         </Button>
       </div>
-      {time === 0 ? (
+      {seconds === 0 ? (
         <Typography
           onClick={() => {
-            setTime(TIMER__DEFAULT__VALUE);
+            setSeconds(TIMER__DEFAULT__VALUE);
           }}
           className='registration__button__repeat'
           as='p'
@@ -73,7 +73,7 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
         <Typography className='registration__text__timer' as='p' variant='text' size='xs'>
           Запросить код повторно можно через{' '}
           <Typography as='b' variant='text-bold' size='xs'>
-            {time} {time === 1 ? 'секунду' : 'секунд'}
+            {seconds} {seconds === 1 ? 'секунду' : 'секунд'}
           </Typography>
         </Typography>
       )}

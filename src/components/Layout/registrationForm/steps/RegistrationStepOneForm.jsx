@@ -32,7 +32,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           <div className='registration__form__input'>
             <Tooltip
               direction='up'
-              isShowTooltip={state.isShowTooltips.telephone}
+              isShowTooltip={!!state.errors?.telephone}
               isWithIcon={true}
               label={state.errors?.telephone}
             >
@@ -62,7 +62,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           <div className='registration__form__input'>
             <Tooltip
               direction='up'
-              isShowTooltip={state.isShowTooltips.surname}
+              isShowTooltip={!!state.errors?.surname}
               label={state.errors?.surname}
             >
               <Input
@@ -88,11 +88,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
             />
           </div>
           <div className='registration__form__input'>
-            <Tooltip
-              direction='up'
-              isShowTooltip={state.isShowTooltips.name}
-              label={state.errors?.name}
-            >
+            <Tooltip direction='up' isShowTooltip={!!state.errors?.name} label={state.errors?.name}>
               <Input
                 size='m'
                 label='Имя'
@@ -115,7 +111,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           <div className='registration__form__input'>
             <Tooltip
               direction='up'
-              isShowTooltip={state.isShowTooltips.password}
+              isShowTooltip={!!state.errors?.password}
               label={state.errors?.password}
             >
               <InputPassword
@@ -140,7 +136,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           <div className='registration__form__input'>
             <Tooltip
               direction='up'
-              isShowTooltip={state.isShowTooltips.passwordRepeat}
+              isShowTooltip={!!state.errors?.passwordRepeat}
               label={state.errors?.passwordRepeat}
             >
               <InputPassword
@@ -169,7 +165,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           <div className='registration__form__input'>
             <Tooltip
               direction='up'
-              isShowTooltip={state.isShowTooltips.cardNumber && !state.values.hasNotCardLoyalty}
+              isShowTooltip={!!state.errors?.cardNumber && !state.values.hasNotCardLoyalty}
               label={state.errors?.cardNumber}
             >
               <ReactInputMask
@@ -194,7 +190,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           <div className='registration__form__input'>
             <Tooltip
               direction='up'
-              isShowTooltip={state.isShowTooltips.email}
+              isShowTooltip={!!state.errors?.email}
               label={state.errors?.email}
             >
               <Input

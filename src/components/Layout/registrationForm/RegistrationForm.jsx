@@ -8,24 +8,25 @@ import { RegistrationStepOneForm } from './steps/RegistrationStepOneForm';
 import { RegistrationStepTwoForm } from './steps/RegistrationStepTwoForm';
 import { Typography } from '../../UI/Typography/Typography';
 import { REGIONS } from '../../../const/registration/regions';
+import { validateIsEmpty } from '../../../utils/helpers/valdiations/validateIsEmpty';
 
 const registrationFormValidateSchema = {
   telephone: (value) => validateIsEmpty(value),
-  dateOfBirthday: new Date(),
+  // dateOfBirthday: new Date(),
   surname: (value) => validateIsEmpty(value),
   name: (value) => validateIsEmpty(value),
-  password: '',
-  passwordRepeat: '',
-  cardNumber: '',
-  email: '',
-  phoneCode: '',
+  // password: '',
+  // passwordRepeat: '',
+  cardNumber: (value) => validateIsEmpty(value),
+  // email: '',
+  // phoneCode: '',
 };
 
 export const RegistrationForm = ({ setStage }) => {
   const [step, setStep] = useState(0);
 
-  const { state, functions } = useForm(
-    {
+  const { state, functions } = useForm({
+    initialValues: {
       telephone: '',
       dateOfBirthday: new Date(),
       surname: '',
@@ -40,8 +41,9 @@ export const RegistrationForm = ({ setStage }) => {
       hasNotCardLoyalty: false,
       phoneCode: '',
     },
-    registrationFormValidateSchema,
-  );
+    validateSchema: registrationFormValidateSchema,
+    onSubmit: () => {console.log(state.values)},
+  });
   const registrationSteps = [
     <RegistrationStepOneForm
       state={state}
@@ -49,20 +51,15 @@ export const RegistrationForm = ({ setStage }) => {
       setStage={setStage}
       setStep={setStep}
     />,
-    <RegistrationStepTwoForm
-      state={state}
-      functions={functions}
-      setStep={setStep}
-    />,
+    <RegistrationStepTwoForm state={state} functions={functions} setStep={setStep} />,
   ];
 
-
   return (
-    <div className='registration__form' on>
+    <form className='registration__form' onSubmit={functions.handleSubmit}>
       <Typography className='registration__header' as='h3' variant='header' size='s'>
         Регистрация
       </Typography>
       {registrationSteps[step]}
-    </div>
+    </form>
   );
 };
