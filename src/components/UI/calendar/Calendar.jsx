@@ -32,7 +32,8 @@ export const Calendar = ({ locale = 'default', firstWeekDay = 2, selectedDate, s
         <div className={styles.calendar__header__btns}>
           <div className={styles.container__btn}>
             <ArrowButton
-              type='icon-btn'
+              buttonType='icon-btn'
+              type='button'
               direction='left'
               size='s'
               decoration='default'
@@ -42,8 +43,8 @@ export const Calendar = ({ locale = 'default', firstWeekDay = 2, selectedDate, s
           </div>
           <div className={styles.container__btn}>
             <ArrowButton
-              type='icon-btn'
-              direction='right'
+              buttonType='icon-btn'
+              type='button'
               size='s'
               decoration='default'
               accent='grayscale'

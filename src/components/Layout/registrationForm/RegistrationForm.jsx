@@ -9,17 +9,37 @@ import { RegistrationStepTwoForm } from './steps/RegistrationStepTwoForm';
 import { Typography } from '../../UI/Typography/Typography';
 import { REGIONS } from '../../../const/registration/regions';
 import { validateIsEmpty } from '../../../utils/helpers/valdiations/validateIsEmpty';
+import { validateMaxLength } from '../../../utils/helpers/valdiations/validateMaxLength';
+import { validateDateOfBirthday } from '../../../utils/helpers/valdiations/validateDateOfBirthday';
+import { validateContainNumber } from '../../../utils/helpers/valdiations/validateContainNumbers';
+import { validateContainSpecialSymbols } from '../../../utils/helpers/valdiations/validateContainSpecialSymbols';
+import { locales } from '../../../const/locales/ru';
+import { validateMinLength } from '../../../utils/helpers/valdiations/validationMinLength';
+
+const nameValidateSchema = (value) => {
+  if (validateIsEmpty(value)) return validateIsEmpty(value);
+  else if (validateContainNumber(value) || validateContainSpecialSymbols(value))
+    return locales['validations.name'];
+  else if (validateMinLength(value, 3)) return validateMinLength(value, 3);
+  return null;
+};
+
+const passwordValidationSchema = (value)=>{
+  if (validateIsEmpty(value)) return validateIsEmpty(value);
+  else if ()
+
+}
 
 const registrationFormValidateSchema = {
   telephone: (value) => validateIsEmpty(value),
-  // dateOfBirthday: new Date(),
-  surname: (value) => validateIsEmpty(value),
-  name: (value) => validateIsEmpty(value),
-  // password: '',
-  // passwordRepeat: '',
+  dateOfBirthday: (date) => validateDateOfBirthday(date),
+  surname: (value) => nameValidateSchema(value),
+  name: (value) => nameValidateSchema(value),
+  password: (value) => validateMaxLength(value, 8),
+  passwordRepeat: (value) => validateMaxLength(value, 8),
   cardNumber: (value) => validateIsEmpty(value),
-  // email: '',
-  // phoneCode: '',
+  email: (value) => validateIsEmpty(value),
+  phoneCode: (value) => validateIsEmpty(value),
 };
 
 export const RegistrationForm = ({ setStage }) => {
@@ -42,7 +62,10 @@ export const RegistrationForm = ({ setStage }) => {
       phoneCode: '',
     },
     validateSchema: registrationFormValidateSchema,
-    onSubmit: () => {console.log(state.values)},
+    validateOnChange: false,
+    onSubmit: () => {
+      console.log('submit success!');
+    },
   });
   const registrationSteps = [
     <RegistrationStepOneForm

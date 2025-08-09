@@ -1,3 +1,4 @@
+import { classNames } from '../../../../utils/helpers/classNames';
 import { ArrowIcon } from '../../icons/inputIcons/ArrowIcon';
 
 import cl from '../Button/Button.module.css';
@@ -11,18 +12,28 @@ export const ArrowButton = ({
   decoration = 'default',
   direction = 'right',
   iconPosition = 'right',
-  type = 'default',
+  buttonType = 'default',
   ...props
 }) => {
   return (
     <button
-      className={`${cl.button} ${classes.button__arrow} ${classes[type]} ${cl[accent]} ${cl[size]} ${cl[decoration]}`}
+      type=''
+      className={classNames(
+        cl.button,
+        classes.button__arrow,
+        classes[buttonType],
+        cl[accent],
+        cl[size],
+        cl[decoration],
+      )}
       {...props}
     >
-      {iconPosition === 'left' && <ArrowIcon className={`${classes[direction]} ${classes.icon}`} />}
+      {iconPosition === 'left' && (
+        <ArrowIcon className={classNames(classes[direction], classes.icon)} />
+      )}
       <span className={classes.button__content}>{children}</span>
       {iconPosition === 'right' && (
-        <ArrowIcon className={`${classes[direction]} ${classes.icon}`} />
+        <ArrowIcon className={classNames(classes[direction], classes.icon)} />
       )}
     </button>
   );

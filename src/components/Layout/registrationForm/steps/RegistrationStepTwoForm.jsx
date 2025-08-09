@@ -32,6 +32,7 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
           <ReactInputMask
             maskChar={null}
             value={state.values.phoneCode}
+            onFocus={() => functions.resetFieldError('phoneCode')}
             onChange={(e) => functions.setFieldValue('phoneCode', e.target.value)}
             mask='99999'
           >

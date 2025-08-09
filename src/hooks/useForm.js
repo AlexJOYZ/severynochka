@@ -12,20 +12,19 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
 
   const [isSubmiting, setIsSubmiting] = useState(false);
 
-  const setFieldValue = (field, value) => {
+  const setFieldValue = (field, value, validateField = true) => {
     setValues((valuesPrev) => ({ ...valuesPrev, [field]: value }));
     const validateSchemaExistForField = !!validateSchema && !!validateSchema[field];
-    if (!validateSchemaExistForField || !validateOnChange) return;
+    if ((!validateSchemaExistForField || !validateOnChange) && validateField) return;
     const error = validateSchema[field](value);
     setErrors((errorsPrev) => ({ ...errorsPrev, [field]: error }));
   };
 
-  const validateForm = () => {
+  const validateForm = (...ignoredFields) => {
     let isErrorExist = false;
     let errors = {};
     Object.keys(values).forEach((field) => {
-      if (!validateSchema[field]) return;
-      console.log(validateSchema[field]);
+      if (!validateSchema[field] || ignoredFields.includes(field)) return;
       const error = validateSchema[field](values[field]);
       if (error) isErrorExist = true;
       errors = { ...errors, [field]: error };
@@ -36,6 +35,11 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
 
   const setFieldsErrors = (field, error) =>
     setErrors((errorsPrev) => ({ ...errorsPrev, [field]: error }));
+
+  const resetFieldError = (field) => {
+    if (!field) return;
+    setFieldsErrors(field, null);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,6 +63,7 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
       setIsSubmiting,
       handleSubmit,
       validateForm,
+      resetFieldError
     },
   };
 };

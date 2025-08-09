@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useClickOutside } from '../../../../hooks/useClickOutside';
+
 import styles from './InputDate.module.css';
 
 import { Calendar } from '../../calendar/Calendar';
@@ -7,7 +9,6 @@ import { CalendarIcon } from '../../icons/inputIcons/CalendarIcon';
 import { Input } from '../Input/Input';
 import { MAX_LENGTH } from '../../../../const/registration/validations';
 import { formateDate } from '../../../../utils/helpers/date';
-import { useClickOutside } from '../../../../hooks/useClickOutside';
 
 export const InputDate = ({ selectedDate, selectDate, locale = 'default', ...props }) => {
   const [showCalendar, setShowCalendar] = useState(false);
@@ -22,6 +23,7 @@ export const InputDate = ({ selectedDate, selectDate, locale = 'default', ...pro
           maxLength={MAX_LENGTH.DATE}
           value={inputValue}
           className={styles.input}
+          readOnly
           {...props}
         />
         <CalendarIcon className={styles.input__icon} />

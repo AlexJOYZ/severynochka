@@ -79,6 +79,14 @@
     border-bottom-color: #f4f6fb;
   }
 }
+.tooltip__icon {
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+.tooltip__text {
+  flex-shrink: 1;
+  flex-grow: 1;
+}
 .tooltip__triangle {
   position: absolute;
   z-index: 10101;

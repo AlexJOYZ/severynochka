@@ -1,5 +1,6 @@
 .date__input__container {
   position: relative;
+  width: 100%;
 }
 
 .input__container {
@@ -27,7 +28,7 @@
 }
 .calendar__container {
   position: absolute;
-  z-index: 10002;
+  z-index: 11000;
   background-color: var(--main-color-surface);
   box-shadow: var(--shadow-default-l);
   border-radius: 10px;

@@ -11,10 +11,9 @@ import { Typography } from '../../../UI/Typography/Typography';
 import ReactInputMask from 'react-input-mask';
 import { REGIONS } from '../../../../const/registration/regions';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
+import { validateIsEmpty } from '../../../../utils/helpers/valdiations/validateIsEmpty';
 
 export const RegistrationStepOneForm = ({ setStage, setStep, state, functions }) => {
-  // const [selectedRegion, selectRegion] = useState(null);
-
   const genders = [{ title: 'Мужской' }, { title: 'Женский' }];
 
   return (
@@ -33,7 +32,6 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
             <Tooltip
               direction='up'
               isShowTooltip={!!state.errors?.telephone}
-              isWithIcon={true}
               label={state.errors?.telephone}
             >
               <ReactInputMask
@@ -42,6 +40,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
                   const telephone = e.target.value;
                   functions.setFieldValue('telephone', telephone);
                 }}
+                onFocus={() => functions.resetFieldError('telephone')}
                 maskChar={null}
                 mask='+7 (999) 999-99-99'
                 type='tel'
@@ -53,11 +52,18 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
             </Tooltip>
           </div>
           <div className='registration__form__input'>
-            <InputDate
-              label='Дата рождения'
-              selectedDate={state.values.dateOfBirthday}
-              selectDate={(date) => functions.setFieldValue('dateOfBirthday', date)}
-            />
+            <Tooltip
+              direction='up'
+              isShowTooltip={!!state.errors?.dateOfBirthday}
+              label={state.errors?.dateOfBirthday}
+              onClick={() => functions.resetFieldError('dateOfBirthday')}
+            >
+              <InputDate
+                label='Дата рождения'
+                selectedDate={state.values.dateOfBirthday}
+                selectDate={(date) => functions.setFieldValue('dateOfBirthday', date)}
+              />
+            </Tooltip>
           </div>
           <div className='registration__form__input'>
             <Tooltip
@@ -67,6 +73,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
             >
               <Input
                 size='m'
+                onFocus={() => functions.resetFieldError('surname')}
                 label='Фамилия'
                 value={state.values.surname}
                 onChange={(e) => {
@@ -93,6 +100,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
                 size='m'
                 label='Имя'
                 value={state.values.name}
+                onFocus={() => functions.resetFieldError('name')}
                 onChange={(e) => {
                   const name = e.target.value;
                   functions.setFieldValue('name', name);
@@ -120,6 +128,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
                   const password = e.target.value;
                   functions.setFieldValue('password', password);
                 }}
+                onFocus={() => functions.resetFieldError('password')}
                 size='m'
                 label='Пароль'
               />
@@ -141,6 +150,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
             >
               <InputPassword
                 value={state.values.passwordRepeat}
+                onFocus={() => functions.resetFieldError('passwordRepeat')}
                 onChange={(e) => {
                   const passwordRepeat = e.target.value;
                   functions.setFieldValue('passwordRepeat', passwordRepeat);
@@ -169,6 +179,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
               label={state.errors?.cardNumber}
             >
               <ReactInputMask
+                onFocus={() => functions.resetFieldError('cardNumber')}
                 value={state.values.cardNumber}
                 onChange={(e) => functions.setFieldValue('cardNumber', e.target.value)}
                 maskChar={null}
@@ -201,6 +212,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
                   const email = e.target.value;
                   functions.setFieldValue('email', email);
                 }}
+                onFocus={() => functions.resetFieldError('email')}
               />
             </Tooltip>
           </div>
@@ -218,7 +230,16 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           className='button__primary'
           accent='primary'
           size='l'
-          onClick={() => setStep((prev) => prev + 1)}
+          onClick={() => {
+            if (
+              !functions.validateForm(
+                state.values.hasNotCardLoyalty ? 'cardNumber' : '',
+                'phoneCode',
+              )
+            )
+              return;
+            setStep((prev) => prev + 1);
+          }}
         >
           Продолжить
         </Button>

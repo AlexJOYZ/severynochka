@@ -91,6 +91,7 @@ export const useCalendar = ({ locale = 'default', selectedDate: date, firstWeekD
     if (mode === 'days') {
       const monthIndex =
         direction === 'left' ? selectedMonth.monthIndex - 1 : selectedMonth.monthIndex + 1;
+        console.log(11)
       if (monthIndex === -1) {
         const year = selectedYear - 1;
         setSelectedYear(year);

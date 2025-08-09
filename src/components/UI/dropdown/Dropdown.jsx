@@ -27,7 +27,8 @@ export const Dropdown = ({
         </Typography>
         <div className={cl.button__container} onClick={showContent}>
           <ArrowButton
-            type='icon-btn'
+            buttonType='icon-btn'
+            type='button'
             decoration='no'
             accent='primary'
             size='m'

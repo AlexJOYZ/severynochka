@@ -12,4 +12,8 @@ export const locales = {
     'Пароль должен <rule>совпадать</rule>',
 
   'validations.required': 'Данное поле обязательно',
+  'validations.minLength': 'Данное поле должно содержать минимум ${number} символов',
+  'validations.maxLength': 'Данное поле должно содержать максимум ${number} символов',
+  'validations.dateOfBirthday': 'Вам должно быть не менее 14 полных лет.',
+  'validations.name': 'Данное поле должно содержать только буквы',
 };
