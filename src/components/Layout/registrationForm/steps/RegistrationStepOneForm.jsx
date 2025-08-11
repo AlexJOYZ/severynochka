@@ -11,10 +11,23 @@ import { Typography } from '../../../UI/Typography/Typography';
 import ReactInputMask from 'react-input-mask';
 import { REGIONS } from '../../../../const/registration/regions';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
-import { validateIsEmpty } from '../../../../utils/helpers/valdiations/validateIsEmpty';
+import { locales } from '../../../../const/locales/ru';
 
 export const RegistrationStepOneForm = ({ setStage, setStep, state, functions }) => {
   const genders = [{ title: 'Мужской' }, { title: 'Женский' }];
+
+  const handlerClickConfirm = () => {
+    if (
+      !functions.validateForm(state.values.hasNotCardLoyalty ? 'cardNumber' : '', 'phoneCode') ||
+      state.values.passwordRepeat !== state.values.password
+    ) {
+      if (state.values.passwordRepeat !== state.values.password && !!state.errors?.password)
+        functions.setFieldsErrors('passwordRepeat', locales['validations.passwordRules.mustMatch']);
+
+      return;
+    }
+    setStep((prev) => prev + 1);
+  };
 
   return (
     <div className='registration__form__step'>
@@ -230,16 +243,8 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           className='button__primary'
           accent='primary'
           size='l'
-          onClick={() => {
-            if (
-              !functions.validateForm(
-                state.values.hasNotCardLoyalty ? 'cardNumber' : '',
-                'phoneCode',
-              )
-            )
-              return;
-            setStep((prev) => prev + 1);
-          }}
+          type='button'
+          onClick={handlerClickConfirm}
         >
           Продолжить
         </Button>

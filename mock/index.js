@@ -1,4 +1,5 @@
 import { getDatabaseConfig } from './database';
+import { postPhoneCodeConfig } from './postPhoneCode';
 import { getProfileConfig } from './getProfileConfig';
 import { getRefreshTokenConfig } from './getRefreshTokenConfig';
 import { postSignInConfig } from './postSignInConfig';
@@ -10,4 +11,5 @@ export const authConfigs = [
   postSignInConfig,
   getProfileConfig,
   getRefreshTokenConfig,
+  postPhoneCodeConfig,
 ];

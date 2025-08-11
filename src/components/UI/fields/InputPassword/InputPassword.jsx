@@ -24,7 +24,7 @@ export const InputPassword = ({ label, ...props }) => {
         </Typography>
       )}
       <div className={style.input__wrapper}>
-        <Input type={showPassword ? 'text' : 'password'} {...props} />
+        <Input className={style.input} type={showPassword ? 'text' : 'password'} {...props} />
         <div className={style.button__container}>
           <Button
             type='button'

@@ -35,7 +35,7 @@ export const Input = ({
           disabled ? cl.disabled : ''
         }`}
       >
-        <input ref={inputRef} {...props} value={value} onChange={onChange} />
+        <input  ref={inputRef} {...props} value={value} onChange={onChange} />
       </div>
     </div>
   );

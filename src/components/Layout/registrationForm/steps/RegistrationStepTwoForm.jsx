@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import ReactInputMask from 'react-input-mask';
 
@@ -9,17 +9,25 @@ import { IconButton } from '../../../UI/buttons/IconButton/IconButton';
 import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
 import { TIMER__DEFAULT__VALUE } from '../../../../const/registration';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
+import { AuthService } from '../../../../API/entities/auth';
 
 export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
   const [seconds, setSeconds] = useState(TIMER__DEFAULT__VALUE);
-
+  // useMemo(
+  //   setInterval(() => {
+  //     if (seconds === 0) return clearInterval(timer);
+  //     setSeconds((prevSeconds) => prevSeconds - 1);
+  //   }, 1000),
+  //   [],
+  // );
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (seconds === 0) return clearInterval(timer);
-      setSeconds((prevSeconds) => prevSeconds - 1);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [seconds]);
+    const createPhoneCode = async () => {
+      const { data } = await AuthService.createPhoneCode(state.values);
+    };
+    console.log(1);
+    createPhoneCode();
+    // return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className='registration__form__step registration__form__step__2'>
@@ -50,7 +58,9 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
       </div>
       <div className='button__container__primary'>
         <Button
-          onClick={functions.handleSubmit}
+          onClick={(e) =>
+            functions.handleSubmit(e, state.values.hasNotCardLoyalty ? 'cardNumber' : '')
+          }
           accent='primary'
           size='l'
           className='button__primary'
@@ -60,9 +70,7 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
       </div>
       {seconds === 0 ? (
         <Typography
-          onClick={() => {
-            setSeconds(TIMER__DEFAULT__VALUE);
-          }}
+          onClick={() => setSeconds(TIMER__DEFAULT__VALUE)}
           className='registration__button__repeat'
           as='p'
           variant='text'

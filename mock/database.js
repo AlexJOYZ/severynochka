@@ -5,7 +5,7 @@ export const DATABASE = {
       role: 'admin',
       email: 'tomorrow@gmail.com',
       password: 'tomorrow@gmail.com',
-      tel: '+7 905 311 14 56',
+      telephone: '+7 (900) 222-11-54',
       firstName: 'Арсений',
       lastName: 'Очиров',
       dateOfBirthday: '2024-06-05T08:41:00Z',
@@ -18,7 +18,7 @@ export const DATABASE = {
       role: 'manager',
       email: 'alex@gmail.com',
       password: '123456!',
-      tel: '+7 905 311 14 56',
+      telephone: '+7 (111) 111-11-11',
       firstName: 'Сультим',
       lastName: 'Гормонов',
       dateOfBirthday: '2024-06-05T08:41:00Z',
@@ -28,6 +28,7 @@ export const DATABASE = {
     },
   ],
   refreshTokens: [],
+  phoneCodes: [],
   products: [
     {
       title: 'Г/Ц Блинчики с мясом вес, Россия',

@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { AuthService } from './entities/auth';
 
 const API_URL = 'http://localhost:31299/api';
@@ -9,9 +10,8 @@ export const api = axios.create({
 });
 
 api.interceptors.response.use(
-  (config) => {
-    return config;
-  },
+  (config) => config,
+
   async (error) => {
     const originalRequest = error.config;
 

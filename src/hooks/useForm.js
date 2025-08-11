@@ -1,11 +1,5 @@
 import { useState } from 'react';
 
-// const getIsShowTooltips = (initialValues) => {
-//   let obj = {};
-//   Object.keys(initialValues).forEach((key) => (obj = { ...obj, [key]: false }));
-//   return obj;
-// };
-
 export const useForm = ({ initialValues, validateSchema, validateOnChange = true, onSubmit }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState();
@@ -33,17 +27,19 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
     return !isErrorExist;
   };
 
-  const setFieldsErrors = (field, error) =>
+  const setFieldsErrors = (field, error) => {
     setErrors((errorsPrev) => ({ ...errorsPrev, [field]: error }));
+    console.log('@useFormSetErrors',error)
+  };
 
   const resetFieldError = (field) => {
     if (!field) return;
     setFieldsErrors(field, null);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, ...ignoredFields) => {
     event.preventDefault();
-    const isFormValid = validateForm();
+    const isFormValid = validateForm(...ignoredFields);
     if (!isFormValid) return;
     setIsSubmiting(true);
     return !!onSubmit && onSubmit(values);
@@ -63,7 +59,7 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
       setIsSubmiting,
       handleSubmit,
       validateForm,
-      resetFieldError
+      resetFieldError,
     },
   };
 };

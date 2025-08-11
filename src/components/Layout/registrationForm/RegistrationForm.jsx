@@ -14,7 +14,10 @@ import { validateDateOfBirthday } from '../../../utils/helpers/valdiations/valid
 import { validateContainNumber } from '../../../utils/helpers/valdiations/validateContainNumbers';
 import { validateContainSpecialSymbols } from '../../../utils/helpers/valdiations/validateContainSpecialSymbols';
 import { locales } from '../../../const/locales/ru';
-import { validateMinLength } from '../../../utils/helpers/valdiations/validationMinLength';
+import { validateMinLength } from '../../../utils/helpers/valdiations/validateMinLength';
+import { validateContainUpperCase } from '../../../utils/helpers/valdiations/validateContainUpperCase';
+import { validateContainLowerCase } from '../../../utils/helpers/valdiations/validateContainLowerCase';
+import { validateEmail } from '../../../utils/helpers/valdiations/validateEmail';
 
 const nameValidateSchema = (value) => {
   if (validateIsEmpty(value)) return validateIsEmpty(value);
@@ -24,21 +27,33 @@ const nameValidateSchema = (value) => {
   return null;
 };
 
-const passwordValidationSchema = (value)=>{
+const passwordValidationSchema = (value) => {
   if (validateIsEmpty(value)) return validateIsEmpty(value);
-  else if ()
-
-}
+  else if (!validateContainNumber(value))
+    return locales['validations.passwordRules.containNumbers'];
+  else if (!validateContainSpecialSymbols(value))
+    return locales['validations.passwordRules.containSpecialSymbols'];
+  else if (validateContainUpperCase(value)) return validateContainUpperCase(value);
+  else if (validateContainLowerCase(value)) return validateContainLowerCase(value);
+  else if (validateMinLength(value, 8)) return validateMinLength(value, 8);
+  return null;
+};
+const emailValidationSchema = (value) => {
+  if (!validateIsEmpty(value)) {
+    return !!validateEmail(value) && validateEmail(value);
+  }
+  return null;
+};
 
 const registrationFormValidateSchema = {
   telephone: (value) => validateIsEmpty(value),
   dateOfBirthday: (date) => validateDateOfBirthday(date),
   surname: (value) => nameValidateSchema(value),
   name: (value) => nameValidateSchema(value),
-  password: (value) => validateMaxLength(value, 8),
-  passwordRepeat: (value) => validateMaxLength(value, 8),
+  password: (value) => passwordValidationSchema(value),
+  passwordRepeat: (value) => validateIsEmpty(value),
   cardNumber: (value) => validateIsEmpty(value),
-  email: (value) => validateIsEmpty(value),
+  email: (value) => emailValidationSchema(value),
   phoneCode: (value) => validateIsEmpty(value),
 };
 
