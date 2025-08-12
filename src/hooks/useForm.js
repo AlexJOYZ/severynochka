@@ -27,10 +27,8 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
     return !isErrorExist;
   };
 
-  const setFieldsErrors = (field, error) => {
+  const setFieldsErrors = (field, error) =>
     setErrors((errorsPrev) => ({ ...errorsPrev, [field]: error }));
-    console.log('@useFormSetErrors',error)
-  };
 
   const resetFieldError = (field) => {
     if (!field) return;
@@ -45,8 +43,8 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
     return !!onSubmit && onSubmit(values);
   };
 
-  console.log('values', values);
-  console.log('errors', errors);
+  // console.log('values', values);
+  // console.log('errors', errors);
   return {
     state: {
       values,

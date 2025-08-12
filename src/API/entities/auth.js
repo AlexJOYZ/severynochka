@@ -5,6 +5,7 @@ export class AuthService {
 
   static registration = (user) => api.post('/signup', user);
   static createPhoneCode = (user) => api.post('/createCode', user);
+  static confirmPhoneCode = (user)=>api.get('/confirmCode',user)
 
   static logout = () => {
     return api.get('/logout');

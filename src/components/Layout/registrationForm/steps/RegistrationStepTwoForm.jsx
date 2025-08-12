@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ReactInputMask from 'react-input-mask';
 
@@ -7,27 +7,12 @@ import { Input } from '../../../UI/fields/Input/Input';
 import { Typography } from '../../../UI/Typography/Typography';
 import { IconButton } from '../../../UI/buttons/IconButton/IconButton';
 import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
-import { TIMER__DEFAULT__VALUE } from '../../../../const/registration';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import { AuthService } from '../../../../API/entities/auth';
+import { TimerCodeAccept } from '../../timerCodeAccept/TimerCodeAccept';
 
 export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
-  const [seconds, setSeconds] = useState(TIMER__DEFAULT__VALUE);
-  // useMemo(
-  //   setInterval(() => {
-  //     if (seconds === 0) return clearInterval(timer);
-  //     setSeconds((prevSeconds) => prevSeconds - 1);
-  //   }, 1000),
-  //   [],
-  // );
-  useEffect(() => {
-    const createPhoneCode = async () => {
-      const { data } = await AuthService.createPhoneCode(state.values);
-    };
-    console.log(1);
-    createPhoneCode();
-    // return () => clearInterval(timer);
-  }, []);
+  const [enabled, setEnabled] = useState(true);
 
   return (
     <div className='registration__form__step registration__form__step__2'>
@@ -68,24 +53,7 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
           Подтвердить
         </Button>
       </div>
-      {seconds === 0 ? (
-        <Typography
-          onClick={() => setSeconds(TIMER__DEFAULT__VALUE)}
-          className='registration__button__repeat'
-          as='p'
-          variant='text'
-          size='xs'
-        >
-          Отправить ещё раз
-        </Typography>
-      ) : (
-        <Typography className='registration__text__timer' as='p' variant='text' size='xs'>
-          Запросить код повторно можно через{' '}
-          <Typography as='b' variant='text-bold' size='xs'>
-            {seconds} {seconds === 1 ? 'секунду' : 'секунд'}
-          </Typography>
-        </Typography>
-      )}
+      <TimerCodeAccept enabled={enabled} setEnabled={setEnabled} values={state.values} />
       <div className='registration__prevButton__container'>
         <IconButton
           accent='grayscale'

@@ -19,6 +19,11 @@ import { validateContainUpperCase } from '../../../utils/helpers/valdiations/val
 import { validateContainLowerCase } from '../../../utils/helpers/valdiations/validateContainLowerCase';
 import { validateEmail } from '../../../utils/helpers/valdiations/validateEmail';
 
+const telephoneValidateSchema = (value) => {
+  if (validateIsEmpty(value)) return validateIsEmpty(value);
+  if (validateMinLength(value, 18)) return validateMinLength(value, 18);
+  return null;
+};
 const nameValidateSchema = (value) => {
   if (validateIsEmpty(value)) return validateIsEmpty(value);
   else if (validateContainNumber(value) || validateContainSpecialSymbols(value))
@@ -46,7 +51,7 @@ const emailValidationSchema = (value) => {
 };
 
 const registrationFormValidateSchema = {
-  telephone: (value) => validateIsEmpty(value),
+  telephone: (value) => telephoneValidateSchema(value),
   dateOfBirthday: (date) => validateDateOfBirthday(date),
   surname: (value) => nameValidateSchema(value),
   name: (value) => nameValidateSchema(value),

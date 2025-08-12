@@ -7,7 +7,7 @@ export const locales = {
   'validations.passwordRules.containUppercase': 'Пароль должен содержать заглавные латинские буквы',
   'validations.passwordRules.containLowerCase': 'Пароль должен содержать строчные латинские буквы',
   'validations.passwordRules.containSpecialSymbols': 'Пароль должен содержать специальные символы',
-  'validations.passwordRules.containNumbers': 'Пароль должен содержать хотя бы одну цифру',
+  'validations.passwordRules.containNumbers': 'Пароль должен содержать цифры',
   'validations.passwordRules.mustMatch': 'Пароли должны совпадать',
   'validations.email': 'Некорректный email',
 };
