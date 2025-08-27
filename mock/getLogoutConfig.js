@@ -1,6 +1,7 @@
 import { COOKIE } from '../src/const/cookies';
 
-const secretKey = import.meta.env.VITE_SECRET_KEY_JWT;
+// const secretKey = import.meta.env.VITE_SECRET_KEY_JWT;
+const secretKey = 'MY_SECRET_KEY';
 
 export const getLogoutConfig = {
   path: '/logout',

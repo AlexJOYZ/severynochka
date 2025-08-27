@@ -4,6 +4,8 @@ import { getProfileConfig } from './getProfileConfig';
 import { getRefreshTokenConfig } from './getRefreshTokenConfig';
 import { postSignInConfig } from './postSignInConfig';
 import { postSignUpConfig } from './postSignUpConfig';
+import { getConfirmPhoneCode } from './getConfirmPhoneCode';
+import { getLogoutConfig } from './getLogoutConfig';
 
 export const authConfigs = [
   getDatabaseConfig,
@@ -12,4 +14,6 @@ export const authConfigs = [
   getProfileConfig,
   getRefreshTokenConfig,
   postPhoneCodeConfig,
+  // getLogoutConfig
+  // getConfirmPhoneCode,
 ];

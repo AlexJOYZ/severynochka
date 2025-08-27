@@ -9,10 +9,23 @@ import { Contacts } from './pages/Contacts';
 import { Vacancy } from './pages/Vacancy';
 import { Orders } from './pages/Orders';
 import { Cart } from './pages/Cart';
-
+import { checkAuth } from './store/asyncActions/auth';
+import { useQuery } from './hooks';
+import { useDispatch } from 'react-redux';
+import { Spinner } from './components/UI/spinner/Spinner';
+import { StrictMode } from 'react';
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  const { isLoading, data, error } = useQuery('checkAuth', () => dispatch(checkAuth()));
+
+
+  if (isLoading) return <Spinner />;
+
   return (
+    <StrictMode>
+
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout />}>
@@ -28,5 +41,6 @@ export const App = () => {
         {/* <Route path='*' element={<ErrorPage />} /> */}
       </Routes>
     </BrowserRouter>
+    </StrictMode>
   );
 };

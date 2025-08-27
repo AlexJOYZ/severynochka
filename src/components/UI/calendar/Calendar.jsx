@@ -5,6 +5,7 @@ import { useCalendar } from '../../../hooks/useCalendar';
 import { Typography } from '../Typography/Typography';
 import { ArrowButton } from '../buttons/ArrowButton/ArrowButton';
 import { checkDateIsEqual } from '../../../utils/helpers/date';
+import { classNames } from '../../../utils/helpers/classNames';
 
 export const Calendar = ({ locale = 'default', firstWeekDay = 2, selectedDate, selectDate }) => {
   const { state, functions } = useCalendar({ firstWeekDay, selectedDate, locale });
@@ -98,10 +99,11 @@ export const Calendar = ({ locale = 'default', firstWeekDay = 2, selectedDate, s
 
               return (
                 <Typography
-                  className={[
+                  key={monthsName.month}
+                  className={classNames(
                     styles.calendar__pick__item,
                     isSelectedMonth ? styles.calendar__pick__item__selected : '',
-                  ].join(' ')}
+                  )}
                   onClick={() => {
                     functions.setMode('days');
                     functions.setSelectedMonthByIndex(monthsName.monthIndex);
@@ -133,10 +135,11 @@ export const Calendar = ({ locale = 'default', firstWeekDay = 2, selectedDate, s
 
               return (
                 <Typography
-                  className={[
+                  key={year}
+                  className={classNames(
                     styles.calendar__pick__item,
                     isSelectedYear ? styles.calendar__pick__item__selected : '',
-                  ].join(' ')}
+                  )}
                   onClick={() => {
                     functions.setMode('months');
                     functions.setSelectedYear(year);

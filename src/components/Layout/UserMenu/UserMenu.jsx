@@ -3,26 +3,27 @@ import { useClickOutside } from '../../../hooks/useClickOutside';
 
 import cl from './UserMenu.module.css';
 
-import icon from '../../../assets/icons/userIcons/avatar.png'
+import icon from '../../../assets/icons/userIcons/avatar.png';
 
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { Typography } from '../../UI/Typography/Typography';
 import { Dropdown } from '../../UI/dropdown/Dropdown';
 import { LogOutIcon } from '../../UI/icons/header/LogOutIcon';
+import { AuthService } from '../../../API/entities/auth';
 
-export const UserMenu = ({user}) => {
+export const UserMenu = ({ user }) => {
   const [isOpen, setOpen] = useState(false);
 
   const closeDropdown = () => {
     setOpen(false);
   };
-
+  console.log(user);
   const dropdownRef = useClickOutside(closeDropdown);
 
   return (
     <div ref={dropdownRef} className={`${cl.menu__container} ${isOpen ? `${cl.opened}` : ''}`}>
       <img className={cl.user__avatar} src={icon} alt='avatar' />
-      <Dropdown value={isOpen} setValue={setOpen} label={user.firstName} className={cl.menu__dropdown}>
+      <Dropdown value={isOpen} setValue={setOpen} label={user.name} className={cl.menu__dropdown}>
         <Dropdown label='Профиль'>
           <li className=''>dfdsd</li>
           <li className=''>dfdfs</li>
@@ -34,6 +35,7 @@ export const UserMenu = ({user}) => {
           Icon={LogOutIcon}
           position='right'
           decoration='no'
+          onClick={() => AuthService.logout()}
         >
           <Typography as='span' size='s' variant='text'>
             Выйти

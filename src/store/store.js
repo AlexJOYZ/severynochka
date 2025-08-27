@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
   account: accountReducer,
 });
 
+
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 // setInterval(() => console.log(store.getState()), 5000);

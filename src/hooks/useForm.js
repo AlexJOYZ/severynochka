@@ -43,8 +43,8 @@ export const useForm = ({ initialValues, validateSchema, validateOnChange = true
     return !!onSubmit && onSubmit(values);
   };
 
-  // console.log('values', values);
-  // console.log('errors', errors);
+  console.log('values', values);
+  console.log('errors', errors);
   return {
     state: {
       values,

@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 
 import cl from './InputSearch.module.css';
 
@@ -19,7 +19,6 @@ export const InputSearch = ({ ...props }) => {
   ]);
   const [searchingProducts, setSearchingProducts] = useState([]);
   let searchPattern = '';
-
   const changeValue = (event) => {
     setValue(event.target.value);
     searchPattern = new RegExp(`${event.target.value.toLowerCase()}`, 'gm');
@@ -39,6 +38,24 @@ export const InputSearch = ({ ...props }) => {
     console.log(...searchingProducts);
   };
 
+  // const changeValue = (event) => {
+  //   setValue(event.target.value);
+  //   searchPattern = new RegExp(`${event.target.value.toLowerCase()}`, 'gm');
+  //   setIsPopUp(true);
+  //   setSearchingProducts(
+  //     products.filter((product) => searchPattern.test(product.title.toLowerCase())),
+  //   );
+  //   searchingProducts.map((product) => {
+  //     let str = '';
+  //     product.title.split('').map((s) => {
+  //       if (event.target.value.toLowerCase().includes(s.toLowerCase())) {
+  //         str += s;
+  //       }
+  //     });
+  //     setStrongStr(str);
+  //   });
+  //   console.log(...searchingProducts);
+  // };
   return (
     <div className={`${cl.input__parent} ${isPopUp ? cl.pop__open : ''} `}>
       <div className={`${cl.input__container} `}>

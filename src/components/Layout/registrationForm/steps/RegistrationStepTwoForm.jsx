@@ -4,12 +4,12 @@ import ReactInputMask from 'react-input-mask';
 
 import { Button } from '../../../UI/buttons/Button/Button';
 import { Input } from '../../../UI/fields/Input/Input';
-import { Typography } from '../../../UI/Typography/Typography';
 import { IconButton } from '../../../UI/buttons/IconButton/IconButton';
 import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import { AuthService } from '../../../../API/entities/auth';
 import { TimerCodeAccept } from '../../timerCodeAccept/TimerCodeAccept';
+import { useMutation } from '../../../../hooks';
 
 export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
   const [enabled, setEnabled] = useState(true);
@@ -43,9 +43,7 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
       </div>
       <div className='button__container__primary'>
         <Button
-          onClick={(e) =>
-            functions.handleSubmit(e, state.values.hasNotCardLoyalty ? 'cardNumber' : '')
-          }
+          type='submit'
           accent='primary'
           size='l'
           className='button__primary'

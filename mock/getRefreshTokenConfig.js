@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { COOKIE } from '../src/const/cookies';
 import { DATABASE } from './database';
 
-const secretKey = 'MY_SECRET_KEY';
+export const secretKey = 'MY_SECRET_KEY';
 
 export const getRefreshTokenConfig = {
   path: '/refresh',
@@ -18,6 +18,7 @@ export const getRefreshTokenConfig = {
       }
 
       const refreshToken = DATABASE.refreshTokens.find((refreshToken) => refreshToken.id === token);
+      DATABASE.refreshTokens.filter((refreshToken) => refreshToken.id !== token);
 
       if (!refreshToken) {
         setStatusCode(401);
@@ -47,11 +48,12 @@ export const getRefreshTokenConfig = {
       const newRefreshToken = jwt.sign({ id: Math.random() }, secretKey, {
         expiresIn: '15d',
       });
+
       DATABASE.refreshTokens.push({ id: newRefreshToken, userId: payload.userId });
 
       setCookie(COOKIE.ACCESS_TOKEN, newAccessToken, {
         httpOnly: true,
-        maxAge: 9000,
+        maxAge: 9000000,
         path: '/',
       });
       setCookie(COOKIE.REFRESH_TOKEN, newRefreshToken, {

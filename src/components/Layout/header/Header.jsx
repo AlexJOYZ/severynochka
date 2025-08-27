@@ -16,7 +16,7 @@ import { useHover } from '../../../hooks/useHover';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from '../../../store/asyncActions/auth';
 import { Button } from '../../UI/buttons/Button/Button';
-import { useFetching } from '../../../hooks/useFetch';
+// import { useFetching } from '../../../hooks/useFetch';
 import { Typography } from '../../UI/Typography/Typography';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthForm } from '../authFrom/AuthForm';
@@ -34,15 +34,12 @@ export const Header = () => {
   const isCategoryHovering = useHover(categoryRef);
   const isMenuHovering = useHover(menuRef);
 
-  const { fetching, isLoading, error } = useFetching(async () => {
-    dispatch(checkAuth());
-  });
+  // const { fetching, isLoading, error } = useFetching(async () => {
+  //   dispatch(checkAuth());
+  // });
 
   const isMenu = isCategoryHovering || isMenuHovering;
 
-  useEffect(() => {
-    fetching();
-  }, [authData]);
 
   return (
     <div className='header__container'>
@@ -82,11 +79,11 @@ export const Header = () => {
               Корзина
             </MenuButton>
           </Link>
-          {isLoading && (
+          {/* {isLoading && (
             <Typography as='h3' variant='text-bold' size='m'>
               Loading...
             </Typography>
-          )}
+          )} */}
           {authData.isAuth ? (
             <UserMenu user={authData.user} />
           ) : (

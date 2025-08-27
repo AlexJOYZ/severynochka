@@ -29,6 +29,7 @@ export const Tabs = ({ tabs, setValue = null, label = null, ...props }) => {
       >
         {tabs.map((tab, i) => (
           <Button
+          type='button'
             key={tab.title}
             data-index={i}
             onClick={openTab}

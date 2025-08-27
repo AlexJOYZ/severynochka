@@ -12,6 +12,7 @@ import ReactInputMask from 'react-input-mask';
 import { REGIONS } from '../../../../const/registration/regions';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import { locales } from '../../../../const/locales/ru';
+import { passwordValidationSchema } from '../RegistrationForm';
 
 export const RegistrationStepOneForm = ({ setStage, setStep, state, functions }) => {
   const genders = [{ title: 'Мужской' }, { title: 'Женский' }];
@@ -21,7 +22,10 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
       !functions.validateForm(state.values.hasNotCardLoyalty ? 'cardNumber' : '', 'phoneCode') ||
       state.values.passwordRepeat !== state.values.password
     ) {
-      if (state.values.passwordRepeat !== state.values.password && state.errors?.password)
+      if (
+        state.values.passwordRepeat !== state.values.password &&
+        !passwordValidationSchema(state.values.password)
+      )
         functions.setFieldsErrors('passwordRepeat', locales['validations.passwordRules.mustMatch']);
 
       return;
