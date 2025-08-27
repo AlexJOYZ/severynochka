@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
 import '../../../styles/footer/footer.css';
+
+import { Link } from 'react-router-dom';
+
 import { TelephoneIcon } from '../../UI/icons/footer/TelephoneIcon';
 import { FacebookIcon } from '../../UI/icons/social/FacebookIcon';
 import { InstagramIcon } from '../../UI/icons/social/InstagramIcon';

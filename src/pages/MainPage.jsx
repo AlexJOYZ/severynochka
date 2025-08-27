@@ -1,4 +1,4 @@
-import '../styles/pages/MainPAge.css';
+import '../styles/pages/MainPage.css';
 
 import { Banner } from '../components/UI/banner/Banner';
 import { Section } from '../components/Layout/Section/SectionProducts';
@@ -167,7 +167,7 @@ export const MainPage = () => {
   return (
     <main>
       <Banner />
-      <div className='container main__content'>
+      <div className='main__content container '>
         <div className='container__inner main__inner'>
           <Section type='product' section={sectionPromotion} />
           <Section type='product' section={sectionNovelty} />

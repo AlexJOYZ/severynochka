@@ -1,4 +1,3 @@
-import { useState } from 'react';
 
 import { Button } from '../../../UI/buttons/Button/Button';
 import { Select } from '../../../UI/select/Select';
@@ -12,7 +11,8 @@ import ReactInputMask from 'react-input-mask';
 import { REGIONS } from '../../../../const/registration/regions';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import { locales } from '../../../../const/locales/ru';
-import { passwordValidationSchema } from '../RegistrationForm';
+import { passwordValidationSchema } from '../../../../utils';
+
 
 export const RegistrationStepOneForm = ({ setStage, setStep, state, functions }) => {
   const genders = [{ title: 'Мужской' }, { title: 'Женский' }];
