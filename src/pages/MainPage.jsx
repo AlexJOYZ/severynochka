@@ -1,4 +1,4 @@
-import '../styles/pages/MainPAge.css';
+import '../styles/pages/MainPage.css';
 
 import { Banner } from '../components/UI/banner/Banner';
 import { Section } from '../components/Layout/Section/SectionProducts';
