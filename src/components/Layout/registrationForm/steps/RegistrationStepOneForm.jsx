@@ -12,7 +12,8 @@ import ReactInputMask from 'react-input-mask';
 import { REGIONS } from '../../../../const/registration/regions';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import { locales } from '../../../../const/locales/ru';
-import { passwordValidationSchema } from '../RegistrationForm';
+import { passwordValidationSchema } from '../../../../utils/helpers/registration';
+
 
 export const RegistrationStepOneForm = ({ setStage, setStep, state, functions }) => {
   const genders = [{ title: 'Мужской' }, { title: 'Женский' }];

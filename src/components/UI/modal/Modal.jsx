@@ -7,11 +7,12 @@ import { CloseIcon } from '../icons/header/CloseIcon';
 import { useScrollLock } from '../../../hooks';
 
 export const Modal = ({ children, setIsModal }) => {
-  const closeBtn = () => {
-    setIsModal(false);
-  };
-  useScrollLock({ widthReflow: true });
+
+  const closeBtn = () => setIsModal(false);
+  
   const modalRef = useClickOutside(closeBtn);
+  
+  useScrollLock();
 
   return (
     <div className={styles.modal__container}>
