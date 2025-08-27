@@ -1,19 +1,31 @@
-import { Link, useLoaderData } from 'react-router-dom';
-import { Typography } from '../components/UI/Typography/Typography';
 import '../styles/pages/ErrorPage.css';
 
+import { Link, useLocation } from 'react-router-dom';
+import { Typography } from '../components/UI/Typography/Typography';
+import { ArrowButton } from '../components/UI/buttons/ArrowButton/ArrowButton';
+
 export const ErrorPage = () => {
-  const error = useLoaderData();
-  console.error(error);
+  const location = useLocation();
   return (
     <div className='modal'>
       <div className='modal__content'>
-        <Typography as='h1' variant='header' size='m' className='error-header h'>
-          Error!
+        <Typography as='h1' variant='header' size='s' className='error-header h'>
+          Ошибка 404
         </Typography>
-        <Typography as='h2' variant='text-bold' size='m'>{error.status}</Typography>
-        <Typography as='i' variant='text' size='m'>{error.data}</Typography>
-        <Typography as='h3' variant='text-bold' size='s'> Please return to <Link to='/'>Home</Link></Typography>
+        <Typography as='i' variant='text' size='m'>
+          Запрашиваемая страница адресу:{' '}
+          <Typography as='span' size='m' variant='text-bold'>
+            {location.pathname}
+          </Typography>{' '}
+          не существует или была перемещена. Возможно, ты перешел по устаревшей ссылке или ввел
+          неправильный адрес.
+        </Typography>
+
+        <Link to='/'>
+          <ArrowButton accent='primary' size='m'>
+            Перейти на главную
+          </ArrowButton>
+        </Link>
       </div>
     </div>
   );
