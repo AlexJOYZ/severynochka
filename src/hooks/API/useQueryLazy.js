@@ -1,3 +1,5 @@
+import { useCallback, useState } from "react";
+
 export const useQueryLazy = (deps, request) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
