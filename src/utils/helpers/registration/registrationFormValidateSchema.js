@@ -6,6 +6,7 @@ import {
   validateContainLowerCase,
   validateDateOfBirthday,
   validateEmail,
+  validateContainSpecialSymbols,
 } from '../valdiations';
 
 const telephoneValidateSchema = (value) => {
