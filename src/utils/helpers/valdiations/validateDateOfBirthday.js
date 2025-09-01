@@ -1,4 +1,4 @@
-import { locales } from '../../../const/locales/ru';
+import { locales } from "../../../const";
 
 export const validateDateOfBirthday = (date, message = locales['validations.dateOfBirthday']) => {
   const today = new Date();
