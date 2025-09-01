@@ -1,8 +1,8 @@
 // import '..//styles/App.css'
 import './styles/App.css';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { useQueryLazy } from './hooks';
+import { useDispatch } from 'react-redux';
+import { useQuery } from './hooks';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -23,17 +23,11 @@ import {
 import { Layout } from './components/Layout/Layout';
 import { Spinner } from './components/UI/spinner/Spinner';
 import { ROUTES } from './const';
-import { useEffect } from 'react';
 
 export const App = () => {
-  const isAuth = useSelector((state)=>state.account.isAuth)
   const dispatch = useDispatch();
 
-  const { isLoading,query, error } = useQueryLazy([isAuth], () => dispatch(checkAuth()));
-
-  useEffect(()=>{
-    query()
-  },[isAuth])
+  const { isLoading, error } = useQuery('checkAuth', () => dispatch(checkAuth()));
 
   if (isLoading) return <Spinner />;
 
