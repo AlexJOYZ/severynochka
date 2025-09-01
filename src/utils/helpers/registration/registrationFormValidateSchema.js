@@ -1,3 +1,4 @@
+import { locales } from '../../../const';
 import {
   validateIsEmpty,
   validateMinLength,

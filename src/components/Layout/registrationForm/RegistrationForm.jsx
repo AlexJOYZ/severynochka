@@ -14,17 +14,23 @@ import { Spinner } from '../../UI/spinner/Spinner';
 
 import { REGIONS } from '../../../const/registration/regions';
 import { registrationFormValidateSchema } from '../../../utils';
-
+import { addUserAction } from '../../../store/reducers/accountReducer';
+import { useDispatch } from 'react-redux';
 
 export const RegistrationForm = ({ setStage }) => {
   const [step, setStep] = useState(0);
+
+  const dispatch = useDispatch();
 
   const {
     mutate: registrationMutation,
     isLoading: registrationIsLoading,
     data: registrationData,
     error,
-  } = useMutation('registration', (body) => AuthService.registration(body));
+  } = useMutation('registration', (body) => {
+    dispatch(addUserAction(body));
+    return AuthService.registration(body);
+  });
 
   const { state, functions } = useForm({
     initialValues: {
@@ -89,7 +95,7 @@ export const RegistrationForm = ({ setStage }) => {
       {registrationIsLoading && <Spinner />}
 
       <Typography as='h3' variant='header' size='s'>
-        {error?.response?.data?.message || registrationData?.data.message  }
+        {error?.response?.data?.message || registrationData?.data.message}
       </Typography>
     </form>
   );
