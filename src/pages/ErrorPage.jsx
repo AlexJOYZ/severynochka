@@ -3,13 +3,15 @@ import '../styles/pages/ErrorPage.css';
 import { Link, useLocation } from 'react-router-dom';
 import { Typography } from '../components/UI/Typography/Typography';
 import { ArrowButton } from '../components/UI/buttons/ArrowButton/ArrowButton';
+import { ErrorIcon } from '../components/UI/icons/error/ErrorIcon';
 
 export const ErrorPage = () => {
   const location = useLocation();
   return (
-    <div className='modal'>
-      <div className='modal__content'>
-        <Typography as='h1' variant='header' size='s' className='error-header h'>
+    <div className='error__root'>
+      <div className='error__content'>
+        <ErrorIcon className='error__icon' />
+        <Typography as='h1' variant='header' size='s' className='error__header'>
           Ошибка 404
         </Typography>
         <Typography as='i' variant='text' size='m'>

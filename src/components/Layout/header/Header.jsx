@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import '../../../styles/header/header.css';
 
@@ -14,10 +14,8 @@ import { CartIcon } from '../../UI/icons/MenuButtons/CartIcon';
 import { Menu } from '../../UI/menu/Menu';
 import { useHover } from '../../../hooks/useHover';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkAuth } from '../../../store/asyncActions/auth';
 import { Button } from '../../UI/buttons/Button/Button';
 // import { useFetching } from '../../../hooks/useFetch';
-import { Typography } from '../../UI/Typography/Typography';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthForm } from '../authFrom/AuthForm';
 
@@ -30,6 +28,7 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   const authData = useSelector((store) => store.account);
+  console.log(authData)
 
   const isCategoryHovering = useHover(categoryRef);
   const isMenuHovering = useHover(menuRef);

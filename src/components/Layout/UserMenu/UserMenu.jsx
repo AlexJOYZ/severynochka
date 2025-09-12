@@ -10,14 +10,21 @@ import { Typography } from '../../UI/Typography/Typography';
 import { Dropdown } from '../../UI/dropdown/Dropdown';
 import { LogOutIcon } from '../../UI/icons/header/LogOutIcon';
 import { AuthService } from '../../../API/entities/auth';
+import { useDispatch } from 'react-redux';
+import { logoutUserAction } from '../../../store/reducers/accountReducer';
+import { useQueryLazy } from '../../../hooks';
+import { Spinner } from '../../UI/spinner/Spinner';
 
 export const UserMenu = ({ user }) => {
   const [isOpen, setOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const { isLoading, query, error } = useQueryLazy('logout', () => AuthService.logout());
+
   const closeDropdown = () => {
     setOpen(false);
   };
-  console.log(user);
   const dropdownRef = useClickOutside(closeDropdown);
 
   return (
@@ -35,13 +42,14 @@ export const UserMenu = ({ user }) => {
           Icon={LogOutIcon}
           position='right'
           decoration='no'
-          onClick={() => AuthService.logout()}
+          onClick={() => query()}
         >
           <Typography as='span' size='s' variant='text'>
             Выйти
           </Typography>
         </IconButton>
       </Dropdown>
+      {isLoading && <Spinner />}
     </div>
   );
 };
