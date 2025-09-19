@@ -2,10 +2,9 @@ import { useState } from 'react';
 
 import styles from './InputSearch.module.css';
 
-import { MenuIcon } from '../../icons/inputIcons/MenuIcon';
 import { SearchIcon } from '../../icons/inputIcons/SearchIcon';
-import { Typography } from '../../Typography/Typography';
 import { classNames } from '../../../../utils/helpers/classNames/classNames';
+import { SearchElementsList } from './SearchElementsList/SearchElementsList';
 
 export const InputSearch = ({ ...props }) => {
   const [value, setValue] = useState('');
@@ -19,11 +18,13 @@ export const InputSearch = ({ ...props }) => {
   ]);
 
   const [searchingProducts, setSearchingProducts] = useState([]);
-  let searchPattern = '';
+
+  let searchPattern;
 
   const changeValue = (event) => {
     setValue(event.target.value);
-    searchPattern = new RegExp(`${event.target.value.toLowerCase()}`, 'gm');
+    const escapedValue = event.target.value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    searchPattern = new RegExp(`(^|\\s)${escapedValue}`, 'i');
     setIsPopUp(true);
     setSearchingProducts(
       products.filter((product) => searchPattern.test(product.title.toLowerCase())),
@@ -45,48 +46,7 @@ export const InputSearch = ({ ...props }) => {
         />
         <SearchIcon />
       </div>
-      {isPopUp && (
-        <div className={styles.search__elements}>
-          {searchingProducts.map((searchingProduct) => {
-            const searchValue = value.toLowerCase();
-            const title = searchingProduct.title;
-            const titleLower = title.toLowerCase();
-
-            const matchIndex = titleLower.indexOf(searchValue);
-            if (!value)
-              return (
-                <li key={searchingProduct.id} className={styles.search__element}>
-                  {title}
-                  {searchingProduct.isCategory && <MenuIcon />}
-                </li>
-              );
-
-            const beforeMatch = title.slice(0, matchIndex);
-            const match = title.slice(matchIndex, matchIndex + searchValue.length);
-            const afterMatch = title.slice(matchIndex + searchValue.length);
-
-            return (
-              <li key={searchingProduct.id} className={styles.search__element}>
-                <p className={styles.search__text}>
-                  {beforeMatch}
-                  <span className={styles.search__match}>{match}</span>
-                  {afterMatch}
-                </p>
-                {searchingProduct.isCategory && <MenuIcon />}
-              </li>
-            );
-          })}
-          {!searchingProducts.length && (
-            <p className={styles.search__error}>
-              По запросу
-              <Typography as='b' size='s' variant='text-bold'>
-                {value}
-              </Typography>
-              ничего не было найдено!
-            </p>
-          )}
-        </div>
-      )}
+      {isPopUp && <SearchElementsList elements={searchingProducts} value={value} />}
     </div>
   );
 };

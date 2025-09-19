@@ -18,6 +18,7 @@ import {
   MainPage,
   Orders,
   Vacancy,
+  Product
 } from './pages';
 
 import { Layout } from './components/Layout/Layout';
@@ -40,6 +41,7 @@ export const App = () => {
           <Route path={ROUTES.FAVORITES} element={<Favorites />} />
           <Route path={ROUTES.ABOUT} element={<About />} />
           <Route path={ROUTES.CONTACTS} element={<Contacts />} />
+          <Route path={ROUTES.PRODUCT} element={<Product />} />
           <Route path={ROUTES.VACANCY} element={<Vacancy />} />
           <Route path={ROUTES.ORDERS} element={<Orders />} />
           <Route path={ROUTES.CART} element={<Cart />} />

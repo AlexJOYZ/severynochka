@@ -1,0 +1,17 @@
+.search__elements {
+  margin-top: 5px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.search__error {
+  margin: 0 16px;
+  margin-bottom: 8px;
+
+  b {
+    margin: 0px 4px;
+  }
+}

@@ -5,6 +5,8 @@ export const ROUTES = {
   FAVORITES: '/favorites',
   CONTACTS: '/contacts',
   VACANCY: '/vacancy',
-  ORDERS:'/orders',
-  CART:'/cart'
+  ORDERS: '/orders',
+  CART: '/cart',
+  PRODUCTS: '/products',
+  PRODUCT: '/products/:id',
 };

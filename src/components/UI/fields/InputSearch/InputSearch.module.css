@@ -38,49 +38,7 @@
   box-shadow: var(--shadow-secondary-m);
   height: fit-content;
 }
-.search__elements {
-  margin-top: 5px;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.search__element {
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
-  height: 24px;
-  width: 100%;
-  &:hover {
-    background-color: var(--main-color-secondary);
-    color: var(--main-color-onSecondary);
-    cursor: pointer;
-    svg {
-      color: var(--main-color-onSecondary);
-    }
-  }
-  &:last-child {
-    margin-bottom: 8px;
-  }
-}
 
-.search__match {
-  font-family: 'Rubik-Bold', sans-serif;
-}
 
-.search__category__img {
-  width: 24px;
-  height: 24px;
-}
 
-.search__error {
-  margin: 0 16px;
-  margin-bottom: 8px;
-  b {
-    margin: 0px 4px;
-  }
-}
+
