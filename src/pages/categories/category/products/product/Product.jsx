@@ -1,13 +1,8 @@
-import { useSearchParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 export const Product = () => {
-  const params = useSearchParams() 
-  console.log(params)
+  const params = useParams();
+  console.log(params.id);
 
-  return (
-    <div>
-      Product
-
-    </div>
-  )
+  return <div>Product {params.id}</div>;
 };

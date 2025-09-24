@@ -2,9 +2,11 @@ import { useState } from 'react';
 
 import styles from './InputSearch.module.css';
 
-import { SearchIcon } from '../../icons/inputIcons/SearchIcon';
 import { classNames } from '../../../../utils/helpers/classNames/classNames';
+
+import { SearchIcon } from '../../icons/inputIcons/SearchIcon';
 import { SearchElementsList } from './SearchElementsList/SearchElementsList';
+import { useClickOutside } from '../../../../hooks';
 
 export const InputSearch = ({ ...props }) => {
   const [value, setValue] = useState('');
@@ -19,6 +21,8 @@ export const InputSearch = ({ ...props }) => {
 
   const [searchingProducts, setSearchingProducts] = useState([]);
 
+  const inputRef = useClickOutside(() => setIsPopUp(false));
+
   let searchPattern;
 
   const changeValue = (event) => {
@@ -32,7 +36,7 @@ export const InputSearch = ({ ...props }) => {
   };
 
   return (
-    <div className={classNames(styles.input__parent, isPopUp ? styles.pop__open : '')}>
+    <div ref={inputRef} className={classNames(styles.input__parent, isPopUp ? styles.pop__open : '')}>
       <div className={styles.input__container}>
         <input
           {...props}
@@ -42,7 +46,7 @@ export const InputSearch = ({ ...props }) => {
           placeholder='Найти товар'
           maxLength='14'
           onChange={(e) => changeValue(e)}
-          onBlur={() => setIsPopUp(false)}
+          // onBlur={() => }
         />
         <SearchIcon />
       </div>
