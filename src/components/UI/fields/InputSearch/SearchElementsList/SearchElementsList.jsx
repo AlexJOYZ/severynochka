@@ -6,7 +6,8 @@ import { Typography } from '../../../Typography/Typography';
 export const SearchElementsList = ({ elements, value }) => {
   return (
     <div className={styles.search__elements}>
-      {elements.map((searchingProduct) => {
+      {elements.map((searchingProduct, index) => {
+        if (index > 9) return;
         const searchValue = value.toLowerCase();
         const title = searchingProduct.title;
         const titleLower = title.toLowerCase();
@@ -19,7 +20,12 @@ export const SearchElementsList = ({ elements, value }) => {
 
         const newSearchingProduct = { ...searchingProduct, beforeMatch, match, afterMatch };
 
-        return <SearchElement element={newSearchingProduct} />;
+        return (
+          <SearchElement
+            key={`${searchingProduct.id}__${searchingProduct.title}`}
+            element={newSearchingProduct}
+          />
+        );
       })}
       {!elements.length && (
         <p className={styles.search__error}>

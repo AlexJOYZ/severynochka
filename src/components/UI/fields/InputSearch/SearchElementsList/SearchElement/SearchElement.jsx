@@ -6,8 +6,8 @@ import { ROUTES } from '../../../../../../const';
 
 export const SearchElement = ({ element }) => {
   return (
-    <Link to={ROUTES.PRODUCT.replace(':id', element.id)}>
-      <li key={element.id} className={styles.search__element}>
+    <Link className={styles.search__link} to={ROUTES.PRODUCT.replace(':id', element.id)}>
+      <li className={styles.search__element}>
         <p className={styles.search__text}>
           {element.beforeMatch}
           <span className={styles.search__match}>{element.match}</span>
