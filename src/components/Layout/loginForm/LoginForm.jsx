@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import './styles.css'
+
 import { Typography } from '../../UI/Typography/Typography';
 import { LoginStepOneForm } from './steps/LoginStepOneForm';
 import { LoginStepTwoForm } from './steps/LoginStepTwoForm';
@@ -13,11 +15,11 @@ export const LoginForm = ({ setStage }) => {
   ];
 
   return (
-    <>
+    <form className='login__form'>
       <Typography as='h2' variant='header' size='s' >
         Вход
       </Typography>
       {loginFormSteps[step]}
-    </>
+    </form>
   );
 };

@@ -1,0 +1,19 @@
+.login__form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60vw;
+  gap: 32px;
+  padding-bottom: 40px;
+}
+
+.login__form__input,.login__button__container{
+  width: 260px;
+}
+
+.container__btns {
+  width: 260px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
