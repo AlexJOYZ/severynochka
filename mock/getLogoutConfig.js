@@ -1,4 +1,7 @@
+import jwt from 'jsonwebtoken';
+
 import { COOKIE } from '../src/const/cookies';
+import { DATABASE } from './database';
 
 // const secretKey = import.meta.env.VITE_SECRET_KEY_JWT;
 const secretKey = 'MY_SECRET_KEY';
@@ -8,7 +11,9 @@ export const getLogoutConfig = {
   method: 'get',
   interceptors: {
     response: (_, { getCookie, clearCookie, setStatusCode }) => {
-      const token = getCookie(COOKIE.ACCESS_TOKEN);
+      // const accessToken = getCookie(COOKIE.ACCESS_TOKEN);
+      const token = getCookie(COOKIE.REFRESH_TOKEN);
+
       if (!token) {
         setStatusCode(401);
         return { success: false, message: 'Требуется токен' };
@@ -25,6 +30,7 @@ export const getLogoutConfig = {
           return { success: false, message: 'Пользователь не найден' };
         }
       });
+      clearCookie(COOKIE.REFRESH_TOKEN);
       clearCookie(COOKIE.ACCESS_TOKEN);
     },
   },

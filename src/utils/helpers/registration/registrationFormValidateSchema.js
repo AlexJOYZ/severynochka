@@ -1,3 +1,4 @@
+import { locales } from '../../../const';
 import {
   validateIsEmpty,
   validateMinLength,
@@ -6,6 +7,7 @@ import {
   validateContainLowerCase,
   validateDateOfBirthday,
   validateEmail,
+  validateContainSpecialSymbols,
 } from '../valdiations';
 
 const telephoneValidateSchema = (value) => {

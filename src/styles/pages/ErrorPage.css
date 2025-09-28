@@ -1,7 +1,7 @@
 @import '../const/colors.css';
 @import '../const/shadows.css';
 
-.modal {
+.error__root {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -15,7 +15,8 @@
 
 }
 
-.modal__content {
+.error__content {
+  width: 650px;
   align-items: center;
   display: flex;
   gap: 15px;
@@ -28,7 +29,13 @@
 
 }
 
-.error-header {
+.error__icon{
+  width:128px;
+  height: 128px;
+  fill: var(--main-color-onSurface);
+}
+
+.error__header {
   color: var(--pallete-color-error);
   text-align: center;
 }
