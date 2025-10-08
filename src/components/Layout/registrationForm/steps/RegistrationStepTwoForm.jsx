@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import ReactInputMask from 'react-input-mask';
 
@@ -7,9 +7,7 @@ import { Input } from '../../../UI/fields/Input/Input';
 import { IconButton } from '../../../UI/buttons/IconButton/IconButton';
 import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
-import { AuthService } from '../../../../API/entities/auth';
 import { TimerCodeAccept } from '../../timerCodeAccept/TimerCodeAccept';
-import { useMutation } from '../../../../hooks';
 
 export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
   const [enabled, setEnabled] = useState(true);

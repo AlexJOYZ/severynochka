@@ -1,4 +1,4 @@
-.login__form{
+.login__form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,7 +7,8 @@
   padding-bottom: 40px;
 }
 
-.login__form__input,.login__button__container{
+.login__form__input,
+.login__button__container {
   width: 260px;
 }
 
@@ -16,4 +17,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+.login__btn__reset:hover {
+  text-decoration: underline;
 }
