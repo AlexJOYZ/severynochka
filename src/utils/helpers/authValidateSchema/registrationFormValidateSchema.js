@@ -4,6 +4,7 @@ import {
   emailValidationSchema,
   nameValidateSchema,
   passwordValidationSchema,
+  phoneCodeValidationSchema,
   telephoneValidateSchema,
 } from './authFormValidateSchemes';
 
@@ -16,5 +17,5 @@ export const registrationFormValidateSchema = {
   passwordRepeat: (value) => validateIsEmpty(value),
   cardNumber: (value) => validateIsEmpty(value),
   email: (value) => emailValidationSchema(value),
-  phoneCode: (value) => validateIsEmpty(value),
+  phoneCode: (value) => phoneCodeValidationSchema(value),
 };

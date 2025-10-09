@@ -40,3 +40,9 @@ export const emailValidationSchema = (value) => {
   }
   return null;
 };
+
+export const phoneCodeValidationSchema = (value) => {
+  if (validateIsEmpty(value)) return validateIsEmpty(value);
+  if (validateMinLength(value, 5)) return validateMinLength(value, 18);
+  return null;
+};
