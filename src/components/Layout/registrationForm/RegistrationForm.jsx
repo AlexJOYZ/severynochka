@@ -78,7 +78,7 @@ export const RegistrationForm = ({ setStage }) => {
       setStage={setStage}
       setStep={setStep}
     />,
-    <RegistrationStepTwoForm state={state} functions={functions} setStep={setStep} />,
+    <RegistrationStepTwoForm state={state} functions={functions} setStep={setStep} error={error}/>,
   ];
 
   return (
@@ -94,9 +94,7 @@ export const RegistrationForm = ({ setStage }) => {
       {registrationSteps[step]}
       {registrationIsLoading && <Spinner />}
 
-      <Typography as='h3' variant='header' size='s'>
-        {error?.response?.data?.message || registrationData?.data.message}
-      </Typography>
+      
     </form>
   );
 };

@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ReactInputMask from 'react-input-mask';
+
+import { phoneCodeValidationSchema } from '../../../../utils';
 
 import { Button } from '../../../UI/buttons/Button/Button';
 import { Input } from '../../../UI/fields/Input/Input';
@@ -9,8 +11,14 @@ import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import { TimerCodeAccept } from '../../timerCodeAccept/TimerCodeAccept';
 
-export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
+export const RegistrationStepTwoForm = ({ setStep, state, functions, error }) => {
   const [enabled, setEnabled] = useState(true);
+
+  useEffect(() => {
+    functions.setFieldsErrors('phoneCode', error?.response?.data?.message);
+    
+  }, [error]);
+  console.log(state.errors?.phoneCode)
 
   return (
     <div className='registration__form__step registration__form__step__2'>
@@ -41,10 +49,10 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
       </div>
       <div className='button__container__primary'>
         <Button
+          disabled={phoneCodeValidationSchema(state.values.phoneCode)}
           type='submit'
           accent='primary'
           size='l'
-          className='button__primary'
         >
           Подтвердить
         </Button>
