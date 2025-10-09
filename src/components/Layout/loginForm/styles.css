@@ -22,3 +22,12 @@
 .login__btn__reset:hover {
   text-decoration: underline;
 }
+
+.login__code__input {
+  width: 110px;
+  input {
+    -webkit-text-security: squire;
+    font-family: 'Rubik-Fake', sans-serif;
+    line-height: 1.5;
+  }
+}
