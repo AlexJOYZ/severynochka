@@ -8,7 +8,7 @@ import { Tooltip } from '../../../UI/tooltip/Tooltip';
 export const LoginStepTwoForm = ({ state, functions, setStep }) => {
   return (
     <>
-      <div className='registration__form__input'>
+      <div className='login__form__input'>
         <Tooltip
           direction='up'
           isShowTooltip={!!state.errors?.password}
@@ -21,7 +21,7 @@ export const LoginStepTwoForm = ({ state, functions, setStep }) => {
               functions.setFieldValue('password', password);
             }}
             onFocus={() => functions.resetFieldError('password')}
-            size='m'
+            size='l'
             label='Пароль'
           />
         </Tooltip>
@@ -34,7 +34,7 @@ export const LoginStepTwoForm = ({ state, functions, setStep }) => {
           disabled={passwordValidationSchema(state.values.password)}
           type='button'
           onClick={() => {
-            if (!functions.validateForm(  'phoneCode')) return;
+            if (!functions.validateForm('phoneCode')) return;
             setStep((prev) => prev + 1);
           }}
         >
