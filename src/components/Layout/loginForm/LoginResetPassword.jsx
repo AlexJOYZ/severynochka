@@ -1,7 +1,11 @@
 import ReactInputMask from 'react-input-mask';
 import { useForm } from '../../../hooks';
 
-import { passwordValidationSchema, resetPasswordFormValidateSchemes } from '../../../utils';
+import {
+  passwordValidationSchema,
+  resetPasswordFormValidateSchemes,
+  telephoneValidateSchema,
+} from '../../../utils';
 import { Input } from '../../UI/fields/Input/Input';
 import { Tooltip } from '../../UI/tooltip/Tooltip';
 
@@ -19,11 +23,15 @@ export const LoginResetPassword = ({ setStage }) => {
       confirmPassword: '',
     },
     validateSchema: resetPasswordFormValidateSchemes,
-    onChange:false,
+    onChange: false,
     onSubmit: () => {
       console.log('@reset password');
     },
   });
+  const isValidated =
+    telephoneValidateSchema(state.values.password) ||
+    passwordValidationSchema(state.values.password) ||
+    state.values.password === state.values.confirmPassword;
 
   return (
     <form className='login__form'>
@@ -94,7 +102,7 @@ export const LoginResetPassword = ({ setStage }) => {
           accent='primary'
           size='l'
           decoration='default'
-          disabled={passwordValidationSchema(state.values.password)}
+          disabled={isValidated}
           type='button'
           onClick={() => {
             if (!functions.validateForm('phoneCode')) return;
