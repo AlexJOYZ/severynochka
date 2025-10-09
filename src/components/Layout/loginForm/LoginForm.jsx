@@ -12,6 +12,7 @@ import { LoginStepOneForm } from './steps/LoginStepOneForm';
 import { LoginStepTwoForm } from './steps/LoginStepTwoForm';
 import { Button } from '../../UI/buttons/Button/Button';
 import { ArrowFullIcon } from '../../UI/icons/inputIcons/ArrowFullIcon';
+import { LoginStepThreeForm } from './steps/LoginStepThreeForm';
 
 export const LoginForm = ({ setStage }) => {
   const [step, setStep] = useState(0);
@@ -32,6 +33,7 @@ export const LoginForm = ({ setStage }) => {
   const loginFormSteps = [
     <LoginStepOneForm state={state} functions={functions} setStep={setStep} setStage={setStage} />,
     <LoginStepTwoForm state={state} functions={functions} setStep={setStep} />,
+    <LoginStepThreeForm state={state} functions={functions} setStep={setStep}/>
   ];
 
   return (
