@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-export const useMutation = (deps, request,config = null) => {
+export const useMutation = (deps, request, config = null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [data, setData] = useState(null);
