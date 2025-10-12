@@ -16,7 +16,6 @@ const getYearsInterval = (year) => {
 export const useCalendar = ({ locale = 'default', selectedDate: date, firstWeekDay = 2 }) => {
   const [mode, setMode] = useState('days');
   const [selectedDay, setSelectedDay] = useState(createDate({ date }));
-  console.log('@useCalendar',selectedDay)
   const [selectedMonth, setSelectedMonth] = useState(
     createMonth({ date: new Date(selectedDay.year, selectedDay.monthIndex), locale }),
   );

@@ -20,7 +20,9 @@ export const UserMenu = ({ user }) => {
 
   const dispatch = useDispatch();
 
-  const { isLoading, query, error } = useQueryLazy('logout', () => AuthService.logout());
+  const { isLoading, query, error } = useQueryLazy('logout', () => AuthService.logout(), {
+    onSuccess: (res) => dispatch(logoutUserAction()),
+  });
 
   const closeDropdown = () => {
     setOpen(false);
