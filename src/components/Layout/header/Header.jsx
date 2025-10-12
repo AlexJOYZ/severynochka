@@ -78,11 +78,6 @@ export const Header = () => {
               Корзина
             </MenuButton>
           </Link>
-          {/* {isLoading && (
-            <Typography as='h3' variant='text-bold' size='m'>
-              Loading...
-            </Typography>
-          )} */}
           {authData.isAuth ? (
             <UserMenu user={authData.user} />
           ) : (

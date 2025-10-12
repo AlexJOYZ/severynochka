@@ -11,9 +11,9 @@ export const AuthForm = ({ setIsModal }) => {
   const [stage, setStage] = useState('login');
 
   const authStage = {
-    login: <LoginForm setStage={setStage} />,
-    registration: <RegistrationForm setStage={setStage} />,
-    resetPasswordForm:<LoginResetPassword setStage={setStage}/>
+    login: <LoginForm setIsModal={setIsModal} setStage={setStage} />,
+    registration: <RegistrationForm setIsModal={setIsModal} setStage={setStage} />,
+    resetPasswordForm: <LoginResetPassword setIsModal={setIsModal} setStage={setStage} />,
   };
 
   return (
