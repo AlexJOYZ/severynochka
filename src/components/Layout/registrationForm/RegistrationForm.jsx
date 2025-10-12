@@ -16,21 +16,22 @@ import { REGIONS } from '../../../const/registration/regions';
 import { registrationFormValidateSchema } from '../../../utils';
 import { addUserAction } from '../../../store/reducers/accountReducer';
 import { useDispatch } from 'react-redux';
+import { constructValuesForSubmit } from '../../../utils/helpers/registartion/constructValuesForSubmit';
 
-export const RegistrationForm = ({ setStage }) => {
+export const RegistrationForm = ({ setStage,setIsModal }) => {
   const [step, setStep] = useState(0);
 
   const dispatch = useDispatch();
 
-  const {
-    mutate: registrationMutation,
-    isLoading: registrationIsLoading,
-    data: registrationData,
-    error,
-  } = useMutation('registration', (body) => {
-    dispatch(addUserAction(body));
-    return AuthService.registration(body);
-  });
+  const handleSubmit = async () => {
+    const user = constructValuesForSubmit(state.values);
+    registrationMutation(user);
+
+    // if (!data.success) return;
+    // console.log('submit success!');
+    // const { date: body } = await AuthService.registration(state.values);
+    // console.log(body);
+  };
 
   const { state, functions } = useForm({
     initialValues: {
@@ -50,27 +51,22 @@ export const RegistrationForm = ({ setStage }) => {
     },
     validateSchema: registrationFormValidateSchema,
     validateOnChange: false,
-    onSubmit: async () => {
-      const newValues = Object.fromEntries(
-        Object.entries(state.values).filter(
-          ([k]) => k !== 'region' && k !== 'locality' && k !== 'passwordRepeat',
-        ),
-      );
-      const user = {
-        ...newValues,
-        address: {
-          region: state.values.region.value,
-          locality: state.values.locality.value,
-        },
-        gender: state.values.gender.title,
-      };
-      registrationMutation(user);
-      // if (!data.success) return;
-      // console.log('submit success!');
-      // const { date: body } = await AuthService.registration(state.values);
-      // console.log(body);
-    },
+    onSubmit: handleSubmit,
   });
+
+  const {
+    mutate: registrationMutation,
+    isLoading: registrationIsLoading,
+    data: registrationData,
+    error,
+  } = useMutation('registration', (body) => AuthService.registration(body), {
+    onSuccess: (response) => {
+      dispatch(addUserAction(response.data.user));
+      setIsModal(false)
+    },
+    onFailure: (e) => functions.setFieldsErrors('phoneCode', e?.response?.data?.message),
+  });
+
   const registrationSteps = [
     <RegistrationStepOneForm
       state={state}
@@ -78,7 +74,7 @@ export const RegistrationForm = ({ setStage }) => {
       setStage={setStage}
       setStep={setStep}
     />,
-    <RegistrationStepTwoForm state={state} functions={functions} setStep={setStep} error={error}/>,
+    <RegistrationStepTwoForm state={state} functions={functions} setStep={setStep} error={error} />,
   ];
 
   return (
@@ -93,8 +89,6 @@ export const RegistrationForm = ({ setStage }) => {
       </Typography>
       {registrationSteps[step]}
       {registrationIsLoading && <Spinner />}
-
-      
     </form>
   );
 };

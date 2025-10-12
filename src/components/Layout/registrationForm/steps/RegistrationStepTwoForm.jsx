@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import ReactInputMask from 'react-input-mask';
 
@@ -11,14 +11,9 @@ import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import { TimerCodeAccept } from '../../timerCodeAccept/TimerCodeAccept';
 
-export const RegistrationStepTwoForm = ({ setStep, state, functions, error }) => {
+export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
   const [enabled, setEnabled] = useState(true);
 
-  useEffect(() => {
-    functions.setFieldsErrors('phoneCode', error?.response?.data?.message);
-    
-  }, [error]);
-  console.log(state.errors?.phoneCode)
 
   return (
     <div className='registration__form__step registration__form__step__2'>
