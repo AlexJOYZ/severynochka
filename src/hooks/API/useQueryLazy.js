@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 export const useQueryLazy = (deps, request) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -8,10 +8,12 @@ export const useQueryLazy = (deps, request) => {
     setIsLoading(true);
     return request()
       .then((response) => {
+        if (config?.onSuccess) config?.onSuccess(response);
         setIsLoading(false);
         setData(response);
       })
       .catch((e) => {
+        if (config?.onFailure) config?.onFailure(e);
         setIsLoading(false);
         setError(e.message);
       });
