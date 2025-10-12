@@ -4,7 +4,6 @@ import { COOKIE } from '../src/const/cookies';
 import { DATABASE } from './database';
 import { secretKey } from './getRefreshTokenConfig';
 
-
 export const postSignUpConfig = {
   path: '/signup',
   method: 'post',
@@ -50,7 +49,7 @@ export const postSignUpConfig = {
 
       setCookie(COOKIE.ACCESS_TOKEN, accessToken, {
         httpOnly: true,
-        maxAge: 90000,
+        maxAge: 300000,
         path: '/',
       });
       setCookie(COOKIE.REFRESH_TOKEN, refreshToken, {
@@ -59,7 +58,7 @@ export const postSignUpConfig = {
         path: '/',
       });
       setStatusCode(201);
-      return { success: true, message: 'Регистрация успешна!' };
+      return { success: true, message: 'Регистрация успешна!', user: newUser };
     },
   },
   routes: [

@@ -21,13 +21,13 @@ export const getProfileConfig = {
           setStatusCode(401);
           return { success: false, message: 'Неверный токен' };
         }
+
         const user = DATABASE.users.find((profile) => profile.id === decode?.userId);
 
         if (!user) {
           setStatusCode(404);
           return { success: false, message: 'Пользователь не найден' };
         }
-
         return user;
       });
       return user;

@@ -11,8 +11,7 @@ export const getLogoutConfig = {
   method: 'get',
   interceptors: {
     response: (_, { getCookie, clearCookie, setStatusCode }) => {
-      // const accessToken = getCookie(COOKIE.ACCESS_TOKEN);
-      const token = getCookie(COOKIE.REFRESH_TOKEN);
+      const token = getCookie(COOKIE.ACCESS_TOKEN);
 
       if (!token) {
         setStatusCode(401);
@@ -23,15 +22,16 @@ export const getLogoutConfig = {
           setStatusCode(401);
           return { success: false, message: 'Неверный токен' };
         }
+
         const user = DATABASE.users.find((profile) => profile.id === decode?.userId);
 
         if (!user) {
           setStatusCode(404);
           return { success: false, message: 'Пользователь не найден' };
         }
+        clearCookie(COOKIE.REFRESH_TOKEN);
+        clearCookie(COOKIE.ACCESS_TOKEN);
       });
-      clearCookie(COOKIE.REFRESH_TOKEN);
-      clearCookie(COOKIE.ACCESS_TOKEN);
     },
   },
   routes: [{ data: null }],
