@@ -13,8 +13,15 @@ export const postSignInConfig = {
     response: (_, { request, setCookie, setStatusCode }) => {
       const { body } = request;
 
+      const phoneCode = DATABASE.phoneCodes.find(
+        (code) => code?.telephone === body.telephone && code?.code === +body.phoneCode,
+      );
+      if (!phoneCode) {
+        setStatusCode(404);
+        return { success: false, message: 'Неверный код' };
+      }
       const user = DATABASE.users.find(
-        (profile) => profile.email === body.email && profile.password === body.password,
+        (profile) => profile.telephone === body.telephone && profile.password === body.password,
       );
       if (!user) {
         setStatusCode(404);
@@ -38,7 +45,7 @@ export const postSignInConfig = {
         path: '/',
       });
 
-      return { ...user, accessToken};
+      return { success: true, message: 'Авторизация успешна!', user: user };
     },
   },
   routes: [
