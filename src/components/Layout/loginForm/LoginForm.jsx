@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import './styles.css';
 
-import { useForm } from '../../../hooks';
+import { useForm, useQuery } from '../../../hooks';
 
 import { loginFormValidateSchema } from '../../../utils';
 
@@ -13,9 +13,24 @@ import { LoginStepTwoForm } from './steps/LoginStepTwoForm';
 import { Button } from '../../UI/buttons/Button/Button';
 import { ArrowFullIcon } from '../../UI/icons/inputIcons/ArrowFullIcon';
 import { LoginStepThreeForm } from './steps/LoginStepThreeForm';
+import { AuthService } from '../../../API/entities/auth';
+import { addUserAction } from '../../../store/reducers/accountReducer';
+import { useDispatch } from 'react-redux';
+import { Spinner } from '../../UI/spinner/Spinner';
 
-export const LoginForm = ({ setStage }) => {
+export const LoginForm = ({ setStage, setIsModal }) => {
   const [step, setStep] = useState(0);
+  const dispatch = useDispatch();
+
+  const { isLoading: loginIsLoading } = useQuery('login', () => AuthService.login(state.values), {
+    onSuccess: (response) => {
+      dispatch(addUserAction(response.data.user));
+      setIsModal(false);
+    },
+    onFailure: (e) => {
+      functions.setFieldsErrors('phoneCode', e?.response?.data?.message);
+    },
+  });
 
   const { state, functions } = useForm({
     initialValues: {
@@ -26,18 +41,18 @@ export const LoginForm = ({ setStage }) => {
     validateSchema: loginFormValidateSchema,
     validateOnChange: true,
     onSubmit: async () => {
-      console.log('@submit!');
+      registrationMutation(user);
     },
   });
 
   const loginFormSteps = [
     <LoginStepOneForm state={state} functions={functions} setStep={setStep} setStage={setStage} />,
     <LoginStepTwoForm state={state} functions={functions} setStep={setStep} />,
-    <LoginStepThreeForm state={state} functions={functions} setStep={setStep}/>
+    <LoginStepThreeForm state={state} functions={functions} setStep={setStep} />,
   ];
 
   return (
-    <form className='login__form'>
+    <form className='login__form' onSubmit={(e) => functions.handleSubmit(e)}>
       <Typography as='h2' variant='header' size='s'>
         Вход
       </Typography>
@@ -77,6 +92,7 @@ export const LoginForm = ({ setStage }) => {
           </Button>
         )}
       </div>
+      {loginIsLoading && <Spinner />}
     </form>
   );
 };
