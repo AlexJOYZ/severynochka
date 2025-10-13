@@ -15,7 +15,6 @@ import { Menu } from '../../UI/menu/Menu';
 import { useHover } from '../../../hooks/useHover';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../UI/buttons/Button/Button';
-// import { useFetching } from '../../../hooks/useFetch';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthForm } from '../authFrom/AuthForm';
 
@@ -33,9 +32,6 @@ export const Header = () => {
   const isCategoryHovering = useHover(categoryRef);
   const isMenuHovering = useHover(menuRef);
 
-  // const { fetching, isLoading, error } = useFetching(async () => {
-  //   dispatch(checkAuth());
-  // });
 
   const isMenu = isCategoryHovering || isMenuHovering;
 

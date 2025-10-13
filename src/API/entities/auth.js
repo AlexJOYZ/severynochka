@@ -1,7 +1,7 @@
 import { api, refreshApi } from '../instance';
 
 export class AuthService {
-  static login = (email, password) => api.post('/signin', { email, password });
+  static login = (user) => api.post('/signin', user);
 
   static registration = (user) => api.post('/signup', user);
   static createPhoneCode = (user) => api.post('/createCode', user);
