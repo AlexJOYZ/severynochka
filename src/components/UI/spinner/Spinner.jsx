@@ -20,7 +20,6 @@ export const Spinner = ({ size = 48, thickness = 4 }) => {
           strokeWidth={thickness}
         />
       </svg>
-      {/* <div ></div> */}
     </div>
   );
 };

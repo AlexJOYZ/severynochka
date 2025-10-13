@@ -1,17 +1,18 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 
+let scrollLockCount = 0;
+let originStyleGlobal = null
+
 export const useScrollLock = (options = {}) => {
   const { autoLock = true, lockTarget, widthReflow = true } = options;
   const [isLocked, setIsLocked] = useState(false);
   const target = useRef(null);
-  const originalStyle = useRef(null);
 
   const lock = () => {
-    if (target.current) {
+    if (!target.current) return;
+    if (scrollLockCount === 0) {
       const { overflow, paddingRight } = target.current.style;
-
-      originalStyle.current = { overflow, paddingRight };
-
+      originStyleGlobal={overflow, paddingRight}
       if (widthReflow) {
         const offsetWidth =
           target.current === document.body ? window.innerWidth : target.current.offsetWidth;
@@ -22,17 +23,23 @@ export const useScrollLock = (options = {}) => {
         target.current.style.paddingRight = `${scrollbarWidth + currentPaddingRight}px`;
       }
       target.current.style.overflow = 'hidden';
-      setIsLocked(true);
     }
+    setIsLocked(true);
+    scrollLockCount++;
   };
   const unlock = () => {
-    if (target.current && originalStyle.current) {
-      target.current.style.overflow = originalStyle.current.overflow;
-      if (widthReflow) {
-        target.current.style.paddingRight = originalStyle.current.paddingRight;
+    if (!target.current) return;
+    scrollLockCount--;
+    if (scrollLockCount <= 0) {
+      scrollLockCount = 0;
+      if (originStyleGlobal) {
+        target.current.style.overflow = originStyleGlobal.overflow 
+        if (widthReflow) {
+          target.current.style.paddingRight = originStyleGlobal.paddingRight;
+        }
       }
+      setIsLocked(false);
     }
-    setIsLocked(false);
   };
   useLayoutEffect(() => {
     if (lockTarget) {
