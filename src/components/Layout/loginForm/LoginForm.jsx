@@ -1,10 +1,14 @@
 import { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import './styles.css';
 
-import { useForm, useQuery } from '../../../hooks';
+import { useForm, useMutation } from '../../../hooks';
 
+import { AuthService } from '../../../API/entities/auth';
 import { loginFormValidateSchema } from '../../../utils';
+import { addUserAction } from '../../../store/reducers/accountReducer';
 
 import { Typography } from '../../UI/Typography/Typography';
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
@@ -13,24 +17,12 @@ import { LoginStepTwoForm } from './steps/LoginStepTwoForm';
 import { Button } from '../../UI/buttons/Button/Button';
 import { ArrowFullIcon } from '../../UI/icons/inputIcons/ArrowFullIcon';
 import { LoginStepThreeForm } from './steps/LoginStepThreeForm';
-import { AuthService } from '../../../API/entities/auth';
-import { addUserAction } from '../../../store/reducers/accountReducer';
-import { useDispatch } from 'react-redux';
 import { Spinner } from '../../UI/spinner/Spinner';
 
 export const LoginForm = ({ setStage, setIsModal }) => {
   const [step, setStep] = useState(0);
-  const dispatch = useDispatch();
 
-  const { isLoading: loginIsLoading } = useQuery('login', () => AuthService.login(state.values), {
-    onSuccess: (response) => {
-      dispatch(addUserAction(response.data.user));
-      setIsModal(false);
-    },
-    onFailure: (e) => {
-      functions.setFieldsErrors('phoneCode', e?.response?.data?.message);
-    },
-  });
+  const dispatch = useDispatch();
 
   const { state, functions } = useForm({
     initialValues: {
@@ -40,10 +32,20 @@ export const LoginForm = ({ setStage, setIsModal }) => {
     },
     validateSchema: loginFormValidateSchema,
     validateOnChange: true,
-    onSubmit: async () => {
-      registrationMutation(user);
-    },
+    onSubmit: async () => loginMutation(state.values),
   });
+
+  const { isLoading: loginIsLoading, mutate: loginMutation } = useMutation(
+    'login',
+    (body) => AuthService.login(body),
+    {
+      onSuccess: (response) => {
+        dispatch(addUserAction(response.data.user));
+        setIsModal(false);
+      },
+      onFailure: (e) => functions.setFieldsErrors('phoneCode', e?.response?.data?.message),
+    },
+  );
 
   const loginFormSteps = [
     <LoginStepOneForm state={state} functions={functions} setStep={setStep} setStage={setStage} />,
