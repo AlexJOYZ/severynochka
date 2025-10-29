@@ -72,7 +72,8 @@ export const LoginForm = ({ setStage, setIsModal }) => {
         )}
 
         {step !== 0 && (
-          <IconButton
+          <IconButton 
+          className='login__button__small'
             accent='grayscale'
             decoration='no'
             Icon={ArrowFullIcon}

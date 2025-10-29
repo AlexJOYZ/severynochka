@@ -8,23 +8,33 @@
 }
 
 .login__form__input,
-.login__button__container {
+.login__button__container,
+.container__btns {
   width: 260px;
 }
 
 .container__btns {
-  width: 260px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 16px;
+}
+.login__button__container {
+  display: flex;
+  justify-content: center;
 }
 
 .login__btn__reset:hover {
   text-decoration: underline;
 }
 
+.login__button__small,
 .login__code__input {
-  width: 110px;
+  width: 111px;
+  flex-shrink: 0;
+}
+
+.login__code__input {
   input {
     -webkit-text-security: squire;
     font-family: 'Rubik-Fake', sans-serif;
