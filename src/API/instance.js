@@ -26,10 +26,7 @@ const processQueue = (error, token = null) => {
   });
   failedQueue = [];
 };
-// const string ='молок'
-// const str = string.split('мо')
-// console.log(str)
-{/* <span>{}</span><span>{}</span> */}
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
