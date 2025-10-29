@@ -26,11 +26,6 @@ export const RegistrationForm = ({ setStage,setIsModal }) => {
   const handleSubmit = async () => {
     const user = constructValuesForSubmit(state.values);
     registrationMutation(user);
-
-    // if (!data.success) return;
-    // console.log('submit success!');
-    // const { date: body } = await AuthService.registration(state.values);
-    // console.log(body);
   };
 
   const { state, functions } = useForm({
