@@ -5,6 +5,7 @@ import { getRefreshTokenConfig } from './getRefreshTokenConfig';
 import { postSignInConfig } from './postSignInConfig';
 import { postSignUpConfig } from './postSignUpConfig';
 import { getLogoutConfig } from './getLogoutConfig';
+import { patchResetPassword } from './patchResetPassword';
 
 export const authConfigs = [
   getDatabaseConfig,
@@ -13,6 +14,7 @@ export const authConfigs = [
   getProfileConfig,
   getRefreshTokenConfig,
   postPhoneCodeConfig,
-  getLogoutConfig
+  getLogoutConfig,
+  patchResetPassword,
   // getConfirmPhoneCode,
 ];
