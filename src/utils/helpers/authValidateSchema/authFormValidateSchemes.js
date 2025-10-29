@@ -12,7 +12,7 @@ import {
 
 export const telephoneValidateSchema = (value) => {
   if (validateIsEmpty(value)) return validateIsEmpty(value);
-  if (validateMinLength(value, 18)) return validateMinLength(value, 18,11);
+  if (validateMinLength(value, 18, 11)) return validateMinLength(value, 18, 11);
   return null;
 };
 export const nameValidateSchema = (value) => {
