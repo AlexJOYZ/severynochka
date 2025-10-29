@@ -1,15 +1,18 @@
-import { InputPassword } from '../../UI/fields/InputPassword/InputPassword';
-import { Button } from '../../UI/buttons/Button/Button';
-import { IconButton } from '../../UI/buttons/IconButton/IconButton';
-import { ArrowFullIcon } from '../../UI/icons/inputIcons/ArrowFullIcon';
-import { Tooltip } from '../../../UI/tooltip/Tooltip';
 import ReactInputMask from 'react-input-mask';
+
 import { passwordValidationSchema, telephoneValidateSchema } from '../../../../utils';
 
-export const FillResetData = ({ state, functions }) => {
+import { Tooltip } from '../../../UI/tooltip/Tooltip';
+import { Input } from '../../../UI/fields/Input/Input';
+import { InputPassword } from '../../../UI/fields/InputPassword/InputPassword';
+import { Button } from '../../../UI/buttons/Button/Button';
+import { IconButton } from '../../../UI/buttons/IconButton/IconButton';
+import { ArrowFullIcon } from '../../../UI/icons/inputIcons/ArrowFullIcon';
+
+export const FillResetData = ({ state, functions, setStep, setStage }) => {
   const isValidated =
-    telephoneValidateSchema(state.values.password) ||
-    passwordValidationSchema(state.values.password) ||
+    !telephoneValidateSchema(state.values.telephone) &&
+    !passwordValidationSchema(state.values.password) &&
     state.values.password === state.values.confirmPassword;
 
   return (
@@ -58,15 +61,17 @@ export const FillResetData = ({ state, functions }) => {
       <div className='login__form__input'>
         <Tooltip
           direction='up'
-          isShowTooltip={!!state.errors?.passwordRepeat}
-          label={state.errors?.passwordRepeat}
+          isShowTooltip={!!state.errors?.confirmPassword}
+          label={state.errors?.confirmPassword}
         >
           <InputPassword
-            value={state.values.passwordRepeat}
-            onFocus={() => functions.resetFieldError('passwordRepeat')}
+            value={state.values.confirmPassword}
+            onFocus={() => functions.resetFieldError('confirmPassword')}
             onChange={(e) => {
-              const passwordRepeat = e.target.value;
-              functions.setFieldValue('passwordRepeat', passwordRepeat);
+              const confirmPassword = e.target.value;
+              functions.setFieldValue('confirmPassword', confirmPassword);
+              if (state.values.password !== confirmPassword)
+                functions.setFieldsErrors('confirmPassword', 'Пароли должны совпадать');
             }}
             size='l'
             label='Подтвеждение пароля'
@@ -78,7 +83,7 @@ export const FillResetData = ({ state, functions }) => {
           accent='primary'
           size='l'
           decoration='default'
-          disabled={isValidated}
+          disabled={!isValidated}
           type='button'
           onClick={() => {
             if (!functions.validateForm('phoneCode')) return;
@@ -88,7 +93,7 @@ export const FillResetData = ({ state, functions }) => {
           Подтвердить
         </Button>
       </div>
-      <div className='login__button__container'>
+      <div className='login__button__small'>
         <IconButton
           accent='grayscale'
           decoration='no'
