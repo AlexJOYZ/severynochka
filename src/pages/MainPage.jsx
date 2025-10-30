@@ -165,7 +165,7 @@ export const MainPage = () => {
   };
 
   return (
-    <main>
+    <main className='main'>
       <Banner />
       <div className='main__content container '>
         <div className='container__inner main__inner'>

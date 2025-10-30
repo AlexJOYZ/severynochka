@@ -1,6 +1,11 @@
 .container {
   padding: 0 116px;
 }
+.main{
+  background-color: var(--main-color-bgPage);
+  padding-bottom: 80px;
+}
+
 .grid {
   display: flex;
   gap: 40px;
