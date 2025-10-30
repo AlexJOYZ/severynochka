@@ -18,7 +18,8 @@ import {
   MainPage,
   Orders,
   Vacancy,
-  Product
+  Product,
+  Category
 } from './pages';
 
 import { Layout } from './components/Layout/Layout';
@@ -38,6 +39,7 @@ export const App = () => {
         <Route path={ROUTES.MAIN} element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route path={ROUTES.CATEGORIES} element={<Categories />} />
+          <Route path={ROUTES.CATEGORY} element={<Category />} />
           <Route path={ROUTES.FAVORITES} element={<Favorites />} />
           <Route path={ROUTES.ABOUT} element={<About />} />
           <Route path={ROUTES.CONTACTS} element={<Contacts />} />
