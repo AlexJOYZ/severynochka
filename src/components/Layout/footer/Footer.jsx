@@ -10,6 +10,7 @@ import { VkIcon } from '../../UI/icons/social/VkIcon';
 
 import { Logo } from '../../UI/logo/Logo';
 import { Typography } from '../../UI/Typography/Typography';
+import { FOOTER__LINKS } from '../../../const/footer';
 
 export const Footer = () => {
   return (
@@ -17,43 +18,35 @@ export const Footer = () => {
       <div className='container footer__container'>
         <div className='footer__left'>
           <Logo type='vertical' />
-          <Link to='/about'>
-            <Typography as='p' variant='text' size='xs'>
-              О компании
-            </Typography>
-          </Link>
-          <Link to='/contacts'>
-            <Typography as='p' variant='text' size='xs'>
-              Контакты
-            </Typography>
-          </Link>
-          <Link to='/vacancy'>
-            <Typography as='p' variant='text' size='xs'>
-              Вакансии
-            </Typography>
-          </Link>
-          <Link to='/cart'>
-          <Typography as='p' variant='text' size='xs'>
-            Статьи
-          </Typography>
-          </Link>
-          <Typography as='p' variant='text' size='xs'>
-            Политика обработки персональных данных
-          </Typography>
+          {FOOTER__LINKS.map((link) => (
+            <Link to={link.path}>
+              <Typography as='p' variant='text' size='xs'>
+                {link.title}
+              </Typography>
+            </Link>
+          ))}
         </div>
         <div className='footer__right'>
           <div className='footer__social'>
-            <InstagramIcon />
-            <VkIcon />
-            <FacebookIcon />
-            <OkIcon />
+            <a target='_blank' href='https://www.instagram.com/'>
+              <InstagramIcon />
+            </a>
+            <a target='_blank' href='https://vk.com/'>
+              <VkIcon />
+            </a>
+            <a target='_blank' href='https://www.facebook.com/?locale=ru_RU'>
+              <FacebookIcon />
+            </a>
+            <a target='_blank' href='https://www.facebook.com/?locale=ru_RU'>
+              <OkIcon />
+            </a>
           </div>
-          <div className='footer__tel'>
+          <a href='tel:+78007773333' className='footer__tel'>
             <TelephoneIcon />
             <Typography as='span' variant='text' size='s'>
               8 800 777 33 33
             </Typography>
-          </div>
+          </a>
         </div>
       </div>
     </footer>
