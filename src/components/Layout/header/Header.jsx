@@ -1,4 +1,7 @@
 import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useHover } from '../../../hooks/useHover';
 
 import '../../../styles/header/header.css';
 
@@ -12,8 +15,6 @@ import { FavoritesIcon } from '../../UI/icons/MenuButtons/FavoritesIcon';
 import { OrderIcon } from '../../UI/icons/MenuButtons/OrderIcon';
 import { CartIcon } from '../../UI/icons/MenuButtons/CartIcon';
 import { Menu } from '../../UI/menu/Menu';
-import { useHover } from '../../../hooks/useHover';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../UI/buttons/Button/Button';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthForm } from '../authFrom/AuthForm';
