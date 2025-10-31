@@ -1,0 +1,18 @@
+.route__page__history {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 0px;
+  a {
+    color: var(--main-color-onSurface);
+  }
+}
+
+.route__page__history__arrow {
+  transform: rotate(-180deg);
+}
+
+.route__page__history__current {
+  cursor: default;
+  color: var(--grayScale-color-hard);
+}
