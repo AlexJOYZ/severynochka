@@ -1,23 +1,13 @@
-.categories__grid {
-  display: grid;
-  gap: 40px;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  
-}
 .categories__header {
   margin-bottom: 60px;
 }
-.page__history {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+
+.categories__grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
 }
-.page__history__arrow {
-  transform: rotate(-180deg);
-}
-.page__history__current {
-  cursor: default;
-  padding: 28px 0px;
-  color: var(--grayScale-color-hard);
+
+.category__card__double {
+  grid-column: span 2;
 }
