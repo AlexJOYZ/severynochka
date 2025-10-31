@@ -8,8 +8,16 @@
   width: 100vw;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 40px;
-  row-gap:24px;
+  row-gap: 24px;
   background-color: var(--main-color-surface);
   z-index: 5;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+}
+
+.menu__link > h2 {
+  transition: color 0.2s;
+}
+
+.menu__link:hover > h2 {
+  color: var(--main-color-primary);
 }
