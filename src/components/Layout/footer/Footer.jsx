@@ -1,45 +1,39 @@
 import '../../../styles/footer/footer.css';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { TelephoneIcon } from '../../UI/icons/footer/TelephoneIcon';
-import { FacebookIcon } from '../../UI/icons/social/FacebookIcon';
-import { InstagramIcon } from '../../UI/icons/social/InstagramIcon';
-import { OkIcon } from '../../UI/icons/social/OkIcon';
-import { VkIcon } from '../../UI/icons/social/VkIcon';
 
 import { Logo } from '../../UI/logo/Logo';
 import { Typography } from '../../UI/Typography/Typography';
-import { FOOTER__LINKS } from '../../../const/footer';
+import { FOOTER_LINKS, FOOTER_SOCIAL_LINKS, ROUTES } from '../../../const';
 
 export const Footer = () => {
   return (
     <footer>
       <div className='container footer__container'>
         <div className='footer__left'>
-          <Logo type='vertical' />
-          {FOOTER__LINKS.map((link) => (
-            <Link to={link.path}>
-              <Typography as='p' variant='text' size='xs'>
+          <Link to={ROUTES.MAIN}>
+            <Logo type='vertical' />
+          </Link>
+          {FOOTER_LINKS.map((link) => (
+            <NavLink
+              className={({ isActive }) => isActive && 'footer__link__current'}
+              to={link.path}
+            >
+              <Typography className='footer__navigate__link' as='p' variant='text' size='xs'>
                 {link.title}
               </Typography>
-            </Link>
+            </NavLink>
           ))}
         </div>
         <div className='footer__right'>
           <div className='footer__social'>
-            <a target='_blank' href='https://www.instagram.com/'>
-              <InstagramIcon />
-            </a>
-            <a target='_blank' href='https://vk.com/'>
-              <VkIcon />
-            </a>
-            <a target='_blank' href='https://www.facebook.com/?locale=ru_RU'>
-              <FacebookIcon />
-            </a>
-            <a target='_blank' href='https://www.facebook.com/?locale=ru_RU'>
-              <OkIcon />
-            </a>
+            {FOOTER_SOCIAL_LINKS.map((socialLink) => (
+              <a target='_blank' href={socialLink.link}>
+                <socialLink.icon />
+              </a>
+            ))}
           </div>
           <a href='tel:+78007773333' className='footer__tel'>
             <TelephoneIcon />
