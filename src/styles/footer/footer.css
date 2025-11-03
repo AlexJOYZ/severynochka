@@ -16,6 +16,18 @@ footer {
   align-items: center;
 }
 
+.footer__link__current > p {
+  color: var(--main-color-primary);
+}
+
+.footer__navigate__link {
+  transition: all 0.2s;
+
+  &:hover {
+    color: var(--main-color-primary);
+  }
+}
+
 .footer__right {
   display: flex;
   gap: 40px;
