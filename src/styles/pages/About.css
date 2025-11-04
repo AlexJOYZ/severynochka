@@ -1,0 +1,35 @@
+.about__container {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.about__description {
+  position: relative;
+  height: 375px;
+}
+
+.about__description__text {
+  padding-left: 30px;
+  padding-top: 20px;
+  max-width: 670px;
+  position: relative;
+  z-index: 100;
+}
+
+.about__subtitle {
+  color: var(--main-color-primary);
+}
+
+.about__title {
+  margin-bottom: 16px;
+}
+
+.about__description__icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 56%;
+  height: 100%;
+  z-index: 10;
+}
