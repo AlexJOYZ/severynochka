@@ -6,13 +6,13 @@
 
 .about__description {
   position: relative;
-  height: 375px;
+  height: 372px;
 }
 
 .about__description__text {
   padding-left: 30px;
   padding-top: 20px;
-  max-width: 670px;
+  max-width: 50%;
   position: relative;
   z-index: 100;
 }
@@ -29,7 +29,130 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 56%;
+  width: 680px;
   height: 100%;
   z-index: 10;
+}
+
+.about__description__ellipse__1 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(45deg);
+  width: 51px;
+  height: 25px;
+  top: 0;
+  left: -51px;
+}
+
+.about__description__ellipse__2 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(-150deg);
+  width: 80px;
+  height: 40px;
+  bottom: 41px;
+  right: -20px;
+}
+
+.about__description__rectangle__1 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(-30deg);
+  width: 70px;
+  height: 33px;
+  top: -17px;
+  right: 30px;
+}
+
+.about__description__rectangle__2 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(84deg);
+  width: 46px;
+  height: 22px;
+  bottom: -10px;
+  left: -80px;
+}
+
+.about__description__arc__1 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(-12deg);
+  width: 67px;
+  height: 31px;
+  bottom: 16px;
+  left: 20%;
+}
+
+.about__description__arc__2 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(-120deg);
+  width: 59px;
+  height: 27px;
+  top: 19px;
+  left: 53%;
+}
+
+.about__description__smile__1 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(66deg);
+  width: 72px;
+  height: 32px;
+  bottom: 27px;
+  left: 40%;
+}
+
+.about__description__smile__2 {
+  position: absolute;
+  z-index: 1000;
+  transform: rotate(141deg);
+  width: 72px;
+  height: 32px;
+  top: 25%;
+  right: 10%;
+}
+
+.about__advantages {
+  display: flex;
+  justify-content: space-between;
+}
+
+.advantages__item {
+  max-width: 33%;
+  display: flex;
+  gap: 10px;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+  }
+}
+
+.advantages__item__description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about__slogan {
+  display: flex;
+  gap: 40px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.about__slogan__icon > img {
+  width: 127px;
+  height: 103px;
+}
+
+.about__slogan__text{
+  color: var(--main-color-secondary);
+  padding: 30px 40px;
+  background-color: var(--main-color-secondaryMuted);
+  border-radius: 16px;
 }
