@@ -5,7 +5,7 @@ export const ROUTES = {
   ABOUT: '/about',
   FAVORITES: '/favorites',
   CONTACTS: '/contacts',
-  VACANCY: '/vacancy',
+  VACANCIES: '/vacancies',
   ORDERS: '/orders',
   CART: '/cart',
   PRODUCTS: '/products',

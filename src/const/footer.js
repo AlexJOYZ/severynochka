@@ -16,7 +16,7 @@ export const FOOTER_LINKS = [
   },
   {
     title: 'Вакансии',
-    path: ROUTES.VACANCY,
+    path: ROUTES.VACANCIES,
   },
   {
     title: 'Статьи',

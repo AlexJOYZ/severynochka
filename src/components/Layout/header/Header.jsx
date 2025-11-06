@@ -18,6 +18,7 @@ import { Menu } from '../../UI/menu/Menu';
 import { Button } from '../../UI/buttons/Button/Button';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthForm } from '../authFrom/AuthForm';
+import { ROUTES } from '../../../const';
 
 export const Header = () => {
   const [isModal, setIsModal] = useState(false);
@@ -28,27 +29,25 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   const authData = useSelector((store) => store.account);
-  console.log(authData)
+  console.log(authData);
 
   const isCategoryHovering = useHover(categoryRef);
   const isMenuHovering = useHover(menuRef);
 
-
   const isMenu = isCategoryHovering || isMenuHovering;
-
 
   return (
     <div className='header__container'>
       <header>
         <div className='header__left'>
-          <Link to='/' ref={categoryRef}>
+          <Link to={ROUTES.MAIN} ref={categoryRef}>
             <Logo type='horizontal' className='header__logo' />
           </Link>
           <div
             className={`${isCategoryHovering ? 'menu__open' : ''} button__container`}
             ref={categoryRef}
           >
-            <Link to='/categories'>
+            <Link to={ROUTES.CATEGORIES}>
               <IconButton accent='secondary' Icon={MenuIcon} position='left' size='m'>
                 Каталог
               </IconButton>
@@ -64,13 +63,13 @@ export const Header = () => {
           </div>
         </div>
         <div className='header__right'>
-          <Link to='/favorites'>
+          <Link to={ROUTES.FAVORITES}>
             <MenuButton Icon={FavoritesIcon}>Избранное</MenuButton>
           </Link>
-          <Link to='/orders'>
+          <Link to={ROUTES.ORDERS}>
             <MenuButton Icon={OrderIcon}>Заказы</MenuButton>
           </Link>
-          <Link to='/cart'>
+          <Link TO={ROUTES.CART}>
             <MenuButton type='cart' Icon={CartIcon}>
               Корзина
             </MenuButton>
