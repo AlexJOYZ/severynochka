@@ -6,5 +6,5 @@ export * from './ErrorPage';
 export * from './Favorites';
 export * from './MainPage';
 export * from './Orders';
-export * from './Vacancy';
+export * from './Vacancies';
 

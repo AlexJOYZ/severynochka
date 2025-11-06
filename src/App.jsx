@@ -17,7 +17,7 @@ import {
   Favorites,
   MainPage,
   Orders,
-  Vacancy,
+  Vacancies,
   Product,
   Category
 } from './pages';
@@ -44,7 +44,7 @@ export const App = () => {
           <Route path={ROUTES.ABOUT} element={<About />} />
           <Route path={ROUTES.CONTACTS} element={<Contacts />} />
           <Route path={ROUTES.PRODUCT} element={<Product />} />
-          <Route path={ROUTES.VACANCY} element={<Vacancy />} />
+          <Route path={ROUTES.VACANCIES} element={<Vacancies />} />
           <Route path={ROUTES.ORDERS} element={<Orders />} />
           <Route path={ROUTES.CART} element={<Cart />} />
           <Route path='*' element={<ErrorPage />} />
