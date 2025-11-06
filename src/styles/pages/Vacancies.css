@@ -1,0 +1,9 @@
+.vacancies__title {
+  margin-bottom: 60px;
+}
+
+.vacancies__container{
+  display: grid;
+  row-gap: 40px;
+  column-gap: 40px;
+}
