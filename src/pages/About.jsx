@@ -75,6 +75,7 @@ export const About = () => {
         <div className='about__slogan'>
           <Logo className='about__slogan__icon' type='sign' />
           <div className='about__slogan__container'>
+            <div className="about__slogan__triangle"></div>
             <Typography className='about__slogan__text' as='h4' variant='text-bold' size='l'>
               Спасибо за то, что вы с нами. Северяночка, везет всегда!
             </Typography>

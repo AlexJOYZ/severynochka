@@ -150,7 +150,20 @@
   height: 103px;
 }
 
-.about__slogan__text{
+.about__slogan__container {
+  display: flex;
+}
+
+.about__slogan__triangle {
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  border: 20px solid transparent;
+  border-top: 20px solid var(--main-color-secondaryMuted);
+  border-right: 20px solid var(--main-color-secondaryMuted);
+}
+
+.about__slogan__text {
   color: var(--main-color-secondary);
   padding: 30px 40px;
   background-color: var(--main-color-secondaryMuted);
