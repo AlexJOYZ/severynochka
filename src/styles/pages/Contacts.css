@@ -1,0 +1,42 @@
+.contacts__container {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.contacts__title {
+  margin-bottom: 40px;
+}
+
+.contacts__description {
+  display: flex;
+  gap: 80px;
+}
+
+.contacts__description__item {
+  display: flex;
+  gap: 8px;
+}
+
+.contacts__description__text {
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+}
+
+.contacts__description__text__tel {
+  text-decoration: underline;
+  color: var(--main-color-onSurface);
+  transition: all 0.2s;
+
+  span {
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    color: var(--main-color-primary);
+    span {
+      color: var(--main-color-primary);
+    }
+  }
+}
