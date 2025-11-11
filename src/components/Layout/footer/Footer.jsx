@@ -1,12 +1,11 @@
-import '../../../styles/footer/footer.css';
-
 import { Link, NavLink } from 'react-router-dom';
-
-import { TelephoneIcon } from '../../UI/icons/footer/TelephoneIcon';
 
 import { Logo } from '../../UI/logo/Logo';
 import { Typography } from '../../UI/Typography/Typography';
 import { FOOTER_LINKS, FOOTER_SOCIAL_LINKS, ROUTES } from '../../../const';
+import { TelephoneLink } from '../../UI/telephoneLink/TelephoneLink';
+
+import '../../../styles/footer/footer.css';
 
 export const Footer = () => {
   return (
@@ -35,12 +34,7 @@ export const Footer = () => {
               </a>
             ))}
           </div>
-          <a href='tel:+78007773333' className='footer__tel'>
-            <TelephoneIcon />
-            <Typography as='span' variant='text' size='s'>
-              8 800 777 33 33
-            </Typography>
-          </a>
+          <TelephoneLink tel='8 800 777 33 33' />
         </div>
       </div>
     </footer>
