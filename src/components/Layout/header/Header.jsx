@@ -1,11 +1,9 @@
 import { useRef, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useHover } from '../../../hooks/useHover';
 
-import '../../../styles/header/header.css';
-
-import { Link } from 'react-router-dom';
 import { Logo } from '../../UI/logo/Logo';
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { MenuIcon } from '../../UI/icons/inputIcons/MenuIcon';
@@ -19,6 +17,8 @@ import { Button } from '../../UI/buttons/Button/Button';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthForm } from '../authFrom/AuthForm';
 import { ROUTES } from '../../../const';
+
+import '../../../styles/header/header.css';
 
 export const Header = () => {
   const [isModal, setIsModal] = useState(false);
@@ -63,17 +63,20 @@ export const Header = () => {
           </div>
         </div>
         <div className='header__right'>
-          <Link to={ROUTES.FAVORITES}>
+          <NavLink
+            className={({ isActive }) => isActive && 'header__link__current'}
+            to={ROUTES.FAVORITES}
+          >
             <MenuButton Icon={FavoritesIcon}>Избранное</MenuButton>
-          </Link>
-          <Link to={ROUTES.ORDERS}>
+          </NavLink>
+          <NavLink to={ROUTES.ORDERS}>
             <MenuButton Icon={OrderIcon}>Заказы</MenuButton>
-          </Link>
-          <Link TO={ROUTES.CART}>
+          </NavLink>
+          <NavLink to={ROUTES.CART}>
             <MenuButton type='cart' Icon={CartIcon}>
               Корзина
             </MenuButton>
-          </Link>
+          </NavLink>
           {authData.isAuth ? (
             <UserMenu user={authData.user} />
           ) : (
