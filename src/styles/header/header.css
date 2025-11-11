@@ -10,7 +10,7 @@
 header {
   max-height: 72px;
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -18,34 +18,45 @@ header {
   display: flex;
   gap: 16px;
 }
+
 .header__right {
   display: flex;
   gap: 24px;
   align-items: center;
 }
 
-.header__logo{
+.header__link__current {
+  * {
+    color: var(--main-color-primary) !important;
+  }
+}
+
+.header__logo {
   margin-right: 26px;
 }
+
 .button__container {
   width: 140px;
-
 }
-.menu__open{
+
+.menu__open {
   display: inline-block;
 }
-.menu__container{
+
+.menu__container {
   position: absolute;
   top: 57%;
   left: 0;
   height: 30px;
   width: 100vw;
 }
+
 .search__inner {
   width: 375px;
   position: relative;
 }
-.button__container{
+
+.button__container {
   width: 157px;
   height: fit-content;
 }

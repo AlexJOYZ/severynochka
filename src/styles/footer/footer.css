@@ -37,21 +37,3 @@ footer {
   display: flex;
   gap: 16px;
 }
-
-.footer__tel {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  color: var(--main-color-onSurface);
-  transition: color 0.1s;
-
-  &:hover {
-    color: var(--main-color-primary);
-    text-decoration: underline;
-
-    span {
-      transition: color 0.1s;
-      color: var(--main-color-primary);
-    }
-  }
-}

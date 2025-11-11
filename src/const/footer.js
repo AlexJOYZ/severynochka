@@ -20,11 +20,11 @@ export const FOOTER_LINKS = [
   },
   {
     title: 'Статьи',
-    path: ROUTES.MAIN,
+    path: ROUTES.ARTICLES,
   },
   {
     title: 'Политика обработки персональных данных',
-    path: ROUTES.MAIN,
+    path: ROUTES.POLICY,
   },
 ];
 export const FOOTER_SOCIAL_LINKS = [
