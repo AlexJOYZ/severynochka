@@ -27,7 +27,9 @@ header {
 
 .header__link__current {
   * {
-    color: var(--main-color-primary) !important;
+    color: var(--main-color-primary);
+    fill: var(--main-color-primary);
+    transition: 0.2s;
   }
 }
 

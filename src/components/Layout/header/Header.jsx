@@ -69,10 +69,16 @@ export const Header = () => {
           >
             <MenuButton Icon={FavoritesIcon}>Избранное</MenuButton>
           </NavLink>
-          <NavLink to={ROUTES.ORDERS}>
+          <NavLink
+            className={({ isActive }) => isActive && 'header__link__current'}
+            to={ROUTES.ORDERS}
+          >
             <MenuButton Icon={OrderIcon}>Заказы</MenuButton>
           </NavLink>
-          <NavLink to={ROUTES.CART}>
+          <NavLink
+            className={({ isActive }) => isActive && 'header__link__current'}
+            to={ROUTES.CART}
+          >
             <MenuButton type='cart' Icon={CartIcon}>
               Корзина
             </MenuButton>
