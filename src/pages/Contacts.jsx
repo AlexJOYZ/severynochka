@@ -1,15 +1,14 @@
+import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
 import { MapSection } from '../components/Layout/MapSection/MapSection';
 import { ContactsHomeIcon } from '../components/UI/icons/contacts/ContactsHomeIcon';
 import { ContactsPercentIcon } from '../components/UI/icons/contacts/ContactsPercentIcon';
-import { RoutePageHistory } from '../components/UI/routePageHistory/RoutePageHistory';
 import { Typography } from '../components/UI/Typography/Typography';
 
 import '../styles/pages/Contacts.css';
 
 export const Contacts = () => {
   return (
-    <main className='container main'>
-      <RoutePageHistory routes={['Главная', 'Контакты']} />
+    <MainContainer routes={['Главная', 'Контакты']}>
       <Typography className='contacts__title' as='h2' variant='header' size='xl'>
         Контакты
       </Typography>
@@ -45,6 +44,6 @@ export const Contacts = () => {
 
         <MapSection />
       </div>
-    </main>
+    </MainContainer>
   );
 };

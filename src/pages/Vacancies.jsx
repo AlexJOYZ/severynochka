@@ -1,10 +1,10 @@
-import { RoutePageHistory } from '../components/UI/routePageHistory/RoutePageHistory';
-
 import { Card } from '../components/UI/cards/card/Card';
 import { Typography } from '../components/UI/Typography/Typography';
 
-import '../styles/pages/Vacancies.css';
 import { TelephoneLink } from '../components/UI/telephoneLink/TelephoneLink';
+import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
+
+import '../styles/pages/Vacancies.css';
 
 const vacancies = [
   {
@@ -62,8 +62,7 @@ const vacancies = [
 
 export const Vacancies = () => {
   return (
-    <main className='container main'>
-      <RoutePageHistory routes={['Главная', 'Вакансии']} />
+    <MainContainer routes={['Главная', 'Вакансии']}>
       <Typography className='vacancies__title' as='h2' variant='header' size='xl'>
         Вакансии
       </Typography>
@@ -106,6 +105,6 @@ export const Vacancies = () => {
           </Card>
         ))}
       </div>
-    </main>
+    </MainContainer>
   );
 };

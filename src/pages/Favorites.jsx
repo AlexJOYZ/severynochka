@@ -1,8 +1,9 @@
+import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
 
 export const Favorites = () => {
   return (
-    <div>
-      Favorites
-    </div>
-  )
+    <MainContainer routes={['Главная', 'Избраное']}>
+      <div>Избраное</div>
+    </MainContainer>
+  );
 };

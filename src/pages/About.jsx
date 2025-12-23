@@ -1,3 +1,4 @@
+import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
 import { AboutDescriptionIcon } from '../components/UI/icons/about/AboutDescriptionIcon';
 import { ArcIcon } from '../components/UI/icons/about/ArcIcon';
 import { CheckIcon } from '../components/UI/icons/about/CheckIcon';
@@ -5,15 +6,14 @@ import { EllipseIcon } from '../components/UI/icons/about/EllipseIcon';
 import { RectangleIcon } from '../components/UI/icons/about/RectangleIcon';
 import { SmileIcon } from '../components/UI/icons/about/SmileIcon';
 import { Logo } from '../components/UI/logo/Logo';
-import { RoutePageHistory } from '../components/UI/routePageHistory/RoutePageHistory';
+
 import { Typography } from '../components/UI/Typography/Typography';
 
 import '../styles/pages/About.css';
 
 export const About = () => {
   return (
-    <main className='container main'>
-      <RoutePageHistory routes={['Главная', 'О компании']} />
+    <MainContainer routes={['Главная', 'О компании']}>
       <div className='about__container'>
         <div className='about__description'>
           <div className='about__description__text'>
@@ -75,13 +75,13 @@ export const About = () => {
         <div className='about__slogan'>
           <Logo className='about__slogan__icon' type='sign' />
           <div className='about__slogan__container'>
-            <div className="about__slogan__triangle"></div>
+            <div className='about__slogan__triangle'></div>
             <Typography className='about__slogan__text' as='h4' variant='text-bold' size='l'>
               Спасибо за то, что вы с нами. Северяночка, везет всегда!
             </Typography>
           </div>
         </div>
       </div>
-    </main>
+    </MainContainer>
   );
 };
