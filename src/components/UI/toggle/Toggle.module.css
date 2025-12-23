@@ -1,3 +1,12 @@
+.btn__parent{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+
 .toggle__btn {
   border: 1px solid #e0e0e0;
   border-radius: 32px;
