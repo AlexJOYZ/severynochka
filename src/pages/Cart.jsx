@@ -1,57 +1,67 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { ProductCard } from '../components/UI/cards/ProductCard/ProductCard';
-import { Typography } from '../components/UI/Typography/Typography';
-import { Input } from '../components/UI/fields/Input/Input';
 import { useState } from 'react';
+
+import { useSelector } from 'react-redux';
+
+import { Typography } from '../components/UI/Typography/Typography';
+import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
+import { ProductCardTable } from '../components/UI/cards/ProductCardTable/ProductCardTable';
+import { Notice } from '../components/UI/notice/Notice';
+import { Toggle } from '../components/UI/toggle/Toggle';
+
+import '../styles/pages/Card.css';
+import { Checkbox } from '../components/UI/checkbox/Checkbox';
 import { Button } from '../components/UI/buttons/Button/Button';
-import { AuthService } from '../API/entities/auth';
-import { loginUser } from '../store/asyncActions/user';
 
 export const Cart = () => {
-  const [form, setForm] = useState({
-    email: '',
-    password: '',
-  });
-
   const cartProducts = useSelector((state) => state.cart.items);
-  const user = useSelector((state) => state.account.user);
+  const cartProductsUniq = Array.from(new Set(cartProducts));
 
-  const dispatch = useDispatch();
+  const [isUsedCard, setIsUsedCard] = useState(true);
+  const [isSelectedAll, setIsSelectedAll] = useState(true);
+  // const user = useSelector((state) => state.account.user);
 
-  const clearForm = () => setForm({ email: '', password: '' });
-
-  const signUp = () => {
-    AuthService.registration(form);
-    clearForm();
-  };
-  const signIn = async () => {
-    dispatch(loginUser(form.email, form.password));
-    clearForm();
-  };
+  // const dispatch = useDispatch();
 
   return (
-    <div>
-      <Input
-        placeholder='email'
-        value={form.email}
-        onChange={(event) => setForm({ ...form, email: event.target.value })}
-      />
-      <Input
-        placeholder='password'
-        type='password'
-        value={form.password}
-        onChange={(event) => setForm({ ...form, password: event.target.value })}
-      />
-      <Button onClick={signUp}>Зарегистрироваться</Button>
-      <Button onClick={signIn}>Войти</Button>
-      {user?.lastName} {user?.firstName}
-      {cartProducts.length !== 0 ? (
-        cartProducts.map((product) => <ProductCard item={product} />)
-      ) : (
-        <Typography type='header' as='h2' size='m'>
-          Корзина пуста
-        </Typography>
-      )}
-    </div>
+    <MainContainer routes={['Главная', 'Корзина']}>
+      <div>
+        <div className='cart__title__inner'>
+          <Typography as='h1' variant='header' size='xl'>
+            Корзина
+          </Typography>
+          {cartProducts.length !== 0 && (
+            <Notice accent='primary' size='m' className='card__title__notice'>
+              {cartProducts.length}
+            </Notice>
+          )}
+        </div>
+        <div className='cart__btn__container'>
+          <Checkbox
+            type='unstated'
+            size='l'
+            label='Выделить всё'
+            setValue={setIsSelectedAll}
+            value={isSelectedAll}
+          />
+          <Button accent='primary' size='s' decoration='no' type='text-btn'>
+            Удалить выбранные
+          </Button>
+        </div>
+        <div className='cart__content'>
+          <div className='cart__table'>
+            {cartProducts.length !== 0 ? (
+              cartProductsUniq.map((product) => <ProductCardTable item={product} />)
+            ) : (
+              <Typography type='header' as='h2' size='m'>
+                Корзина пуста
+              </Typography>
+            )}
+          </div>
+          <div className='cart__panel'>
+            <Toggle size='m' value={isUsedCard} setValue={setIsUsedCard} label='Списать 200 ₽' />
+          </div>
+        </div>
+      </div>
+    </MainContainer>
   );
 };
