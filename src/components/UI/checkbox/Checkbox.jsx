@@ -1,8 +1,10 @@
-import style from './Checkbox.module.css';
+import { classNames } from '../../../utils/helpers/classNames/classNames';
 
 import { Typography } from '../Typography/Typography';
 import { CheckIcon } from '../icons/checkbox/CheckIcon';
 import { CheckMinusIcon } from '../icons/checkbox/CheckMinusIcon';
+
+import style from './Checkbox.module.css';
 
 export const Checkbox = ({
   label = '',
@@ -11,9 +13,15 @@ export const Checkbox = ({
   setValue,
   type = 'check',
   disabled = false,
+  className = '',
 }) => {
   return (
-    <Typography className={style.checkbox__wrapper} as='label' size='s' variant='text'>
+    <Typography
+      className={classNames(style.checkbox__wrapper, className)}
+      as='label'
+      size={`${size === 'm' ? 's' : 'xs'}`}
+      variant='text'
+    >
       <input
         className={style.input__checkbox}
         type='checkbox'

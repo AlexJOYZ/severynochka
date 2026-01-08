@@ -17,7 +17,6 @@ import { MinusIconBtn } from '../../icons/card/MinusIconBtn';
 import { PlusIconBtn } from '../../icons/card/PlusIconBtn';
 
 import styles from './ProductCard.module.css';
-import cardStyles from '../card.module.css'
 import cl from '../card.module.css';
 
 export const ProductCard = ({ item }) => {

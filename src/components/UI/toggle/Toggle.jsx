@@ -1,3 +1,4 @@
+import { classNames } from '../../../utils/helpers/classNames/classNames';
 import { Typography } from '../Typography/Typography';
 
 import style from './Toggle.module.css';
@@ -7,7 +8,7 @@ export const Toggle = ({ size, value, setValue, label, ...props }) => {
     <label className={style.btn__parent}>
       <button
         type='button'
-        className={`${style.toggle__btn} ${style[size]} ${value ? style.toggled : ''}`}
+        className={classNames(style.toggle__btn, style[size], value ? style.toggled : '')}
         onClick={() => setValue(!value)}
         {...props}
       >
