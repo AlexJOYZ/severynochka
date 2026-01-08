@@ -1,11 +1,11 @@
-.card__prod{
-  .notice{
+.card__prod {
+  .notice {
     display: none;
   }
-  .price{
+  .price {
     display: none;
   }
-  .price__text{
+  .price__text {
     opacity: 0;
   }
 }
@@ -28,7 +28,6 @@
     transition: all 0.2s;
     background-color: var(--main-color-primaryMuted);
   }
-  
 }
 .notice {
   position: absolute;
@@ -59,7 +58,6 @@
   color: var(--grayScale-color-hardest);
 }
 .card__title {
-  
   text-overflow: clip;
   -webkit-line-clamp: 2;
   display: -webkit-box;
