@@ -1,9 +1,11 @@
 import { useState } from 'react';
+
+import { classNames } from '../../../utils/helpers/classNames';
+
 import { Button } from '../buttons/Button/Button';
+import { Typography } from '../Typography/Typography';
 
 import styles from './Tabs.module.css';
-import { Typography } from '../Typography/Typography';
-import { classNames } from '../../../utils/helpers/classNames';
 
 export const Tabs = ({ tabs, setValue = null, label = null, ...props }) => {
   const [active, setActive] = useState(0);
@@ -29,7 +31,7 @@ export const Tabs = ({ tabs, setValue = null, label = null, ...props }) => {
       >
         {tabs.map((tab, i) => (
           <Button
-          type='button'
+            type='button'
             key={tab.title}
             data-index={i}
             onClick={openTab}
