@@ -42,6 +42,7 @@ export const ProductCardTable = ({ item }) => {
   useEffect(() => {
     if (item.isSelectedAll) {
       setIsSelected(true);
+      if (item.selectedProductsIds.includes(item.id)) return
       item.setSelectedProductsIds((mas) => [...mas, item.id]);
     }
   }, [item.isSelectedAll]);
@@ -63,8 +64,10 @@ export const ProductCardTable = ({ item }) => {
             className={cl.card__img__checkbox}
             value={isSelected}
             setValue={(value) => {
-              if (!value) item.setIsSelectedAll(false);
-              else item.setSelectedProductsIds([...item.selectedProductsIds, item.id]);
+              if (!value) {
+                item.setIsSelectedAll(false);
+                item.setSelectedProductsIds((mas)=>[...mas.filter((id)=>id !==item.id)]);
+              } else item.setSelectedProductsIds((mas)=>[...mas, item.id]);
               setIsSelected(value);
             }}
             size='l'

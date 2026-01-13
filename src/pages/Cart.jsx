@@ -1,26 +1,22 @@
 import { useMemo, useState } from 'react';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Typography } from '../components/UI/Typography/Typography';
 import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
-import { ProductCardTable } from '../components/UI/cards/ProductCardTable/ProductCardTable';
 import { Notice } from '../components/UI/notice/Notice';
 import { Toggle } from '../components/UI/toggle/Toggle';
-
-import { Checkbox } from '../components/UI/checkbox/Checkbox';
 import { Button } from '../components/UI/buttons/Button/Button';
+import { SmileIcon } from '../components/UI/icons/about/SmileIcon';
+import { Tooltip } from '../components/UI/tooltip/Tooltip';
+import { FillOrderDetails } from '../components/Layout/CartSteps/FillOrderDetails';
+import { ChooseDateDelivery } from '../components/Layout/CartSteps/ChooseDateDelivery';
 
 import '../styles/pages/Cart.css';
-import { SmileIcon } from '../components/UI/icons/about/SmileIcon';
-import { removeCartAction, removeManyCartAction } from '../store/reducers/cartReducer';
 
 export const Cart = () => {
-  const dispatch = useDispatch();
-
-  const [isUsedCard, setIsUsedCard] = useState(true);
-  const [isSelectedAll, setIsSelectedAll] = useState(false);
-  const [selectedProductsIds, setSelectedProductsIds] = useState([]);
+  const [step, setStep] = useState('fillOrderDetails');
+  const [isUsedBonus, setIsUsedBonus] = useState(true);
 
   const user = useSelector((state) => state.account.user);
   const cartProducts = useSelector((state) => state.cart.items);
@@ -50,19 +46,12 @@ export const Cart = () => {
     [cartProducts],
   );
 
-  const deleteSelectedCartProducts = () => {
-    dispatch(removeManyCartAction(selectedProductsIds));
-    setSelectedProductsIds([]);
-  };
-
-  console.log(selectedProductsIds);
-
   return (
-    <MainContainer routes={['Главная', 'Корзина']}>
+    <MainContainer className='cart__container' routes={['Главная', 'Корзина']}>
       <div>
         <div className='cart__title__inner'>
           <Typography as='h1' variant='header' size='xl'>
-            Корзина
+            {step === 'fillOrderDetails' ? 'Корзина' : 'Доставка'}
           </Typography>
           {cartProducts.length !== 0 && (
             <Notice accent='primary' size='m' className='cart__title__notice'>
@@ -70,57 +59,24 @@ export const Cart = () => {
             </Notice>
           )}
         </div>
-        <div className='cart__btns__container'>
-          <div className='cart__btn__container cart__checkbox'>
-            <Checkbox
-              type='unstated'
-              size='l'
-              label='Выделить всё'
-              setValue={setIsSelectedAll}
-              value={isSelectedAll}
-            />
-          </div>
-          <div className='cart__btn__container'>
-            <Button
-              onClick={() => deleteSelectedCartProducts()}
-              accent='primary'
-              size='s'
-              decoration='no'
-              type='text-btn'
-            >
-              Удалить выбранные
-            </Button>
-          </div>
-        </div>
         <div className='cart__content'>
-          <div className='cart__table'>
-            {cartProducts.length !== 0 ? (
-              cartProductsUniq.map((product) => (
-                <ProductCardTable
-                  key={product.id}
-                  item={{
-                    ...product,
-                    isSelectedAll,
-                    setIsSelectedAll,
-                    setSelectedProductsIds,
-                    selectedProductsIds,
-                  }}
-                />
-              ))
-            ) : (
-              <Typography type='header' as='h2' size='m'>
-                Корзина пуста
-              </Typography>
-            )}
-          </div>
+          {cartProducts.length === 0 && (
+            <Typography type='header' as='h2' size='m'>
+              Корзина пуста
+            </Typography>
+          )}
+          {cartProducts.length !== 0 && step === 'fillOrderDetails' && (
+            <FillOrderDetails cartProductsUniq={cartProductsUniq} />
+          )}
+          {cartProducts.length !== 0 && step === 'chooseDateDelivery' && <ChooseDateDelivery />}
           {cartProducts.length !== 0 && (
             <div className='cart__panel'>
               <div className='cart__panel__top'>
                 <Toggle
                   size='m'
-                  value={isUsedCard}
-                  setValue={setIsUsedCard}
-                  label='Списать 200 ₽'
+                  value={isUsedBonus}
+                  setValue={setIsUsedBonus}
+                  label='Использовать бонусы'
                 />
                 <Typography className='cart__panel__top__text' as='p' size='s'>
                   На карте накоплено 200 ₽
@@ -148,6 +104,21 @@ export const Cart = () => {
                     -{(cartTotalPrice - cartTotalPriceWithDiscount).toFixed(2)} ₽
                   </Typography>
                 </div>
+                {isUsedBonus && (
+                  <div className='cart__panel__middle__item'>
+                    <Typography className='cart__panel__middle__item__text' as='p' size='s'>
+                      Бонусы
+                    </Typography>
+                    <Typography
+                      className='cart__panel__middle__item__discount'
+                      as='p'
+                      size='s'
+                      variant='text-bold'
+                    >
+                      -{Math.min(cartTotalPrice * 0.5, 200)} ₽
+                    </Typography>
+                  </div>
+                )}
               </div>
               <div className='cart__panel__total'>
                 <div className='cart__panel__total__price'>
@@ -155,7 +126,11 @@ export const Cart = () => {
                     Итог
                   </Typography>
                   <Typography as='p' size='l' variant='text-bold'>
-                    {cartTotalPriceWithDiscount.toFixed(2)} ₽
+                    {(
+                      cartTotalPriceWithDiscount -
+                      (isUsedBonus ? Math.min(cartTotalPrice * 0.5, 200) : 0)
+                    ).toFixed(2)}{' '}
+                    ₽
                   </Typography>
                 </div>
                 <div className='cart__panel__total__bonus'>
@@ -168,14 +143,54 @@ export const Cart = () => {
                       size='s'
                       variant='text-bold'
                     >
-                      100 бонусов
+                      {(
+                        (cartTotalPriceWithDiscount -
+                          (isUsedBonus ? Math.min(cartTotalPrice * 0.5, 200) : 0)) *
+                        0.1
+                      ).toFixed(2)}{' '}
+                      бонусов
                     </Typography>
                   </Typography>
                 </div>
               </div>
-              <Button disabled={true} size='l' accent='primary'>
-                Оформить заказ
-              </Button>
+              {step === 'fillOrderDetails' && (
+                <Tooltip
+                  direction='down'
+                  isShowTooltip={cartTotalPriceWithDiscount < 1000}
+                  label='Минимальная сумма заказа 1000р'
+                  isWithIcon={false}
+                  className='cart__panel__tooltip'
+                >
+                  <Button
+                    onClick={() => setStep('chooseDateDelivery')}
+                    disabled={cartTotalPriceWithDiscount < 1000}
+                    size='l'
+                    accent='primary'
+                  >
+                    Оформить заказ
+                  </Button>
+                </Tooltip>
+              )}
+              {step === 'chooseDateDelivery' && (
+                <div className='cart__panel__btns'>
+                  <Button
+                    onClick={() => setStep('chooseDateDelivery')}
+                    disabled={cartTotalPriceWithDiscount < 1000}
+                    size='l'
+                    accent='primary'
+                  >
+                    Оплатить на сайте
+                  </Button>
+                  <Button
+                    onClick={() => setStep('chooseDateDelivery')}
+                    disabled={cartTotalPriceWithDiscount < 1000}
+                    size='m'
+                    accent='secondary'
+                  >
+                    Оплатить при получении
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </div>

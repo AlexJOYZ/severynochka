@@ -5,6 +5,7 @@ import { useFocus } from '../../../../hooks/useFocus';
 import cl from './Input.module.css';
 
 import { Typography } from '../../Typography/Typography';
+import { classNames } from '../../../../utils/helpers/classNames';
 
 export const Input = ({
   value,
@@ -19,7 +20,7 @@ export const Input = ({
   const isFocus = useFocus(inputRef);
 
   return (
-    <div className={[cl.input__root, !!className ? className : ''].join(' ')}>
+    <div className={classNames(cl.input__root, !!className ? className : '')}>
       {!!label && (
         <Typography
           className={cl.input__label}
@@ -31,11 +32,14 @@ export const Input = ({
         </Typography>
       )}
       <div
-        className={`${cl.input__container} ${isFocus ? cl.input__focus : ''} ${cl[size]} ${
-          disabled ? cl.disabled : ''
-        }`}
+        className={classNames(
+          cl.input__container,
+          isFocus ? cl.input__focus : '',
+          cl[size],
+          disabled ? cl.disabled : '',
+        )}
       >
-        <input  ref={inputRef} {...props} value={value} onChange={onChange} />
+        <input ref={inputRef} {...props} value={value} onChange={onChange} />
       </div>
     </div>
   );

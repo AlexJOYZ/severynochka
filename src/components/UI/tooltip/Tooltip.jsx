@@ -11,10 +11,11 @@ export const Tooltip = ({
   label,
   children,
   isShowTooltip,
+  className = '',
   ...props
 }) => {
   return (
-    <div {...props} className={styles.tooltip__container}>
+    <div {...props} className={classNames(styles.tooltip__container, className)}>
       {children}
       {isShowTooltip && (
         <div className={classNames(styles.tooltip__innner, styles[direction])}>

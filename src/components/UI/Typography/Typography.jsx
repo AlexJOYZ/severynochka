@@ -1,7 +1,15 @@
 import { createElement } from 'react';
 import './Typography.css';
 
-export const Typography = ({ children, as, size, variant, color, className, ...props }) => {
+export const Typography = ({
+  children,
+  as,
+  size,
+  variant = 'text',
+  color,
+  className,
+  ...props
+}) => {
   return createElement(
     as,
     {
