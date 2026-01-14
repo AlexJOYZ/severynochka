@@ -10,4 +10,5 @@ export const locales = {
   'validations.passwordRules.containNumbers': 'Пароль должен содержать цифры',
   'validations.passwordRules.mustMatch': 'Пароли должны совпадать',
   'validations.email': 'Некорректный email',
+  'validations.containNumbers':'Поле должно содержать только цифры'
 };

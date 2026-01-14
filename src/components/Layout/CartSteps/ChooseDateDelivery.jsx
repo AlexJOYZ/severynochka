@@ -7,68 +7,82 @@ import { Tabs } from '../../UI/tabs/Tabs';
 import { Typography } from '../../UI/Typography/Typography';
 
 import { REGIONS } from '../../../const';
+import { Tooltip } from '../../UI/tooltip/Tooltip';
 
-export const ChooseDateDelivery = () => {
-  const [region, setRegion] = useState(REGIONS[0]);
-
-  const 
-
-  const [deliveryData, setDeliveryData] = useState({
-    region: REGIONS[0],
-    street: '',
-    homeNumber: '',
-    apartmentNumber: '',
-    additionally: '',
-    dateOfDelivery: new Date(),
-  });
+export const ChooseDateDelivery = ({ state, functions, tabs }) => {
   return (
     <div className='cart__step'>
       <div className='cart__delivery__item'>
-        <Typography as='h3' variant='header' size='m'>
+        <Typography className='cart__delivery__item__header' as='h3' variant='header' size='m'>
           Куда
         </Typography>
         <div className='cart__delivery__item__inputs'>
-          <Select
-            onChange={(region) => setRegion(region)}
-            selected={region}
-            label='Населенный пункт'
-            options={REGIONS}
-          />
+          <div className='input__inner'>
+            <Select
+              onChange={(region) => functions.setFieldValue('region', region)}
+              selected={state.values.region}
+              label='Населенный пункт'
+              options={REGIONS}
+            />
+          </div>
+          <div className='input__inner'>
+            <Tooltip label={state.errors?.street} isShowTooltip={state.errors?.street}>
+              <Input
+                onFocus={() => functions.resetFieldError('street')}
+                value={state.values.street}
+                onChange={(e) => functions.setFieldValue('street', e.target.value)}
+                label='Улица'
+              />
+            </Tooltip>
+          </div>
+          <Tooltip className='cart__cart__delivery__item__tooltip' label={state.errors?.homeNumber} isShowTooltip={state.errors?.homeNumber}>
+            <Input
+              className='cart__cart__delivery__item__input'
+              onFocus={() => functions.resetFieldError('homeNumber')}
+              maxLength={4}
+              value={state.values.homeNumber}
+              onChange={(e) => functions.setFieldValue('homeNumber', e.target.value)}
+              label='Дом'
+            />
+          </Tooltip>
+          <Tooltip
+            label={state.errors?.apartmentNumber}
+            isShowTooltip={state.errors?.apartmentNumber}
+          >
+            <Input
+              onFocus={() => functions.resetFieldError('apartmentNumber')}
+              value={state.values.apartmentNumber}
+              onChange={(e) => functions.setFieldValue('apartmentNumber', e.target.value)}
+              label='Квартира'
+            />
+          </Tooltip>
           <Input
-            value={deliveryData.street}
-            onChange={(e) => setDeliveryData((prev) => ({ ...prev, street: e.target.value }))}
-            label='Улица'
-          />
-          <Input
-            value={deliveryData.homeNumber}
-            onChange={(e) => setDeliveryData((prev) => ({ ...prev, homeNumber: e.target.value }))}
-            label='Дом'
-          />
-          <Input
-            value={deliveryData.apartmentNumber}
-            onChange={(e) =>
-              setDeliveryData((prev) => ({ ...prev, apartmentNumber: e.target.value }))
-            }
-            label='Квартира'
-          />
-          <Input
-            value={deliveryData.additionally}
-            onChange={(e) => setDeliveryData((prev) => ({ ...prev, additionally: e.target.value }))}
+            value={state.values.additionally}
+            onChange={(e) => functions.setFieldValue('additionally', e.target.value)}
             label='Дополнительно'
           />
         </div>
       </div>
       <div className='cart__delivery__item'>
-        <Typography as='h3' variant='header' size='m'>
+        <Typography className='cart__delivery__item__header' as='h3' variant='header' size='m'>
           Когда
         </Typography>
         <div className='cart__delivery__item__inputs'>
-          <InputDate
-            label='Дата'
-            selectedDate={deliveryData.dateOfDelivery}
-            selectDate={(date) => setDeliveryData((prev) => ({ ...prev, dateOfDelivery: date }))}
-          />
-          <Tabs tabs={} label='Время' />
+          <div className='input__inner'>
+            <InputDate
+              label='Дата'
+              selectedDate={state.values.dateOfDelivery}
+              selectDate={(date) => functions.setFieldValue('dateOfDelivery', date)}
+            />
+          </div>
+          <div className='cart__delivery__item__tabs__inner'>
+            <Tabs
+              setValue={(time) => functions.setFieldValue('timeOfDelivery', time)}
+              className='cart__delivery__item__tabs'
+              tabs={tabs}
+              label='Время'
+            />
+          </div>
         </div>
       </div>
     </div>
