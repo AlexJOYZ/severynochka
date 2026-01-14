@@ -4,19 +4,22 @@
   justify-content: center;
   align-items: center;
 }
-.tooltip__innner {
+
+.tooltip__inner {
   position: absolute;
   z-index: 10200;
 }
 
 .up {
   top: calc(100% + 2px);
+  
   .tooltip__triangle {
     top: -4px;
     left: 50%;
     transform: translate(-50%, 0);
   }
 }
+
 .down {
   top: 0;
   transform: translate(0, -100%);
@@ -56,6 +59,8 @@
   gap: 16px;
   z-index: 10100;
   user-select: none;
+  box-shadow: 0px 8px 16px 0px #00000026;
+
 }
 .error {
   background-color: var(--pallete-color-error);
