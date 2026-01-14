@@ -1,6 +1,10 @@
 import { useMemo, useState } from 'react';
+import { useForm } from '../hooks/useForm';
 
 import { useSelector } from 'react-redux';
+
+import { REGIONS } from '../const';
+import { cartValidateSchema } from '../utils/helpers';
 
 import { Typography } from '../components/UI/Typography/Typography';
 import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
@@ -18,8 +22,31 @@ export const Cart = () => {
   const [step, setStep] = useState('fillOrderDetails');
   const [isUsedBonus, setIsUsedBonus] = useState(true);
 
+  const times = [
+    { title: '8:00 - 14:00' },
+    { title: '14:00 - 18:00' },
+    { title: '18:00 - 20:00', disabled: true, message: 'На это время доставить не можем' },
+    { title: '20:00 - 22:00' },
+  ];
+
   const user = useSelector((state) => state.account.user);
   const cartProducts = useSelector((state) => state.cart.items);
+  const { state, functions } = useForm({
+    initialValues: {
+      region: REGIONS[0],
+      street: '',
+      homeNumber: '',
+      apartmentNumber: '',
+      additionally: '',
+      dateOfDelivery: new Date(),
+      timeOfDelivery: times[0],
+    },
+    validateSchema: cartValidateSchema,
+    onSubmit: () => {
+      console.log({ ...state.values, cartProducts });
+    },
+    validateOnChange:false,
+  });
 
   const cartProductsUniq = useMemo(() => {
     const uniqIds = [];
@@ -46,6 +73,8 @@ export const Cart = () => {
     [cartProducts],
   );
 
+  console.log(state.values)
+
   return (
     <MainContainer className='cart__container' routes={['Главная', 'Корзина']}>
       <div>
@@ -68,7 +97,9 @@ export const Cart = () => {
           {cartProducts.length !== 0 && step === 'fillOrderDetails' && (
             <FillOrderDetails cartProductsUniq={cartProductsUniq} />
           )}
-          {cartProducts.length !== 0 && step === 'chooseDateDelivery' && <ChooseDateDelivery />}
+          {cartProducts.length !== 0 && step === 'chooseDateDelivery' && (
+            <ChooseDateDelivery state={state} functions={functions} tabs={times} />
+          )}
           {cartProducts.length !== 0 && (
             <div className='cart__panel'>
               <div className='cart__panel__top'>
@@ -174,7 +205,9 @@ export const Cart = () => {
               {step === 'chooseDateDelivery' && (
                 <div className='cart__panel__btns'>
                   <Button
-                    onClick={() => setStep('chooseDateDelivery')}
+                    onClick={(e) =>
+                      functions.handleSubmit(e, 'region', 'dateOfDelivery', 'timeOfDelivery')
+                    }
                     disabled={cartTotalPriceWithDiscount < 1000}
                     size='l'
                     accent='primary'

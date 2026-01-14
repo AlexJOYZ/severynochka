@@ -1,14 +1,18 @@
 import { useState } from 'react';
+import { useClickOutside } from '../../../hooks/useClickOutside';
 
 import { classNames } from '../../../utils/helpers/classNames';
 
 import { Button } from '../buttons/Button/Button';
 import { Typography } from '../Typography/Typography';
+import { Tooltip } from '../tooltip/Tooltip';
 
 import styles from './Tabs.module.css';
 
-export const Tabs = ({ tabs, setValue = null, label = null, ...props }) => {
+export const Tabs = ({ tabs, setValue = null, label = null, className = null, ...props }) => {
   const [active, setActive] = useState(0);
+  const [hover, setHover] = useState(null);
+  const ref = useClickOutside(() => setHover(null));
 
   const openTab = (e) => {
     const indexTab = +e.currentTarget.dataset.index;
@@ -25,21 +29,30 @@ export const Tabs = ({ tabs, setValue = null, label = null, ...props }) => {
           {label}
         </Typography>
       )}
-      <div
-        className={classNames(styles.tabs__content, !!props.className ? props.className : '')}
-        {...props}
-      >
+      <div className={classNames(styles.tabs__content, className)} {...props}>
         {tabs.map((tab, i) => (
-          <Button
-            type='button'
+          <Tooltip
             key={tab.title}
+            theme='light'
+            direction='down'
             data-index={i}
-            onClick={openTab}
-            accent={`${i === active ? 'secondary' : 'grayscale'}`}
-            size='s'
+            onMouseOver={(e) => setHover(+e.currentTarget.dataset.index)}
+            onTouchStart={(e) => setHover(+e.currentTarget.dataset.index)}
+            ref={ref}
+            isShowTooltip={i === hover && (tab.disabled ?? false)}
+            label={tab.message ?? 'Label'}
           >
-            {tab.title}
-          </Button>
+            <Button
+              disabled={tab.disabled ?? false}
+              type='button'
+              data-index={i}
+              onClick={openTab}
+              accent={`${i === active ? 'secondary' : 'grayscale'}`}
+              size='s'
+            >
+              {tab.title}
+            </Button>
+          </Tooltip>
         ))}
       </div>
     </div>
