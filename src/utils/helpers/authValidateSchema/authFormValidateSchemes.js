@@ -43,6 +43,6 @@ export const emailValidationSchema = (value) => {
 
 export const phoneCodeValidationSchema = (value) => {
   if (validateIsEmpty(value)) return validateIsEmpty(value);
-  if (validateMinLength(value, 5)) return validateMinLength(value, 18);
+  if (validateMinLength(value, 5)) return validateMinLength(value, 5);
   return null;
 };
