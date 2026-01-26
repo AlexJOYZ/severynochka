@@ -13,6 +13,7 @@ export const LoginStepThreeForm = ({ state, functions }) => {
   return (
     <>
       <Tooltip
+        className='login__code__tooltip'
         direction='up'
         isShowTooltip={!!state.errors?.phoneCode}
         label={state.errors?.phoneCode}
@@ -36,7 +37,12 @@ export const LoginStepThreeForm = ({ state, functions }) => {
         </ReactInputMask>
       </Tooltip>
       <div className='login__button__container'>
-        <Button disabled={phoneCodeValidationSchema(state.values.phoneCode)} type='submit' accent='primary' size='l'>
+        <Button
+          disabled={phoneCodeValidationSchema(state.values.phoneCode)}
+          type='submit'
+          accent='primary'
+          size='l'
+        >
           Подтвердить
         </Button>
       </div>

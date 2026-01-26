@@ -1,9 +1,8 @@
 .dropdown {
   position: relative;
-  
 }
 .dropdown > .dropdown__content {
-  .dropdown{
+  .dropdown {
     box-shadow: none;
   }
   .dropdown__content {
@@ -22,11 +21,13 @@
 
 .button__container {
   width: 40px;
+  svg {
+    color: var(--main-color-onSurface);
+  }
 }
 
 .dropdown__content {
   box-shadow: var(--shadow-default-m);
-
   padding: 8px;
   top: 100%;
   left: 0;

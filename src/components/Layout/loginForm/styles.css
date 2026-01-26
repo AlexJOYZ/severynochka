@@ -34,6 +34,10 @@
   flex-shrink: 0;
 }
 
+.login__code__tooltip .s {
+  white-space: nowrap;
+}
+
 .login__code__input {
   input {
     -webkit-text-security: squire;

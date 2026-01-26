@@ -17,10 +17,15 @@ import { FillOrderDetails } from '../components/Layout/CartSteps/FillOrderDetail
 import { ChooseDateDelivery } from '../components/Layout/CartSteps/ChooseDateDelivery';
 
 import '../styles/pages/Cart.css';
+import { useMutation } from '../hooks';
+import { OrderService } from '../API/entities/order';
+import { Spinner } from '../components/UI/spinner/Spinner';
 
 export const Cart = () => {
+  const user = useSelector((state) => state.account.user);
+
   const [step, setStep] = useState('fillOrderDetails');
-  const [isUsedBonus, setIsUsedBonus] = useState(true);
+  const [isUsedBonus, setIsUsedBonus] = useState(user.cardBalance !== 0);
 
   const times = [
     { title: '8:00 - 14:00' },
@@ -29,24 +34,7 @@ export const Cart = () => {
     { title: '20:00 - 22:00' },
   ];
 
-  const user = useSelector((state) => state.account.user);
   const cartProducts = useSelector((state) => state.cart.items);
-  const { state, functions } = useForm({
-    initialValues: {
-      region: REGIONS[0],
-      street: '',
-      homeNumber: '',
-      apartmentNumber: '',
-      additionally: '',
-      dateOfDelivery: new Date(),
-      timeOfDelivery: times[0],
-    },
-    validateSchema: cartValidateSchema,
-    onSubmit: () => {
-      console.log({ ...state.values, cartProducts });
-    },
-    validateOnChange:false,
-  });
 
   const cartProductsUniq = useMemo(() => {
     const uniqIds = [];
@@ -73,13 +61,58 @@ export const Cart = () => {
     [cartProducts],
   );
 
-  console.log(state.values)
+  const cartPrice = +(
+    user.cardDetails
+      ? cartTotalPriceWithDiscount -
+        (isUsedBonus ? Math.min(cartTotalPriceWithDiscount * 0.5, user.cardBalance) : 0)
+      : cartTotalPrice
+  ).toFixed(2);
+  const locations = useMemo(
+    () => REGIONS.filter((region) => region.value === user.address.region)[0].localities,
+    [],
+  );
+
+  const {
+    mutate: orderMutation,
+    isLoading: orderIsLoading,
+    error: orderError,
+  } = useMutation('order', (body) => OrderService.createOrder(body));
+
+  const { state, functions } = useForm({
+    initialValues: {
+      location: locations[0],
+      street: '',
+      homeNumber: '',
+      apartmentNumber: '',
+      additionally: '',
+      dateOfDelivery: new Date(),
+      timeOfDelivery: times[0],
+      statusPayment: null,
+    },
+    validateSchema: cartValidateSchema,
+    onSubmit: () => {
+      const order = {
+        ...state.values,
+        userId: user.id,
+        userCardDetails: user.cardDetails,
+        location: state.values.location.value,
+        timeOfDelivery: state.values.timeOfDelivery.title,
+        products: cartProducts,
+        totalPrice: cartPrice,
+        bonus: +(cartPrice * 0.1).toFixed(2),
+        statusPayment: state.values.statusPayment,
+      };
+      console.log(order);
+      orderMutation(order);
+    },
+    validateOnChange: false,
+  });
 
   return (
     <MainContainer className='cart__container' routes={['Главная', 'Корзина']}>
       <div>
         <div className='cart__title__inner'>
-          <Typography as='h1' variant='header' size='xl'>
+          <Typography className='d-f' as='h1' variant='header' size='xl'>
             {step === 'fillOrderDetails' ? 'Корзина' : 'Доставка'}
           </Typography>
           {cartProducts.length !== 0 && (
@@ -98,19 +131,27 @@ export const Cart = () => {
             <FillOrderDetails cartProductsUniq={cartProductsUniq} />
           )}
           {cartProducts.length !== 0 && step === 'chooseDateDelivery' && (
-            <ChooseDateDelivery state={state} functions={functions} tabs={times} />
+            <ChooseDateDelivery
+              locations={locations}
+              state={state}
+              functions={functions}
+              tabs={times}
+            />
           )}
           {cartProducts.length !== 0 && (
             <div className='cart__panel'>
               <div className='cart__panel__top'>
                 <Toggle
+                  disabled={user.cardBalance === 0}
                   size='m'
                   value={isUsedBonus}
                   setValue={setIsUsedBonus}
                   label='Использовать бонусы'
                 />
                 <Typography className='cart__panel__top__text' as='p' size='s'>
-                  На карте накоплено 200 ₽
+                  {user.cardDetails
+                    ? `На карте накоплено ${user.cardBalance} ₽`
+                    : 'У Вас нет бонусной карты'}
                 </Typography>
               </div>
               <div className='cart__panel__middle'>
@@ -122,19 +163,22 @@ export const Cart = () => {
                     {cartTotalPrice.toFixed(2)} ₽
                   </Typography>
                 </div>
-                <div className='cart__panel__middle__item'>
-                  <Typography className='cart__panel__middle__item__text' as='p' size='s'>
-                    Скидка
-                  </Typography>
-                  <Typography
-                    className='cart__panel__middle__item__discount'
-                    as='p'
-                    size='s'
-                    variant='text-bold'
-                  >
-                    -{(cartTotalPrice - cartTotalPriceWithDiscount).toFixed(2)} ₽
-                  </Typography>
-                </div>
+                {user.cardDetails && (
+                  <div className='cart__panel__middle__item'>
+                    <Typography className='cart__panel__middle__item__text' as='p' size='s'>
+                      Скидка
+                    </Typography>
+                    <Typography
+                      className='cart__panel__middle__item__discount'
+                      as='p'
+                      size='s'
+                      variant='text-bold'
+                    >
+                      -{(cartTotalPrice - cartTotalPriceWithDiscount).toFixed(2)} ₽
+                    </Typography>
+                  </div>
+                )}
+
                 {isUsedBonus && (
                   <div className='cart__panel__middle__item'>
                     <Typography className='cart__panel__middle__item__text' as='p' size='s'>
@@ -146,7 +190,7 @@ export const Cart = () => {
                       size='s'
                       variant='text-bold'
                     >
-                      -{Math.min(cartTotalPrice * 0.5, 200)} ₽
+                      -{Math.min(cartTotalPriceWithDiscount * 0.5, user.cardBalance)} ₽
                     </Typography>
                   </div>
                 )}
@@ -157,44 +201,37 @@ export const Cart = () => {
                     Итог
                   </Typography>
                   <Typography as='p' size='l' variant='text-bold'>
-                    {(
-                      cartTotalPriceWithDiscount -
-                      (isUsedBonus ? Math.min(cartTotalPrice * 0.5, 200) : 0)
-                    ).toFixed(2)}{' '}
-                    ₽
+                    {cartPrice} ₽
                   </Typography>
                 </div>
-                <div className='cart__panel__total__bonus'>
-                  <SmileIcon className='cart__panel__total__bonus__icon' color='#70C05B' />
-                  <Typography className='cart__panel__total__bonus__text' as='p' size='s'>
-                    Вы получяете{' '}
-                    <Typography
-                      className='cart__panel__total__bonus__text'
-                      as='span'
-                      size='s'
-                      variant='text-bold'
-                    >
-                      {(
-                        (cartTotalPriceWithDiscount -
-                          (isUsedBonus ? Math.min(cartTotalPrice * 0.5, 200) : 0)) *
-                        0.1
-                      ).toFixed(2)}{' '}
-                      бонусов
+                {user.cardDetails && (
+                  <div className='cart__panel__total__bonus'>
+                    <SmileIcon className='cart__panel__total__bonus__icon' color='#70C05B' />
+                    <Typography className='cart__panel__total__bonus__text' as='p' size='s'>
+                      Вы получяете{' '}
+                      <Typography
+                        className='cart__panel__total__bonus__text'
+                        as='span'
+                        size='s'
+                        variant='text-bold'
+                      >
+                        {(cartPrice * 0.1).toFixed(2)} бонусов
+                      </Typography>
                     </Typography>
-                  </Typography>
-                </div>
+                  </div>
+                )}
               </div>
               {step === 'fillOrderDetails' && (
                 <Tooltip
                   direction='down'
-                  isShowTooltip={cartTotalPriceWithDiscount < 1000}
+                  isShowTooltip={cartPrice < 1000}
                   label='Минимальная сумма заказа 1000р'
                   isWithIcon={false}
                   className='cart__panel__tooltip'
                 >
                   <Button
                     onClick={() => setStep('chooseDateDelivery')}
-                    disabled={cartTotalPriceWithDiscount < 1000}
+                    disabled={cartPrice < 1000}
                     size='l'
                     accent='primary'
                   >
@@ -205,18 +242,22 @@ export const Cart = () => {
               {step === 'chooseDateDelivery' && (
                 <div className='cart__panel__btns'>
                   <Button
-                    onClick={(e) =>
-                      functions.handleSubmit(e, 'region', 'dateOfDelivery', 'timeOfDelivery')
-                    }
-                    disabled={cartTotalPriceWithDiscount < 1000}
+                    onClick={(e) => {
+                      functions.handleSubmit(e, 'region', 'dateOfDelivery', 'timeOfDelivery');
+                      functions.setFieldValue('statusPayment', 'Оплата на сайте');
+                    }}
+                    disabled={cartPrice < 1000}
                     size='l'
                     accent='primary'
                   >
                     Оплатить на сайте
                   </Button>
                   <Button
-                    onClick={() => setStep('chooseDateDelivery')}
-                    disabled={cartTotalPriceWithDiscount < 1000}
+                    onClick={(e) => {
+                      functions.handleSubmit(e, 'region', 'dateOfDelivery', 'timeOfDelivery');
+                      functions.setFieldValue('statusPayment', 'Оплата при получении');
+                    }}
+                    disabled={cartPrice < 1000}
                     size='m'
                     accent='secondary'
                   >
@@ -228,6 +269,7 @@ export const Cart = () => {
           )}
         </div>
       </div>
+      {orderIsLoading && <Spinner />}
     </MainContainer>
   );
 };

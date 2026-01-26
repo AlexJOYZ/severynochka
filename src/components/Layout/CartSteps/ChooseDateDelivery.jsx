@@ -1,15 +1,12 @@
-import { useState } from 'react';
-
 import { Input } from '../../UI/fields/Input/Input';
 import { InputDate } from '../../UI/fields/InputDate/InputDate';
 import { Select } from '../../UI/select/Select';
 import { Tabs } from '../../UI/tabs/Tabs';
 import { Typography } from '../../UI/Typography/Typography';
 
-import { REGIONS } from '../../../const';
 import { Tooltip } from '../../UI/tooltip/Tooltip';
 
-export const ChooseDateDelivery = ({ state, functions, tabs }) => {
+export const ChooseDateDelivery = ({ state, functions, tabs, locations }) => {
   return (
     <div className='cart__step'>
       <div className='cart__delivery__item'>
@@ -19,10 +16,10 @@ export const ChooseDateDelivery = ({ state, functions, tabs }) => {
         <div className='cart__delivery__item__inputs'>
           <div className='input__inner'>
             <Select
-              onChange={(region) => functions.setFieldValue('region', region)}
-              selected={state.values.region}
+              onChange={(region) => functions.setFieldValue('location', region)}
+              selected={state.values.location}
               label='Населенный пункт'
-              options={REGIONS}
+              options={locations}
             />
           </div>
           <div className='input__inner'>
@@ -35,7 +32,11 @@ export const ChooseDateDelivery = ({ state, functions, tabs }) => {
               />
             </Tooltip>
           </div>
-          <Tooltip className='cart__cart__delivery__item__tooltip' label={state.errors?.homeNumber} isShowTooltip={state.errors?.homeNumber}>
+          <Tooltip
+            className='cart__cart__delivery__item__tooltip'
+            label={state.errors?.homeNumber}
+            isShowTooltip={state.errors?.homeNumber}
+          >
             <Input
               className='cart__cart__delivery__item__input'
               onFocus={() => functions.resetFieldError('homeNumber')}
