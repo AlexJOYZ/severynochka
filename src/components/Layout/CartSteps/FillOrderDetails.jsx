@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Checkbox } from '../../UI/checkbox/Checkbox';
 import { Button } from '../../UI/buttons/Button/Button';
 import { ProductCardTable } from '../../UI/cards/ProductCardTable/ProductCardTable';
+import { removeManyCartAction } from '../../../store/reducers/cartReducer';
 
 export const FillOrderDetails = ({ cartProductsUniq }) => {
   const dispatch = useDispatch();
