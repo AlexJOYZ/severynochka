@@ -1,7 +1,7 @@
 // import '..//styles/App.css'
 import './styles/App.css';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useQuery } from './hooks';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -29,6 +29,8 @@ import { ROUTES } from './const';
 export const App = () => {
   const dispatch = useDispatch();
 
+  const isAuth = useSelector(state=>state.account.isAuth)
+
   const { isLoading, error } = useQuery('checkAuth', () => dispatch(checkAuth()));
 
   if (isLoading) return <Spinner />;
@@ -46,7 +48,8 @@ export const App = () => {
           <Route path={ROUTES.PRODUCT} element={<Product />} />
           <Route path={ROUTES.VACANCIES} element={<Vacancies />} />
           <Route path={ROUTES.ORDERS} element={<Orders />} />
-          <Route path={ROUTES.CART} element={<Cart />} />
+          {isAuth && <Route path={ROUTES.CART} element={<Cart />} />}
+          
           <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>
