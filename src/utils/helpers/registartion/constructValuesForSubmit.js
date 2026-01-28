@@ -1,7 +1,8 @@
 export const constructValuesForSubmit = (values) => {
   const newValues = Object.fromEntries(
     Object.entries(values).filter(
-      ([k]) => k !== 'region' && k !== 'locality' && k !== 'passwordRepeat',
+      ([k]) =>
+        k !== 'region' && k !== 'locality' && k !== 'passwordRepeat' && k !== 'hasNotCardLoyalty',
     ),
   );
   const user = {
@@ -11,6 +12,7 @@ export const constructValuesForSubmit = (values) => {
       locality: values.locality.value,
     },
     gender: values.gender.title,
+    cardBalance: 0,
   };
   return user;
 };
