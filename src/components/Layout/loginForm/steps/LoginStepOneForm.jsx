@@ -1,10 +1,19 @@
 import ReactInputMask from 'react-input-mask';
+
+import { useKeyDown } from '../../../../hooks';
+
+import { telephoneValidateSchema } from '../../../../utils/helpers/authValidateSchema/authFormValidateSchemes';
+
 import { Button } from '../../../UI/buttons/Button/Button';
 import { Input } from '../../../UI/fields/Input/Input';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
-import { telephoneValidateSchema } from '../../../../utils/helpers/authValidateSchema/authFormValidateSchemes';
 
 export const LoginStepOneForm = ({ state, functions, setStep, setStage }) => {
+  const handler = () => {
+    if (!functions.validateForm('password', 'phoneCode')) return;
+    setStep((prev) => prev + 1);
+  };
+  useKeyDown('Enter', handler, { ignoreInputs: false });
   return (
     <>
       <div className='login__form__input'>
@@ -37,16 +46,11 @@ export const LoginStepOneForm = ({ state, functions, setStep, setStage }) => {
           decoration='default'
           disabled={telephoneValidateSchema(state.values.telephone)}
           type='button'
-          onClick={() => {
-            if (!functions.validateForm('password', 'phoneCode')) return;
-            setStep((prev) => prev + 1);
-          }}
+          onClick={() => handler()}
         >
           Вход
         </Button>
       </div>
-
-      
     </>
   );
 };

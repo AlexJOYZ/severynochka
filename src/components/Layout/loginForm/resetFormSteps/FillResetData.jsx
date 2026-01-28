@@ -1,5 +1,7 @@
 import ReactInputMask from 'react-input-mask';
 
+import { useKeyDown } from '../../../../hooks';
+
 import { passwordValidationSchema, telephoneValidateSchema } from '../../../../utils';
 
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
@@ -14,6 +16,12 @@ export const FillResetData = ({ state, functions, setStep, setStage }) => {
     !telephoneValidateSchema(state.values.telephone) &&
     !passwordValidationSchema(state.values.password) &&
     state.values.password === state.values.confirmPassword;
+
+  const handler = () => {
+    if (!functions.validateForm('phoneCode')) return;
+    setStep('confirmPhoneCode');
+  };
+  useKeyDown('Enter', handler, { ignoreInputs: false });
 
   return (
     <>
@@ -85,10 +93,7 @@ export const FillResetData = ({ state, functions, setStep, setStage }) => {
           decoration='default'
           disabled={!isValidated}
           type='button'
-          onClick={() => {
-            if (!functions.validateForm('phoneCode')) return;
-            setStep('confirmPhoneCode');
-          }}
+          onClick={() => handler()}
         >
           Подтвердить
         </Button>
