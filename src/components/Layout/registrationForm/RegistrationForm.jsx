@@ -18,7 +18,7 @@ import { addUserAction } from '../../../store/reducers/accountReducer';
 import { useDispatch } from 'react-redux';
 import { constructValuesForSubmit } from '../../../utils/helpers/registartion/constructValuesForSubmit';
 
-export const RegistrationForm = ({ setStage,setIsModal }) => {
+export const RegistrationForm = ({ setStage, setIsModal }) => {
   const [step, setStep] = useState(0);
 
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ export const RegistrationForm = ({ setStage,setIsModal }) => {
       password: '',
       passwordRepeat: '',
       gender: { title: 'Мужской' },
-      cardNumber: '',
+      cardDetails: null,
       email: '',
       hasNotCardLoyalty: false,
       phoneCode: '',
@@ -57,7 +57,7 @@ export const RegistrationForm = ({ setStage,setIsModal }) => {
   } = useMutation('registration', (body) => AuthService.registration(body), {
     onSuccess: (response) => {
       dispatch(addUserAction(response.data.user));
-      setIsModal(false)
+      setIsModal(false);
     },
     onFailure: (e) => functions.setFieldsErrors('phoneCode', e?.response?.data?.message),
   });
@@ -76,7 +76,7 @@ export const RegistrationForm = ({ setStage,setIsModal }) => {
     <form
       className='registration__form'
       onSubmit={(e) =>
-        functions.handleSubmit(e, state.values.hasNotCardLoyalty ? 'cardNumber' : '')
+        functions.handleSubmit(e, state.values.hasNotCardLoyalty ? 'cardDetails' : '')
       }
     >
       <Typography className='registration__header' as='h3' variant='header' size='s'>

@@ -37,6 +37,7 @@ export const postSignUpConfig = {
         ...newUser,
         id,
         role: 'user',
+        cardBalance: 0,
       });
       const payload = { userId: id };
       const accessToken = jwt.sign(payload, secretKey, {
