@@ -13,6 +13,14 @@ export const postOrderDetailsConfig = {
       }
 
       if (body.statusPayment === 'Оплата на сайте') {
+        DATABASE.users.forEach((profile, i) => {
+          if (profile.id === body.userId && profile.cardDetails) {
+            DATABASE.users[i] = {
+              ...profile,
+              cardBalance: profile.cardBalance - body.usedBonus + body.bonus,
+            };
+          }
+        });
       }
 
       DATABASE.orders.push({

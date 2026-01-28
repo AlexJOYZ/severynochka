@@ -4,8 +4,16 @@ import { passwordValidationSchema } from '../../../../utils';
 import { Button } from '../../../UI/buttons/Button/Button';
 import { InputPassword } from '../../../UI/fields/InputPassword/InputPassword';
 import { Tooltip } from '../../../UI/tooltip/Tooltip';
+import { useKeyDown } from '../../../../hooks';
 
 export const LoginStepTwoForm = ({ state, functions, setStep }) => {
+  const handler = () => {
+    if (!functions.validateForm('phoneCode')) return;
+    setStep((prev) => prev + 1);
+  };
+
+  useKeyDown('Enter', handler, { ignoreInputs: false });
+
   return (
     <>
       <div className='login__form__input'>
@@ -33,10 +41,7 @@ export const LoginStepTwoForm = ({ state, functions, setStep }) => {
           decoration='default'
           disabled={passwordValidationSchema(state.values.password)}
           type='button'
-          onClick={() => {
-            if (!functions.validateForm('phoneCode')) return;
-            setStep((prev) => prev + 1);
-          }}
+          onClick={() => handler()}
         >
           Подтвердить
         </Button>

@@ -1,8 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useForm } from '../hooks/useForm';
 
+import { useMutation } from '../hooks';
 import { useSelector } from 'react-redux';
 
+import { OrderService } from '../API/entities/order';
 import { REGIONS } from '../const';
 import { cartValidateSchema } from '../utils/helpers';
 
@@ -15,16 +17,17 @@ import { SmileIcon } from '../components/UI/icons/about/SmileIcon';
 import { Tooltip } from '../components/UI/tooltip/Tooltip';
 import { FillOrderDetails } from '../components/Layout/CartSteps/FillOrderDetails';
 import { ChooseDateDelivery } from '../components/Layout/CartSteps/ChooseDateDelivery';
+import { Spinner } from '../components/UI/spinner/Spinner';
+import { Modal } from '../components/UI/modal/Modal';
 
 import '../styles/pages/Cart.css';
-import { useMutation } from '../hooks';
-import { OrderService } from '../API/entities/order';
-import { Spinner } from '../components/UI/spinner/Spinner';
 
 export const Cart = () => {
   const user = useSelector((state) => state.account.user);
+  const statusPayment = useRef(null);
 
   const [step, setStep] = useState('fillOrderDetails');
+  const [isModal, setIsModal] = useState(false);
   const [isUsedBonus, setIsUsedBonus] = useState(user.cardBalance !== 0);
 
   const times = [
@@ -76,7 +79,12 @@ export const Cart = () => {
     mutate: orderMutation,
     isLoading: orderIsLoading,
     error: orderError,
-  } = useMutation('order', (body) => OrderService.createOrder(body));
+  } = useMutation('order', (body) => OrderService.createOrder(body), {
+    onSuccess: (response) => {
+      console.log(response);
+      setIsModal(true);
+    },
+  });
 
   const { state, functions } = useForm({
     initialValues: {
@@ -87,7 +95,6 @@ export const Cart = () => {
       additionally: '',
       dateOfDelivery: new Date(),
       timeOfDelivery: times[0],
-      statusPayment: null,
     },
     validateSchema: cartValidateSchema,
     onSubmit: () => {
@@ -99,8 +106,9 @@ export const Cart = () => {
         timeOfDelivery: state.values.timeOfDelivery.title,
         products: cartProducts,
         totalPrice: cartPrice,
-        bonus: +(cartPrice * 0.1).toFixed(2),
-        statusPayment: state.values.statusPayment,
+        bonus: user.cardDetails ? +(cartPrice * 0.1).toFixed(2) : 0,
+        usedBonus: isUsedBonus ? Math.min(cartTotalPriceWithDiscount * 0.5, user.cardBalance) : 0,
+        statusPayment: statusPayment.current,
       };
       console.log(order);
       orderMutation(order);
@@ -243,8 +251,8 @@ export const Cart = () => {
                 <div className='cart__panel__btns'>
                   <Button
                     onClick={(e) => {
+                      statusPayment.current = 'Оплата на сайте';
                       functions.handleSubmit(e, 'region', 'dateOfDelivery', 'timeOfDelivery');
-                      functions.setFieldValue('statusPayment', 'Оплата на сайте');
                     }}
                     disabled={cartPrice < 1000}
                     size='l'
@@ -254,8 +262,8 @@ export const Cart = () => {
                   </Button>
                   <Button
                     onClick={(e) => {
+                      statusPayment.current = 'Оплата при получении';
                       functions.handleSubmit(e, 'region', 'dateOfDelivery', 'timeOfDelivery');
-                      functions.setFieldValue('statusPayment', 'Оплата при получении');
                     }}
                     disabled={cartPrice < 1000}
                     size='m'
@@ -270,6 +278,7 @@ export const Cart = () => {
         </div>
       </div>
       {orderIsLoading && <Spinner />}
+      {isModal && <Modal setIsModal={setIsModal}>успешно</Modal>}
     </MainContainer>
   );
 };

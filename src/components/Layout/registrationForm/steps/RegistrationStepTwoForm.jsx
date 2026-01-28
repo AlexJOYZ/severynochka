@@ -14,7 +14,6 @@ import { TimerCodeAccept } from '../../timerCodeAccept/TimerCodeAccept';
 export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
   const [enabled, setEnabled] = useState(true);
 
-
   return (
     <div className='registration__form__step registration__form__step__2'>
       <div className='registration__code__input__container'>
@@ -22,6 +21,7 @@ export const RegistrationStepTwoForm = ({ setStep, state, functions }) => {
           direction='up'
           isShowTooltip={!!state.errors?.phoneCode}
           label={state.errors?.phoneCode}
+          className='registration__form__tooltip'
         >
           <ReactInputMask
             maskChar={null}

@@ -1,7 +1,8 @@
 import ReactInputMask from 'react-input-mask';
 
-import { passwordValidationSchema } from '../../../../utils';
+import { useKeyDown } from '../../../../hooks';
 
+import { passwordValidationSchema } from '../../../../utils';
 import { locales } from '../../../../const/locales/ru';
 
 import { Button } from '../../../UI/buttons/Button/Button';
@@ -33,6 +34,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
     }
     setStep((prev) => prev + 1);
   };
+  useKeyDown('Enter', handlerClickConfirm, { ignoreInputs: false });
 
   return (
     <div className='registration__form__step'>
@@ -152,7 +154,7 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
               />
             </Tooltip>
           </div>
-          <div className='registration__form__input'>
+          <div className='registration__form__input registration__form__tabs__container'>
             <Tabs
               className='registration__form__tabs'
               label='Пол'
@@ -193,13 +195,13 @@ export const RegistrationStepOneForm = ({ setStage, setStep, state, functions })
           <div className='registration__form__input'>
             <Tooltip
               direction='up'
-              isShowTooltip={!!state.errors?.cardNumber && !state.values.hasNotCardLoyalty}
-              label={state.errors?.cardNumber}
+              isShowTooltip={!!state.errors?.cardDetails && !state.values.hasNotCardLoyalty}
+              label={state.errors?.cardDetails}
             >
               <ReactInputMask
-                onFocus={() => functions.resetFieldError('cardNumber')}
+                onFocus={() => functions.resetFieldError('cardDetails')}
                 value={state.values.cardNumber}
-                onChange={(e) => functions.setFieldValue('cardNumber', e.target.value)}
+                onChange={(e) => functions.setFieldValue('cardDetails', e.target.value)}
                 maskChar={null}
                 mask='9999 9999 9999 9999'
                 disabled={state.values.hasNotCardLoyalty}

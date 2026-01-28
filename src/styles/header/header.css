@@ -5,6 +5,7 @@
   width: 100%;
   margin-bottom: 4px;
   padding: 0 116px;
+  background-color: var(--main-color-surface);
 }
 
 header {
