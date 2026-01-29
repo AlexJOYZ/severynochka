@@ -1,10 +1,9 @@
-import { useClickOutside } from '../../../hooks/useClickOutside';
+import { useClickOutside, useKeyDown, useScrollLock } from '../../../../hooks';
+
+import { IconButton } from '../../buttons/IconButton/IconButton';
+import { CloseIcon } from '../../icons/header/CloseIcon';
 
 import styles from './Modal.module.css';
-
-import { IconButton } from '../buttons/IconButton/IconButton';
-import { CloseIcon } from '../icons/header/CloseIcon';
-import { useKeyDown, useScrollLock } from '../../../hooks';
 
 export const Modal = ({ children, setIsModal }) => {
   const closeBtn = () => setIsModal(false);

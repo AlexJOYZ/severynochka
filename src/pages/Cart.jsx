@@ -1,8 +1,8 @@
 import { useMemo, useRef, useState } from 'react';
-import { useForm } from '../hooks/useForm';
-
-import { useMutation } from '../hooks';
 import { useSelector } from 'react-redux';
+
+import { useForm } from '../hooks/useForm';
+import { useMutation } from '../hooks';
 
 import { OrderService } from '../API/entities/order';
 import { REGIONS } from '../const';
@@ -18,7 +18,7 @@ import { Tooltip } from '../components/UI/tooltip/Tooltip';
 import { FillOrderDetails } from '../components/Layout/CartSteps/FillOrderDetails';
 import { ChooseDateDelivery } from '../components/Layout/CartSteps/ChooseDateDelivery';
 import { Spinner } from '../components/UI/spinner/Spinner';
-import { Modal } from '../components/UI/modal/Modal';
+import { ModalStatusMessage } from '../components/UI/modals/modalStatusMessage/ModalStatusMessage';
 
 import '../styles/pages/Cart.css';
 
@@ -28,6 +28,7 @@ export const Cart = () => {
 
   const [step, setStep] = useState('fillOrderDetails');
   const [isModal, setIsModal] = useState(false);
+  const [modalData, setModalData] = useState(null);
   const [isUsedBonus, setIsUsedBonus] = useState(user.cardBalance !== 0);
 
   const times = [
@@ -83,6 +84,12 @@ export const Cart = () => {
     onSuccess: (response) => {
       console.log(response);
       setIsModal(true);
+      setModalData({ title: 'Успех', subTitle: 'Действие выполнено', type: 'success' });
+    },
+    onFailure: (e) => {
+      console.log(response);
+      setIsModal(true);
+      setModalData({ title: 'Ошибка', subTitle: e?.message, type: 'failure' });
     },
   });
 
@@ -278,7 +285,14 @@ export const Cart = () => {
         </div>
       </div>
       {orderIsLoading && <Spinner />}
-      {isModal && <Modal setIsModal={setIsModal}>успешно</Modal>}
+      {isModal && (
+        <ModalStatusMessage
+          title={modalData?.title}
+          subTitle={modalData?.subTitle}
+          setIsModal={setIsModal}
+          type={modalData?.type}
+        />
+      )}
     </MainContainer>
   );
 };
