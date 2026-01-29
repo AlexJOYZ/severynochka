@@ -1,9 +1,10 @@
-import '../styles/pages/ErrorPage.css';
-
 import { Link, useLocation } from 'react-router-dom';
+
 import { Typography } from '../components/UI/Typography/Typography';
 import { ArrowButton } from '../components/UI/buttons/ArrowButton/ArrowButton';
 import { ErrorIcon } from '../components/UI/icons/error/ErrorIcon';
+
+import '../styles/pages/ErrorPage.css';
 
 export const ErrorPage = () => {
   const location = useLocation();
