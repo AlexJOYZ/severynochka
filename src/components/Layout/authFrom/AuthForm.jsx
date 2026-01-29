@@ -1,11 +1,11 @@
-import styles from './AuthForm.module.css';
-
 import { useState } from 'react';
 
-import { Modal } from '../../UI/modal/Modal';
 import { LoginForm } from '../loginForm/LoginForm';
 import { RegistrationForm } from '../registrationForm/RegistrationForm';
 import { LoginResetPassword } from '../loginForm/LoginResetPassword';
+import { Modal } from '../../UI/modals/modal/Modal';
+
+import styles from './AuthForm.module.css';
 
 export const AuthForm = ({ setIsModal }) => {
   const [stage, setStage] = useState('login');
