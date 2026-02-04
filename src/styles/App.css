@@ -1,14 +1,14 @@
 .container {
   padding: 0 116px;
 }
-.main{
+.main {
   background-color: var(--main-color-bgPage);
   padding-bottom: 80px;
+  min-height: 100vh;
 }
 
 .grid {
   display: flex;
   gap: 40px;
   align-items: stretch;
-  
 }

@@ -18,7 +18,7 @@ export const cartReducer = (state = initialCart, action) => {
     case REMOVE_MANY_CART:
       return { ...state, items: state.items.filter((item) => !action.payload.includes(item.id)) };
     case CLEAR_CART:
-      return {};
+      return { items: [] };
     default:
       return state;
   }

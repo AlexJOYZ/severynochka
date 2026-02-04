@@ -1,7 +1,3 @@
-.cart__container {
-  min-height: 100vh;
-}
-
 .cart__title__inner {
   display: flex;
   gap: 20px;
@@ -10,6 +6,20 @@
 
 .cart__title__notice {
   height: fit-content;
+}
+
+.cart__empty__container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart__empty__content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .cart__step {
@@ -147,4 +157,10 @@
     height: 40px;
     font-size: 16px;
   }
+}
+
+.cart__modal__btns {
+  margin: 20px 0px;
+  display: flex;
+  gap: 10px;
 }

@@ -2,13 +2,16 @@
   .notice {
     display: none;
   }
+
   .price {
     display: none;
   }
+
   .price__text {
     opacity: 0;
   }
 }
+
 .button__container {
   opacity: 0.5;
   width: 32px;
@@ -16,24 +19,39 @@
   right: 8px;
   top: 8px;
 }
+
+.cart__icon {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+}
+
 .btn__favorite {
   opacity: 1;
+
   button {
     background-color: var(--main-color-surface);
     box-shadow: none;
   }
 }
+
 .btn__hover {
   button {
     transition: all 0.2s;
     background-color: var(--main-color-primaryMuted);
   }
 }
+
 .notice {
   position: absolute;
   left: 8px;
   bottom: 8px;
 }
+
 .card__content {
   padding: 8px;
   display: flex;
@@ -45,18 +63,22 @@
 .price__text {
   display: flex;
   justify-content: space-between;
+
   span {
     margin-right: 4px;
   }
 }
+
 .price__text {
   p {
     color: var(--grayScale-color-light);
   }
 }
+
 .price {
   color: var(--grayScale-color-hardest);
 }
+
 .card__title {
   text-overflow: clip;
   -webkit-line-clamp: 2;

@@ -1,0 +1,24 @@
+.order__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.order__header__left,
+.order__header__right {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.order__main{
+  display: flex;
+  gap: 40px;
+}
+
+.order__button{
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 200px;
+  
+}

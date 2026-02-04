@@ -28,17 +28,12 @@ export const postSignUpConfig = {
         setStatusCode(409);
         return { success: false, message: 'Пользователь с этими данными уже зарегистрирован!' };
       }
-      const newUser = body;
+      const id = DATABASE.users.length + 1;
+      const newUser = { ...body, id, role: 'user', cardBalance: 0 };
       delete newUser.phoneCode;
 
-      const id = DATABASE.users.length + 1;
-
-      DATABASE.users.push({
-        ...newUser,
-        id,
-        role: 'user',
-        cardBalance: 0,
-      });
+      DATABASE.users.push(newUser);
+      
       const payload = { userId: id };
       const accessToken = jwt.sign(payload, secretKey, {
         expiresIn: '15m',

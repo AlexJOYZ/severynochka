@@ -29,7 +29,11 @@ export const postOrderDetailsConfig = {
         status: 'Новый',
       });
       setStatusCode(201);
-      return { success: true, message: 'Заказ успешно создан' };
+      return {
+        success: true,
+        message: 'Заказ успешно создан',
+        user: DATABASE.users.find((profile) => profile.id === body.userId),
+      };
     },
   },
   routes: [

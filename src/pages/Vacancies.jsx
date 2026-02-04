@@ -8,6 +8,7 @@ import '../styles/pages/Vacancies.css';
 
 const vacancies = [
   {
+    id: 1,
     position: 'Веб-программист',
     requirements: 'Опыт работы с HTML, CSS, JavaScript, PHP. Знание фреймворков (Laravel, React).',
     responsibilities:
@@ -16,6 +17,7 @@ const vacancies = [
     tel: '+7 (495) 123-45-67',
   },
   {
+    id: 2,
     position: 'Frontend-разработчик',
     requirements:
       'Глубокое знание JavaScript, TypeScript. Опыт с React/Vue.js. Понимание принципов UI/UX.',
@@ -25,6 +27,7 @@ const vacancies = [
     tel: '+7 (495) 234-56-78',
   },
   {
+    id: 3,
     position: 'Backend-разработчик',
     requirements:
       'Python/Django или Node.js. Опыт работы с базами данных. Знание Docker, Kubernetes.',
@@ -33,6 +36,7 @@ const vacancies = [
     tel: '+7 (495) 345-67-89',
   },
   {
+    id: 4,
     position: 'DevOps-инженер',
     requirements:
       'Опыт настройки CI/CD. Знание AWS/Azure. Администрирование Linux/Windows серверов.',
@@ -42,6 +46,7 @@ const vacancies = [
     tel: '+7 (495) 456-78-90',
   },
   {
+    id: 5,
     position: 'Тестировщик ПО',
     requirements:
       'Опыт ручного/автоматического тестирования. Знание SQL. Базовые навыки программирования.',
@@ -51,6 +56,7 @@ const vacancies = [
     tel: '+7 (495) 567-89-01',
   },
   {
+    id: 6,
     position: 'Системный аналитик',
     requirements: 'Умение составлять ТЗ. Опыт работы с BPMN. Знание методологий разработки.',
     responsibilities:
@@ -68,7 +74,7 @@ export const Vacancies = () => {
       </Typography>
       <div className='vacancies__container'>
         {vacancies.map((vacancy) => (
-          <Card>
+          <Card key={vacancy.id}>
             <Typography className='vacancy__item__block' as='h3' size='l' variant='text-bold'>
               {vacancy.position}
             </Typography>

@@ -18,8 +18,9 @@ import { PlusIconBtn } from '../../icons/card/PlusIconBtn';
 
 import styles from './ProductCard.module.css';
 import cl from '../card.module.css';
+import { CartIcon } from '../../icons/MenuButtons/CartIcon';
 
-export const ProductCard = ({ item }) => {
+export const ProductCard = ({ item, type = 'default' }) => {
   const [isFavorite, setIsFavorite] = useState(item.isFavorite);
   const [isCart, setCart] = useState(false);
 
@@ -76,6 +77,23 @@ export const ProductCard = ({ item }) => {
         >
           <IconButton type='icon-btn' size='s' Icon={FavoritesIcon} accent='grayscale' />
         </div>
+        {type === 'ordered' && (
+          <div
+            className={classNames(
+              styles.cart__icon,
+              isBtnHovering ? styles.btn__hover : '',
+              isFavorite ? styles.btn__favorite : '',
+            )}
+            ref={btnRef}
+            onClick={clickFavoriteBtn}
+          >
+            <CartIcon />
+            <Typography as='h3' variant='text-bold' size='m'>
+              {item.countOrder}
+            </Typography>
+          </div>
+        )}
+
         <Notice accent='primary' size='m' className={styles.notice}>
           -{item.discount}%
         </Notice>

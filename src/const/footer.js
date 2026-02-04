@@ -42,6 +42,6 @@ export const FOOTER_SOCIAL_LINKS = [
   },
   {
     icon: OkIcon,
-    link: 'https://www.facebook.com/?locale=ru_RU',
+    link: 'https://ok.ru/',
   },
 ];

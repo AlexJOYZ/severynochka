@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useHover } from '../../../hooks/useHover';
 
+import { ROUTES } from '../../../const';
+
 import { Logo } from '../../UI/logo/Logo';
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { MenuIcon } from '../../UI/icons/inputIcons/MenuIcon';
@@ -16,7 +18,6 @@ import { Menu } from '../../UI/menu/Menu';
 import { Button } from '../../UI/buttons/Button/Button';
 import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthForm } from '../authFrom/AuthForm';
-import { ROUTES } from '../../../const';
 
 import '../../../styles/header/header.css';
 

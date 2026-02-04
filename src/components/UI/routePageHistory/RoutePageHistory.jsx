@@ -12,7 +12,7 @@ export const RoutePageHistory = ({ routes }) => {
   return (
     <Typography className={styles.route__page__history__root} as='p' size='xs' variant='text'>
       {routes.map((route, i) => (
-        <div key={route} className={styles.route__page__history}>
+        <span key={route} className={styles.route__page__history}>
           {i !== routes.length - 1 && (
             <>
               <Link to={i === 0 ? '/' : routesPath[i]}>{route}</Link>
@@ -22,7 +22,7 @@ export const RoutePageHistory = ({ routes }) => {
           {i === routes.length - 1 && (
             <span className={styles.route__page__history__current}>{route}</span>
           )}
-        </div>
+        </span>
       ))}
     </Typography>
   );
