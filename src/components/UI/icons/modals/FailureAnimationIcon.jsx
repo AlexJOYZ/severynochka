@@ -1,6 +1,6 @@
-export const FailureAnimationIcon = () => {
+export const FailureAnimationIcon = ({ size = 80 }) => {
   return (
-    <svg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'>
+    <svg width={size} height={size} viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'>
       <defs>
         <filter id='glow-error'>
           <feGaussianBlur stdDeviation='3' result='blur' />
@@ -11,13 +11,22 @@ export const FailureAnimationIcon = () => {
         </filter>
       </defs>
 
-      <circle cx='70' cy='70' r='32' fill='none' stroke='#ef4444' stroke-width='4' opacity='0.4'>
-        <animate attributeName='r' from='32' to='62' dur='0.6s' begin='0.2s' fill='freeze' />
+      <circle cx='40' cy='40' r='18' fill='none' stroke='#ef4444' stroke-width='3' opacity='0.4'>
+        <animate attributeName='r' from='18' to='34' dur='0.6s' begin='0.2s' fill='freeze' />
         <animate attributeName='opacity' from='0.4' to='0' dur='0.6s' begin='0.2s' fill='freeze' />
       </circle>
 
       <g filter='url(#glow-error)'>
-        <circle cx='70' cy='70' r='40' fill='#ef4444'>
+        <circle
+          cx='40'
+          cy='40'
+          r='22'
+          fill='#ef4444'
+          style={{
+            transformBox: 'fill-box',
+            transformOrigin: 'center',
+          }}
+        >
           <animateTransform
             attributeName='transform'
             type='scale'
@@ -29,17 +38,17 @@ export const FailureAnimationIcon = () => {
         </circle>
 
         <path
-          d='M52 52 L88 88'
+          d='M30 30 L50 50'
           fill='none'
           stroke='#ffffff'
-          stroke-width='7'
+          stroke-width='4'
           stroke-linecap='round'
-          stroke-dasharray='60'
-          stroke-dashoffset='60'
+          stroke-dasharray='30'
+          stroke-dashoffset='30'
         >
           <animate
             attributeName='stroke-dashoffset'
-            from='60'
+            from='30'
             to='0'
             dur='0.25s'
             begin='0.35s'
@@ -48,17 +57,17 @@ export const FailureAnimationIcon = () => {
         </path>
 
         <path
-          d='M88 52 L52 88'
+          d='M50 30 L30 50'
           fill='none'
           stroke='#ffffff'
-          stroke-width='7'
+          stroke-width='4'
           stroke-linecap='round'
-          stroke-dasharray='60'
-          stroke-dashoffset='60'
+          stroke-dasharray='30'
+          stroke-dashoffset='30'
         >
           <animate
             attributeName='stroke-dashoffset'
-            from='60'
+            from='30'
             to='0'
             dur='0.25s'
             begin='0.45s'

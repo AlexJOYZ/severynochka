@@ -1,3 +1,5 @@
+import { classNames } from '../../../../utils/helpers';
+
 import cl from '../Button/Button.module.css';
 
 import classes from '../ArrowButton/ArrowButton.module.css';
@@ -13,15 +15,24 @@ export const IconButton = ({
   type = 'default',
   Icon = null,
   IconLeft = null,
-  leftClick=null,
-  rightClick=null,
+  leftClick = null,
+  rightClick = null,
   IconRight = null,
   className = '',
   ...props
 }) => {
   return (
     <button
-      className={`${cl.button} ${styles.icon__btn} ${classes[type]} ${cl[accent]} ${cl[size]} ${styles[size]} ${cl[decoration]} ${className}`}
+      className={classNames(
+        cl.button,
+        styles.icon__btn,
+        classes[type],
+        cl[accent],
+        cl[size],
+        styles[size],
+        className,
+        cl[decoration],
+      )}
       {...props}
     >
       {position === 'left' && position !== 'both' && (

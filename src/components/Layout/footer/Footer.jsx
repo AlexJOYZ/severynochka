@@ -17,6 +17,7 @@ export const Footer = () => {
           </Link>
           {FOOTER_LINKS.map((link) => (
             <NavLink
+              key={link.path}
               className={({ isActive }) => isActive && 'footer__link__current'}
               to={link.path}
             >
@@ -29,7 +30,7 @@ export const Footer = () => {
         <div className='footer__right'>
           <div className='footer__social'>
             {FOOTER_SOCIAL_LINKS.map((socialLink) => (
-              <a target='_blank' href={socialLink.link}>
+              <a key={socialLink.link} target='_blank' href={socialLink.link}>
                 <socialLink.icon />
               </a>
             ))}

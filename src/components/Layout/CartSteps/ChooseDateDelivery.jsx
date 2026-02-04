@@ -39,6 +39,7 @@ export const ChooseDateDelivery = ({ state, functions, tabs, locations }) => {
           >
             <Input
               className='cart__cart__delivery__item__input'
+              type='number'
               onFocus={() => functions.resetFieldError('homeNumber')}
               maxLength={4}
               value={state.values.homeNumber}
@@ -51,6 +52,7 @@ export const ChooseDateDelivery = ({ state, functions, tabs, locations }) => {
             isShowTooltip={state.errors?.apartmentNumber}
           >
             <Input
+              type='number'
               onFocus={() => functions.resetFieldError('apartmentNumber')}
               value={state.values.apartmentNumber}
               onChange={(e) => functions.setFieldValue('apartmentNumber', e.target.value)}

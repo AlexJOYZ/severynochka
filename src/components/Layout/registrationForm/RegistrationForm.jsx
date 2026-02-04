@@ -56,6 +56,7 @@ export const RegistrationForm = ({ setStage, setIsModal }) => {
     error,
   } = useMutation('registration', (body) => AuthService.registration(body), {
     onSuccess: (response) => {
+      console.log(response.data.user)
       dispatch(addUserAction(response.data.user));
       setIsModal(false);
     },

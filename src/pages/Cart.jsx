@@ -1,11 +1,14 @@
 import { useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { useForm } from '../hooks/useForm';
 import { useMutation } from '../hooks';
 
+import { addUserAction } from '../store/reducers/accountReducer';
+import { clearCartAction } from '../store/reducers/cartReducer';
 import { OrderService } from '../API/entities/order';
-import { REGIONS } from '../const';
+import { REGIONS, ROUTES } from '../const';
 import { cartValidateSchema } from '../utils/helpers';
 
 import { Typography } from '../components/UI/Typography/Typography';
@@ -15,6 +18,7 @@ import { Toggle } from '../components/UI/toggle/Toggle';
 import { Button } from '../components/UI/buttons/Button/Button';
 import { SmileIcon } from '../components/UI/icons/about/SmileIcon';
 import { Tooltip } from '../components/UI/tooltip/Tooltip';
+import { EmptyCart } from '../components/Layout/CartSteps/EmptyCart';
 import { FillOrderDetails } from '../components/Layout/CartSteps/FillOrderDetails';
 import { ChooseDateDelivery } from '../components/Layout/CartSteps/ChooseDateDelivery';
 import { Spinner } from '../components/UI/spinner/Spinner';
@@ -37,6 +41,8 @@ export const Cart = () => {
     { title: '18:00 - 20:00', disabled: true, message: 'На это время доставить не можем' },
     { title: '20:00 - 22:00' },
   ];
+
+  const dispatch = useDispatch();
 
   const cartProducts = useSelector((state) => state.cart.items);
 
@@ -82,14 +88,23 @@ export const Cart = () => {
     error: orderError,
   } = useMutation('order', (body) => OrderService.createOrder(body), {
     onSuccess: (response) => {
-      console.log(response);
       setIsModal(true);
-      setModalData({ title: 'Успех', subTitle: 'Действие выполнено', type: 'success' });
+      setModalData({
+        title: 'Заказ успешно создан',
+        subTitle: 'Спасибо за покупку! Мы получили ваш заказ и уже начали его обработку.',
+        type: 'success',
+      });
+      dispatch(addUserAction(response.data.user));
+      dispatch(clearCartAction());
     },
-    onFailure: (e) => {
-      console.log(response);
+    onFailure: (error) => {
+      console.log(error?.message);
       setIsModal(true);
-      setModalData({ title: 'Ошибка', subTitle: e?.message, type: 'failure' });
+      setModalData({
+        title: 'Не удалось оформить заказ',
+        subTitle: ' Произошла ошибка при создании заказа. Пожалуйста, попробуйте ещё раз.',
+        type: 'failure',
+      });
     },
   });
 
@@ -117,17 +132,16 @@ export const Cart = () => {
         usedBonus: isUsedBonus ? Math.min(cartTotalPriceWithDiscount * 0.5, user.cardBalance) : 0,
         statusPayment: statusPayment.current,
       };
-      console.log(order);
       orderMutation(order);
     },
     validateOnChange: false,
   });
 
   return (
-    <MainContainer className='cart__container' routes={['Главная', 'Корзина']}>
+    <MainContainer routes={['Главная', 'Корзина']}>
       <div>
         <div className='cart__title__inner'>
-          <Typography className='d-f' as='h1' variant='header' size='xl'>
+          <Typography as='h1' variant='header' size='xl'>
             {step === 'fillOrderDetails' ? 'Корзина' : 'Доставка'}
           </Typography>
           {cartProducts.length !== 0 && (
@@ -137,11 +151,7 @@ export const Cart = () => {
           )}
         </div>
         <div className='cart__content'>
-          {cartProducts.length === 0 && (
-            <Typography type='header' as='h2' size='m'>
-              Корзина пуста
-            </Typography>
-          )}
+          {cartProducts.length === 0 && <EmptyCart />}
           {cartProducts.length !== 0 && step === 'fillOrderDetails' && (
             <FillOrderDetails cartProductsUniq={cartProductsUniq} />
           )}
@@ -291,7 +301,35 @@ export const Cart = () => {
           subTitle={modalData?.subTitle}
           setIsModal={setIsModal}
           type={modalData?.type}
-        />
+        >
+          {modalData.type === 'success' && (
+            <div className='cart__modal__btns'>
+              <Link to={ROUTES.ORDERS}>
+                <Button accent='primary' size='m'>
+                  Перейти к заказам
+                </Button>
+              </Link>
+              <Link to={ROUTES.CATEGORIES}>
+                <Button accent='secondary' size='m'>
+                  Продолжить покупки
+                </Button>
+              </Link>
+            </div>
+          )}
+          {modalData.type === 'failure' && (
+            <div className='cart__modal__btns'>
+              <Button
+                onClick={(e) =>
+                  functions.handleSubmit(e, 'region', 'dateOfDelivery', 'timeOfDelivery')
+                }
+                accent='secondary'
+                size='l'
+              >
+                Повторить попытку
+              </Button>
+            </div>
+          )}
+        </ModalStatusMessage>
       )}
     </MainContainer>
   );
