@@ -2,22 +2,23 @@ import { useRef } from 'react';
 
 import { useHover } from '../../../hooks';
 
-import { formateDate } from '../../../utils/helpers';
+import { classNames, formateDate } from '../../../utils/helpers';
+
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { ProductCard } from '../../UI/cards/ProductCard/ProductCard';
 import { CalendarIcon } from '../../UI/icons/inputIcons/CalendarIcon';
 import { Notice } from '../../UI/notice/Notice';
 import { Typography } from '../../UI/Typography/Typography';
+import { EyeIcon } from '../../UI/icons/inputIcons/EyeIcon';
+import { Grid } from '../Grid';
 
 import styles from './Order.module.css';
-import { EyeIcon } from '../../UI/icons/inputIcons/EyeIcon';
 
 export const Order = ({ order }) => {
   const articleRef = useRef();
   const date = new Date(order.dateOfDelivery);
   const isHovering = useHover(articleRef);
 
-  // console.log(formateDate(order.dateOfDelivery, 'DD.MM.YYYY'));
   return (
     <article ref={articleRef}>
       <div className={styles.order__header}>
@@ -37,19 +38,31 @@ export const Order = ({ order }) => {
             {order.totalPrice} ₽
           </Typography>
 
-          <IconButton accent='secondary' size='m' Icon={CalendarIcon}>
-            В процессе
+          <IconButton
+            className={classNames(styles.button__container, styles.status__button)}
+            accent='secondary'
+            size='m'
+            Icon={CalendarIcon}
+          >
+            Когда доставить
           </IconButton>
         </div>
       </div>
-      <div className={styles.order__main}>
+      <Grid>
         {order.products.map(
           (product, i) =>
-            i < 4 && <ProductCard item={{ ...product, countOrder: 3 }} type='ordered' />,
+            i < 4 && (
+              <ProductCard
+                className={styles.order__item}
+                key={product.id + i}
+                item={{ ...product, countOrder: 3 }}
+                type='ordered'
+              />
+            ),
         )}
-      </div>
+      </Grid>
       {isHovering && (
-        <div className={styles.order__button}>
+        <div className={classNames(styles.order__button, styles.button__container)}>
           <IconButton Icon={EyeIcon} size='m'>
             Просмотреть заказ
           </IconButton>
