@@ -1,3 +1,9 @@
-.orders__header{
+.orders__header {
   margin-bottom: 60px;
+}
+
+.orders__main {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
 }
