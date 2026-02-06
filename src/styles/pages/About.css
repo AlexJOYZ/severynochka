@@ -14,7 +14,7 @@
   padding-top: 20px;
   max-width: 50%;
   position: relative;
-  z-index: 100;
+  z-index: 15;
 }
 
 .about__subtitle {
@@ -36,7 +36,7 @@
 
 .about__description__ellipse__1 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(45deg);
   width: 51px;
   height: 25px;
@@ -46,7 +46,7 @@
 
 .about__description__ellipse__2 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(-150deg);
   width: 80px;
   height: 40px;
@@ -56,7 +56,7 @@
 
 .about__description__rectangle__1 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(-30deg);
   width: 70px;
   height: 33px;
@@ -66,7 +66,7 @@
 
 .about__description__rectangle__2 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(84deg);
   width: 46px;
   height: 22px;
@@ -76,7 +76,7 @@
 
 .about__description__arc__1 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(-12deg);
   width: 67px;
   height: 31px;
@@ -86,7 +86,7 @@
 
 .about__description__arc__2 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(-120deg);
   width: 59px;
   height: 27px;
@@ -96,7 +96,7 @@
 
 .about__description__smile__1 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(66deg);
   width: 72px;
   height: 32px;
@@ -106,7 +106,7 @@
 
 .about__description__smile__2 {
   position: absolute;
-  z-index: 1000;
+  z-index: 15;
   transform: rotate(141deg);
   width: 72px;
   height: 32px;
