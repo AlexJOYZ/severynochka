@@ -1,8 +1,10 @@
-import '../../../styles/sectionProducts/sectionProducts.css';
-
 import { ArrowButton } from '../../UI/buttons/ArrowButton/ArrowButton';
 import { Typography } from '../../UI/Typography/Typography';
 import { SectionItems } from './SectionItems/SectionItems';
+import { Grid } from '../Grid';
+import { Flex } from '../Flex';
+
+import '../../../styles/sectionProducts/sectionProducts.css';
 
 export const Section = ({ section, type = 'product' }) => {
   const { title, titleBtn, items } = section;
@@ -18,7 +20,16 @@ export const Section = ({ section, type = 'product' }) => {
           </ArrowButton>
         </div>
       </div>
-      <SectionItems items={items} type = {type}/>
+      {type === 'product' && (
+        <Grid>
+          <SectionItems items={items} type={type} />
+        </Grid>
+      )}
+      {type === 'news' && (
+        <Flex>
+          <SectionItems items={items} type={type} />
+        </Flex>
+      )}
     </section>
   );
 };

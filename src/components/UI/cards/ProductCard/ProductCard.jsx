@@ -15,12 +15,12 @@ import { Notice } from '../../notice/Notice';
 import { useHover } from '../../../../hooks/useHover';
 import { MinusIconBtn } from '../../icons/card/MinusIconBtn';
 import { PlusIconBtn } from '../../icons/card/PlusIconBtn';
+import { CartIcon } from '../../icons/MenuButtons/CartIcon';
 
 import styles from './ProductCard.module.css';
 import cl from '../card.module.css';
-import { CartIcon } from '../../icons/MenuButtons/CartIcon';
 
-export const ProductCard = ({ item, type = 'default' }) => {
+export const ProductCard = ({ item, type = 'default', className = '', props }) => {
   const [isFavorite, setIsFavorite] = useState(item.isFavorite);
   const [isCart, setCart] = useState(false);
 
@@ -57,11 +57,13 @@ export const ProductCard = ({ item, type = 'default' }) => {
 
   return (
     <article
+      {...props}
       ref={itemRef}
       className={classNames(
         cl.card,
         isItemHovering ? cl.card__active : '',
         item.discount ? '' : styles.card__prod,
+        className,
       )}
     >
       <div className={cl.card__img}>

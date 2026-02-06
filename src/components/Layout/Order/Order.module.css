@@ -11,14 +11,15 @@
   align-items: center;
 }
 
-.order__main{
-  display: flex;
-  gap: 40px;
+.status__button > svg {
+  color: var(--main-color-surface);
 }
 
-.order__button{
+.button__container {
+  width: 200px;
+}
+
+.order__button {
   margin: 0 auto;
   margin-top: 40px;
-  width: 200px;
-  
 }
