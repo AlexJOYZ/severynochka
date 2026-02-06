@@ -2,11 +2,12 @@ import { useRef } from 'react';
 
 import { useHover } from '../../../../hooks/useHover';
 
-import styles from '../card.module.css';
-import cl from './NewsCard.module.css';
-
 import { Button } from '../../buttons/Button/Button';
 import { Typography } from '../../Typography/Typography';
+import { classNames } from '../../../../utils/helpers';
+
+import styles from '../card.module.css';
+import cl from './NewsCard.module.css';
 
 export const NewsCard = ({ item }) => {
   const cardRef = useRef();
@@ -17,7 +18,7 @@ export const NewsCard = ({ item }) => {
   return (
     <article
       ref={cardRef}
-      className={`${styles.card} ${cl.newsCard} ${isHovering && `${styles.card__active}`}`}
+      className={classNames(styles.card, cl.newsCard, isHovering && styles.card__active)}
     >
       <div className={styles.card__img}>
         <img src={item.imgUrl} alt='news image' />

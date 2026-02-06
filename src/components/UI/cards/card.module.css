@@ -1,8 +1,9 @@
 .card {
-  width: 25%;
+  /* width: 25%; */
   background-color: var(--main-color-surface);
   border-radius: 4px;
   box-shadow: var(--shadow-default-xs);
+  /* align-items: stretch; */
 }
 .card__active {
   box-shadow: var(--shadow-primary-m);
