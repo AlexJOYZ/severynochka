@@ -2,7 +2,8 @@ import { useRef } from 'react';
 
 import { useHover } from '../../../hooks';
 
-import { classNames, formateDate } from '../../../utils/helpers';
+import { classNames, findUniqueItemsById, formateDate } from '../../../utils/helpers';
+import { ORDER_STATUS } from '../../../const';
 
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { ProductCard } from '../../UI/cards/ProductCard/ProductCard';
@@ -19,6 +20,8 @@ export const Order = ({ order }) => {
   const date = new Date(order.dateOfDelivery);
   const isHovering = useHover(articleRef);
 
+  const uniqueProducts = findUniqueItemsById(order.products);
+
   return (
     <article ref={articleRef}>
       <div className={styles.order__header}>
@@ -29,14 +32,29 @@ export const Order = ({ order }) => {
           <Typography as='h3' variant='text-bold' size='l'>
             {order.timeOfDelivery}
           </Typography>
-          <Notice accent='gray' size='m'>
-            В процессе
-          </Notice>
+          {order.status === ORDER_STATUS.REFUND.title && (
+            <Notice accent='error' size='m'>
+              {ORDER_STATUS.REFUND.title}
+            </Notice>
+          )}
+          {order.status === ORDER_STATUS.SUPPLIED.title && (
+            <Notice accent='primary' size='m'>
+              {ORDER_STATUS.SUPPLIED.title}
+            </Notice>
+          )}
+          {order.status === ORDER_STATUS.SUPPLIED.title && (
+            <Notice accent='error' size='m'>
+              {ORDER_STATUS.SUPPLIED.title}
+            </Notice>
+          )}
+          <Notice accent='gray' size='m'></Notice>
         </div>
         <div className={styles.order__header__right}>
           <Typography as='p' variant='text' size='l'>
-            {order.totalPrice} ₽
+            {order.totalPrice.toFixed(2)} ₽
           </Typography>
+
+          {}
 
           <IconButton
             className={classNames(styles.button__container, styles.status__button)}
@@ -49,13 +67,13 @@ export const Order = ({ order }) => {
         </div>
       </div>
       <Grid>
-        {order.products.map(
+        {uniqueProducts.map(
           (product, i) =>
             i < 4 && (
               <ProductCard
                 className={styles.order__item}
-                key={product.id + i}
-                item={{ ...product, countOrder: 3 }}
+                key={product.id}
+                item={{ ...product, products: order.products }}
                 type='ordered'
               />
             ),
