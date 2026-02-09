@@ -33,6 +33,15 @@ export const Orders = () => {
           discount: 20,
         },
         {
+          title: 'GOFO',
+          id: 3,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 3.8,
+          price: 700,
+          discount: 40,
+        },
+        {
           title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
           id: 2,
           imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
@@ -148,7 +157,7 @@ export const Orders = () => {
       </Typography>
       <div className='orders__main'>
         {orders.map((order, id) => (
-          <Order order={order} />
+          <Order key={id} order={order} />
         ))}
       </div>
       {/* {isLoading && <Spinner />} */}
