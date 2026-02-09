@@ -17,16 +17,19 @@ import { MinusIconBtn } from '../../icons/card/MinusIconBtn';
 import { PlusIconBtn } from '../../icons/card/PlusIconBtn';
 import { CartIcon } from '../../icons/MenuButtons/CartIcon';
 
-import styles from './ProductCard.module.css';
 import cl from '../card.module.css';
+import styles from './ProductCard.module.css';
 
-export const ProductCard = ({ item, type = 'default', className = '', props }) => {
+export const ProductCard = ({ item, type = 'default', className = '', ...props }) => {
   const [isFavorite, setIsFavorite] = useState(item.isFavorite);
   const [isCart, setCart] = useState(false);
 
   const countProduct = useSelector(
     (state) => state.cart.items.filter((product) => product.id === item.id).length,
   );
+
+  const countOrder =
+    item?.products && item?.products.filter((product) => product.id === item.id).length;
 
   const dispatch = useDispatch();
 
@@ -80,18 +83,10 @@ export const ProductCard = ({ item, type = 'default', className = '', props }) =
           <IconButton type='icon-btn' size='s' Icon={FavoritesIcon} accent='grayscale' />
         </div>
         {type === 'ordered' && (
-          <div
-            className={classNames(
-              styles.cart__icon,
-              isBtnHovering ? styles.btn__hover : '',
-              isFavorite ? styles.btn__favorite : '',
-            )}
-            ref={btnRef}
-            onClick={clickFavoriteBtn}
-          >
+          <div className={classNames(styles.cart__icon)}>
             <CartIcon />
             <Typography as='h3' variant='text-bold' size='m'>
-              {item.countOrder}
+              {countOrder}
             </Typography>
           </div>
         )}
