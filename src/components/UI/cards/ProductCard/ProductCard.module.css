@@ -18,6 +18,7 @@
   position: absolute;
   right: 8px;
   top: 8px;
+  z-index: 10;
 }
 
 .cart__icon {
@@ -28,6 +29,7 @@
   align-items: center;
   gap: 4px;
   padding: 4px;
+  z-index: 1;
 }
 
 .btn__favorite {
@@ -83,6 +85,7 @@
   text-overflow: clip;
   -webkit-line-clamp: 2;
   display: -webkit-box;
+  min-height: 3em;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
