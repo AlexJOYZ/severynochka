@@ -11,7 +11,7 @@ export const MainPage = () => {
     titleBtn: 'акции',
     items: [
       {
-        title: 'Молоко ПРОСТОКВАШИНО паст. питьевое цельное отборное',
+        title: 'Молоко ',
         id: 1,
         imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
         isFavorite: true,
