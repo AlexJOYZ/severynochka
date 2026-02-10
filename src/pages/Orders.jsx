@@ -1,14 +1,21 @@
+import { useState } from 'react';
 import { useQuery } from '../hooks';
 
 import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
 import { Typography } from '../components/UI/Typography/Typography';
 import { Spinner } from '../components/UI/spinner/Spinner';
 import { Order } from '../components/Layout/Order/Order';
+import { Button } from '../components/UI/buttons/Button/Button';
 
 import '../styles/pages/Orders.css';
 
+const limitPageWeight = 4;
+
 export const Orders = () => {
   // const { isLoading, data } = useQuery('', () => console.log(1));
+
+  const [limitPageOrders, setLimitPageOrders] = useState(1);
+  const limitOrdersCount = limitPageOrders * limitPageWeight;
 
   const orders = [
     {
@@ -146,20 +153,421 @@ export const Orders = () => {
       bonus: 0,
       usedBonus: 0,
       statusPayment: 'Оплата на сайте',
+      status: 'Собран',
+    },
+    {
+      id: 3,
+      location: 'г. Горно-Алтайск',
+      street: 'sadas',
+      homeNumber: '12',
+      apartmentNumber: '11',
+      additionally: '',
+      dateOfDelivery: '2026-01-30T11:00:55.458Z',
+      timeOfDelivery: '8:00 - 14:00',
+      userId: 4,
+      userCardDetails: null,
+      products: [
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+      ],
+      totalPrice: 3025,
+      bonus: 0,
+      usedBonus: 0,
+      statusPayment: 'Оплата на сайте',
+      status: 'Возврат',
+    },
+    {
+      id: 4,
+      location: 'г. Горно-Алтайск',
+      street: 'sadas',
+      homeNumber: '12',
+      apartmentNumber: '11',
+      additionally: '',
+      dateOfDelivery: '2026-01-30T11:00:55.458Z',
+      timeOfDelivery: '8:00 - 14:00',
+      userId: 4,
+      userCardDetails: null,
+      products: [
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+      ],
+      totalPrice: 3025,
+      bonus: 0,
+      usedBonus: 0,
+      statusPayment: 'Оплата на сайте',
+      status: 'Получен',
+    },
+    {
+      id: 5,
+      location: 'г. Горно-Алтайск',
+      street: 'sadas',
+      homeNumber: '12',
+      apartmentNumber: '11',
+      additionally: '',
+      dateOfDelivery: '2026-01-30T11:00:55.458Z',
+      timeOfDelivery: '8:00 - 14:00',
+      userId: 4,
+      userCardDetails: null,
+      products: [
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+      ],
+      totalPrice: 3025,
+      bonus: 0,
+      usedBonus: 0,
+      statusPayment: 'Оплата на сайте',
+      status: 'Не доставили',
+    },
+    {
+      id: 1,
+      location: 'г. Горно-Алтайск',
+      street: 'sadas',
+      homeNumber: '12',
+      apartmentNumber: '11',
+      additionally: '',
+      dateOfDelivery: '2026-01-30T11:00:55.458Z',
+      timeOfDelivery: '8:00 - 14:00',
+      userId: 4,
+      userCardDetails: null,
+      products: [
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'GOFO',
+          id: 3,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 3.8,
+          price: 700,
+          discount: 40,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+      ],
+      totalPrice: 3025,
+      bonus: 0,
+      usedBonus: 0,
+      statusPayment: 'Оплата на сайте',
       status: 'Новый',
     },
+    {
+      id: 2,
+      location: 'г. Горно-Алтайск',
+      street: 'sadas',
+      homeNumber: '12',
+      apartmentNumber: '11',
+      additionally: '',
+      dateOfDelivery: '2026-01-30T11:00:55.458Z',
+      timeOfDelivery: '8:00 - 14:00',
+      userId: 4,
+      userCardDetails: null,
+      products: [
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+      ],
+      totalPrice: 3025,
+      bonus: 0,
+      usedBonus: 0,
+      statusPayment: 'Оплата на сайте',
+      status: 'Собран',
+    },
+    {
+      id: 3,
+      location: 'г. Горно-Алтайск',
+      street: 'sadas',
+      homeNumber: '12',
+      apartmentNumber: '11',
+      additionally: '',
+      dateOfDelivery: '2026-01-30T11:00:55.458Z',
+      timeOfDelivery: '8:00 - 14:00',
+      userId: 4,
+      userCardDetails: null,
+      products: [
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 2,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+      ],
+      totalPrice: 3025,
+      bonus: 0,
+      usedBonus: 0,
+      statusPayment: 'Оплата на сайте',
+      status: 'Возврат',
+    },
   ];
-
   return (
-    <MainContainer routes={['Главная', 'Заказы']}>
+    <MainContainer className='orders__container' routes={['Главная', 'Заказы']}>
       <Typography as='h1' variant='header' size='xl' className='orders__header'>
         Заказы
       </Typography>
       <div className='orders__main'>
-        {orders.map((order, id) => (
-          <Order key={id} order={order} />
-        ))}
+        {orders.map((order, i) => i < limitOrdersCount && <Order key={i} order={order} />)}
       </div>
+      {limitOrdersCount <= orders.length && (
+        <div className='orders__button__more'>
+          <Button
+            onClick={() => setLimitPageOrders((value) => value + 1)}
+            accent='grayscale'
+            size='l'
+          >
+            Показать ещё
+          </Button>
+        </div>
+      )}
       {/* {isLoading && <Spinner />} */}
     </MainContainer>
   );
