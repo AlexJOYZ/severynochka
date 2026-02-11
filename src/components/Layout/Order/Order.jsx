@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 
 import { useHover } from '../../../hooks';
 
-import { addCartAction } from '../../../store/reducers/cartReducer';
 import { classNames, findUniqueItemsById, formateDate } from '../../../utils/helpers';
 import { ORDER_STATUS } from '../../../const';
 
@@ -18,6 +17,7 @@ import { Grid } from '../Grid';
 import { CalendarChangeTimeOfDelivery } from '../../UI/calendarChangeTimeOfDelivery/calendarChangeTimeOfDelivery';
 
 import styles from './Order.module.css';
+import { addManyCartAction } from '../../../store/reducers/cartReducer';
 
 const limitOrderCount = 4;
 
@@ -104,7 +104,7 @@ export const Order = ({ order }) => {
             {!isInProgress && (
               <Button
                 onClick={() => {
-                  dispatch(addCartAction(order.products));
+                  dispatch(addManyCartAction(order.products));
                 }}
                 className={classNames(styles.button__container)}
                 accent='primary'
