@@ -9,7 +9,14 @@ import { Tooltip } from '../tooltip/Tooltip';
 
 import styles from './Tabs.module.css';
 
-export const Tabs = ({ tabs, setValue = null, label = null, className = null, ...props }) => {
+export const Tabs = ({
+  tabs,
+  size = 's',
+  setValue = null,
+  label = null,
+  className = null,
+  ...props
+}) => {
   const [active, setActive] = useState(0);
   const [hover, setHover] = useState(null);
   const ref = useClickOutside(() => setHover(null));
@@ -48,7 +55,7 @@ export const Tabs = ({ tabs, setValue = null, label = null, className = null, ..
               data-index={i}
               onClick={openTab}
               accent={`${i === active ? 'secondary' : 'grayscale'}`}
-              size='s'
+              size={size}
             >
               {tab.title}
             </Button>

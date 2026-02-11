@@ -40,6 +40,33 @@ export const Orders = () => {
           discount: 20,
         },
         {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 4,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 5,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
+          title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
+          id: 6,
+          imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
+          isFavorite: false,
+          rating: 4.8,
+          price: 605,
+          discount: 20,
+        },
+        {
           title: 'GOFO',
           id: 3,
           imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
@@ -50,7 +77,7 @@ export const Orders = () => {
         },
         {
           title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
-          id: 2,
+          id: 6,
           imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
           isFavorite: false,
           rating: 4.8,
@@ -59,7 +86,7 @@ export const Orders = () => {
         },
         {
           title: 'Колбаса сырокопченая МЯСНАЯ ИСТОРИЯ Сальчичон',
-          id: 2,
+          id: 7,
           imgUrl: 'https://i.postimg.cc/HLpW4shS/image.jpg',
           isFavorite: false,
           rating: 4.8,
@@ -557,7 +584,7 @@ export const Orders = () => {
       <div className='orders__main'>
         {orders.map((order, i) => i < limitOrdersCount && <Order key={i} order={order} />)}
       </div>
-      {limitOrdersCount <= orders.length && (
+      {limitOrdersCount < orders.length && (
         <div className='orders__button__more'>
           <Button
             onClick={() => setLimitPageOrders((value) => value + 1)}

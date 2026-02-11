@@ -9,6 +9,7 @@
   align-items: center;
   margin-bottom: 24px;
   h3 {
+    text-transform: capitalize;
     width: 50%;
     user-select: none;
     cursor: pointer;

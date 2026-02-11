@@ -1,0 +1,45 @@
+.calendar__change__container {
+  background-color: var(--main-color-surface);
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: var(--shadow-default-m);
+  position: absolute;
+  z-index: 100;
+  margin-top: 10px;
+  right: -30%;
+}
+
+.calendar__change__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.btn__container {
+  width: 40px;
+
+  svg {
+    color: var(--main-color-onSurface);
+  }
+}
+
+.calendar__change__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 17px;
+  margin: 17px 0px;
+
+  button {
+    width: 100%;
+  }
+}
+
+.calendar__change__date{
+  text-align: center;
+}
+
+.calendar__change__primary{
+  margin-top: 17px;
+}
