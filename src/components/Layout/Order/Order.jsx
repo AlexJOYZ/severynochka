@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { useHover } from '../../../hooks';
 
+import { addCartAction } from '../../../store/reducers/cartReducer';
 import { classNames, findUniqueItemsById, formateDate } from '../../../utils/helpers';
 import { ORDER_STATUS } from '../../../const';
 
@@ -13,6 +15,7 @@ import { Notice } from '../../UI/notice/Notice';
 import { Typography } from '../../UI/Typography/Typography';
 import { EyeIcon } from '../../UI/icons/inputIcons/EyeIcon';
 import { Grid } from '../Grid';
+import { CalendarChangeTimeOfDelivery } from '../../UI/calendarChangeTimeOfDelivery/calendarChangeTimeOfDelivery';
 
 import styles from './Order.module.css';
 
@@ -23,16 +26,24 @@ export const Order = ({ order }) => {
   const date = new Date(order.dateOfDelivery);
   const isHovering = useHover(articleRef);
 
+  const dispatch = useDispatch();
+
+  const [showChangeCalendar, setShowChangeCalendar] = useState(false);
+  const [selectedDate, selectDate] = useState(date);
+
   const isInProgress =
     order.status === ORDER_STATUS.NEW.title ||
     order.status === ORDER_STATUS.PICKED.title ||
     order.status === ORDER_STATUS.DELIVERED.title ||
     order.status === ORDER_STATUS.CONFIRMED.title;
 
-  const [isLimited, setIsLimited] = useState(true);
-
   const uniqueProducts = findUniqueItemsById(order.products);
 
+  const [isLimited, setIsLimited] = useState(limitOrderCount < uniqueProducts.length);
+
+  const changeDateOfDelivery = (date) => {
+    console.log(date, order.id);
+  };
   return (
     <article ref={articleRef}>
       <div className={styles.order__header}>
@@ -69,30 +80,46 @@ export const Order = ({ order }) => {
           <Typography as='p' variant='text' size='l'>
             {order.totalPrice.toFixed(2)} ₽
           </Typography>
+          <div className={styles.order__header__button}>
+            {isInProgress && (
+              <IconButton
+                onClick={() => setShowChangeCalendar(true)}
+                className={classNames(styles.button__container, styles.status__button)}
+                accent='secondary'
+                size='m'
+                Icon={CalendarIcon}
+              >
+                Когда доставить
+              </IconButton>
+            )}
+            {showChangeCalendar && (
+              <CalendarChangeTimeOfDelivery
+                setIsShow={setShowChangeCalendar}
+                selectDate={selectDate}
+                selectedDate={selectedDate}
+                changeDateOfDelivery={changeDateOfDelivery}
+              />
+            )}
 
-          {isInProgress && (
-            <IconButton
-              className={classNames(styles.button__container, styles.status__button)}
-              accent='secondary'
-              size='m'
-              Icon={CalendarIcon}
-            >
-              Когда доставить
-            </IconButton>
-          )}
-
-          {!isInProgress && (
-            <Button className={classNames(styles.button__container)} accent='primary' size='m'>
-              Заказать
-            </Button>
-          )}
+            {!isInProgress && (
+              <Button
+                onClick={() => {
+                  dispatch(addCartAction(order.products));
+                }}
+                className={classNames(styles.button__container)}
+                accent='primary'
+                size='m'
+              >
+                Заказать
+              </Button>
+            )}
+          </div>
         </div>
       </div>
       <Grid>
         {uniqueProducts.map(
           (product, i) =>
-            i < limitOrderCount &&
-            isLimited && (
+            ((isLimited && i < limitOrderCount) || !isLimited) && (
               <ProductCard
                 className={styles.order__item}
                 key={product.id}
@@ -102,7 +129,7 @@ export const Order = ({ order }) => {
             ),
         )}
       </Grid>
-      { limitOrderCount < uniqueProducts.length && isHovering && (
+      {isLimited && isHovering && (
         <div className={classNames(styles.order__button, styles.button__container)}>
           <IconButton onClick={() => setIsLimited(false)} Icon={EyeIcon} size='m'>
             Просмотреть заказ

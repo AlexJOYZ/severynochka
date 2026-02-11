@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.order__header__button{
+  position: relative;
+}
+
 .status__button > svg {
   color: var(--main-color-surface);
 }
