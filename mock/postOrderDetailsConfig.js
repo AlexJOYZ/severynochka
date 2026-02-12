@@ -22,16 +22,13 @@ export const postOrderDetailsConfig = {
           }
         });
       }
-
-      DATABASE.orders.push({
-        id: DATABASE.orders.length + 1,
-        ...body,
-        status: 'Новый',
-      });
+      const order = { id: DATABASE.orders.length + 1, ...body, status: 'Новый' };
+      DATABASE.orders.push(order);
       setStatusCode(201);
       return {
         success: true,
         message: 'Заказ успешно создан',
+        order: order,
         user: DATABASE.users.find((profile) => profile.id === body.userId),
       };
     },

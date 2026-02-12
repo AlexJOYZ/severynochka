@@ -96,6 +96,7 @@ export const Cart = () => {
       });
       dispatch(addUserAction(response.data.user));
       dispatch(clearCartAction());
+      dispatch(addOrder)
     },
     onFailure: (error) => {
       console.log(error?.message);

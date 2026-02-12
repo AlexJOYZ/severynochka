@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { useHover } from '../../../hooks';
 
+import { addManyCartAction } from '../../../store/reducers/cartReducer';
 import { classNames, findUniqueItemsById, formateDate } from '../../../utils/helpers';
-import { ORDER_STATUS } from '../../../const';
+import { ORDER_STATUS, ROUTES } from '../../../const';
 
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { Button } from '../../UI/buttons/Button/Button';
@@ -17,7 +19,6 @@ import { Grid } from '../Grid';
 import { CalendarChangeTimeOfDelivery } from '../../UI/calendarChangeTimeOfDelivery/calendarChangeTimeOfDelivery';
 
 import styles from './Order.module.css';
-import { addManyCartAction } from '../../../store/reducers/cartReducer';
 
 const limitOrderCount = 4;
 
@@ -27,6 +28,7 @@ export const Order = ({ order }) => {
   const isHovering = useHover(articleRef);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [showChangeCalendar, setShowChangeCalendar] = useState(false);
   const [selectedDate, selectDate] = useState(date);
@@ -105,6 +107,7 @@ export const Order = ({ order }) => {
               <Button
                 onClick={() => {
                   dispatch(addManyCartAction(order.products));
+                  navigate(ROUTES.CART);
                 }}
                 className={classNames(styles.button__container)}
                 accent='primary'
