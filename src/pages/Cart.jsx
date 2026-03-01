@@ -6,6 +6,7 @@ import { useForm } from '../hooks/useForm';
 import { useMutation } from '../hooks';
 
 import { addUserAction } from '../store/reducers/accountReducer';
+import { addOrderAction } from '../store/reducers/ordersReducer';
 import { clearCartAction } from '../store/reducers/cartReducer';
 import { OrderService } from '../API/entities/order';
 import { REGIONS, ROUTES } from '../const';
@@ -96,7 +97,7 @@ export const Cart = () => {
       });
       dispatch(addUserAction(response.data.user));
       dispatch(clearCartAction());
-      dispatch(addOrder)
+      dispatch(addOrderAction(response.data.order));
     },
     onFailure: (error) => {
       console.log(error?.message);
