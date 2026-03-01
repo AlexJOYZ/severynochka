@@ -28,7 +28,7 @@ export const postOrderDetailsConfig = {
       return {
         success: true,
         message: 'Заказ успешно создан',
-        order: order,
+        order,
         user: DATABASE.users.find((profile) => profile.id === body.userId),
       };
     },
