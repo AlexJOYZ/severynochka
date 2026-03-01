@@ -19,21 +19,27 @@ import {
   Orders,
   Vacancies,
   Product,
-  Category
+  Category,
 } from './pages';
+
+import { ROUTES } from './const';
+
+import { getOrders } from './store/asyncActions/order';
 
 import { Layout } from './components/Layout/Layout';
 import { Spinner } from './components/UI/spinner/Spinner';
-import { ROUTES } from './const';
 
 export const App = () => {
   const dispatch = useDispatch();
 
-  const isAuth = useSelector(state=>state.account.isAuth)
+  const { isLoading: authIsLoading, error } = useQuery('checkAuth', () => dispatch(checkAuth()));
+  const { isAuth, user } = useSelector((state) => state.account);
 
-  const { isLoading, error } = useQuery('checkAuth', () => dispatch(checkAuth()));
+  const { isLoading: ordersIsLoading } = useQuery([authIsLoading], () =>
+    dispatch(getOrders(user.id)),
+  );
 
-  if (isLoading) return <Spinner />;
+  if (authIsLoading || ordersIsLoading) return <Spinner />;
 
   return (
     <BrowserRouter>
@@ -49,7 +55,7 @@ export const App = () => {
           <Route path={ROUTES.VACANCIES} element={<Vacancies />} />
           <Route path={ROUTES.ORDERS} element={<Orders />} />
           {isAuth && <Route path={ROUTES.CART} element={<Cart />} />}
-          
+
           <Route path='*' element={<ErrorPage />} />
         </Route>
       </Routes>
