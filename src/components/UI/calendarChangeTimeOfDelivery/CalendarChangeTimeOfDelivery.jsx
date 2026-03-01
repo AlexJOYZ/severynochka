@@ -61,7 +61,12 @@ export const CalendarChangeTimeOfDelivery = ({
         {date.dayNumber} {date.month} {date.year} {timeOfDelivery.title}
       </Typography>
       <Button
-        onClick={() => changeDateOfDelivery({ selectedDate, dateOfDelivery: timeOfDelivery.title })}
+        onClick={() =>
+          changeDateOfDelivery({
+            dateOfDelivery: selectedDate,
+            timeOfDelivery: timeOfDelivery.title,
+          })
+        }
         className={styles.calendar__change__primary}
         size='m'
         accent='primary'

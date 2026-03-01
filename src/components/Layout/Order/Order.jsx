@@ -7,6 +7,7 @@ import { useHover } from '../../../hooks';
 import { addManyCartAction } from '../../../store/reducers/cartReducer';
 import { classNames, findUniqueItemsById, formateDate } from '../../../utils/helpers';
 import { ORDER_STATUS, ROUTES } from '../../../const';
+import { OrderService } from '../../../API/entities/order';
 
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { Button } from '../../UI/buttons/Button/Button';
@@ -17,6 +18,7 @@ import { Typography } from '../../UI/Typography/Typography';
 import { EyeIcon } from '../../UI/icons/inputIcons/EyeIcon';
 import { Grid } from '../Grid';
 import { CalendarChangeTimeOfDelivery } from '../../UI/calendarChangeTimeOfDelivery/calendarChangeTimeOfDelivery';
+import { ModalStatusMessage } from '../../UI/modals/modalStatusMessage/ModalStatusMessage';
 
 import styles from './Order.module.css';
 
@@ -42,9 +44,27 @@ export const Order = ({ order }) => {
   const uniqueProducts = findUniqueItemsById(order.products);
 
   const [isLimited, setIsLimited] = useState(limitOrderCount < uniqueProducts.length);
+  const [modalData, setModalData] = useState(null);
+  const [isModal, setIsModal] = useState(false);
 
   const changeDateOfDelivery = (date) => {
-    console.log(date, order.id);
+    const datePrev = new Date(order.dateOfDelivery);
+    console.log(date, order.userId);
+    console.log('@order.dateOfDelivery',order.timeOfDelivery);
+    console.log('@date.timeOfDelivery', date.timeOfDelivery);
+    if (
+      datePrev === date.dateOfDelivery ||
+      (datePrev === date.dateOfDelivery && order.timeOfDelivery === date.timeOfDelivery)
+    ) {
+      setIsModal(true);
+      setModalData({
+        title: 'Дата и время доставки не были изменены!',
+        subTitle: 'Выбирите отличную дату и время доставки от начальной',
+        type: 'failure',
+      });
+      return;
+    }
+    OrderService.changeDeliveryTimeAndDateOrder({ ...order, ...date });
   };
   return (
     <article ref={articleRef}>
@@ -138,6 +158,14 @@ export const Order = ({ order }) => {
             Просмотреть заказ
           </IconButton>
         </div>
+      )}
+      {isModal && (
+        <ModalStatusMessage
+          setIsModal={setIsModal}
+          title={modalData?.title}
+          subTitle={modalData?.subTitle}
+          type={modalData?.type}
+        />
       )}
     </article>
   );
