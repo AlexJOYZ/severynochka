@@ -7,6 +7,8 @@ import { postSignUpConfig } from './postSignUpConfig';
 import { getLogoutConfig } from './getLogoutConfig';
 import { patchResetPassword } from './patchResetPassword';
 import { postOrderDetailsConfig } from './postOrderDetailsConfig';
+import { getOrderDetailsByUserId } from './getOrderDetailsByUserId';
+import { patchOrderDeliveryTimeConfig } from './patchOrderDeliveryTimeConfig';
 
 export const authConfigs = [
   getDatabaseConfig,
@@ -18,5 +20,6 @@ export const authConfigs = [
   getLogoutConfig,
   patchResetPassword,
   postOrderDetailsConfig,
-  // getConfirmPhoneCode,
+  getOrderDetailsByUserId,
+  patchOrderDeliveryTimeConfig,
 ];
