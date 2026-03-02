@@ -37,7 +37,7 @@ export const Cart = () => {
   const [isUsedBonus, setIsUsedBonus] = useState(user.cardBalance !== 0);
 
   const times = [
-    { title: '8:00 - 14:00' },
+    { title: '11:00 - 14:00' },
     { title: '14:00 - 18:00' },
     { title: '18:00 - 20:00', disabled: true, message: 'На это время доставить не можем' },
     { title: '20:00 - 22:00' },
