@@ -8,7 +8,7 @@
   .price__discount__text {
     display: none;
   }
-  .total__price__without__discount{
+  .total__price__without__discount {
     display: none;
   }
 }
@@ -16,6 +16,7 @@
 .card__table {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
   width: 100%;
   position: relative;
 }
@@ -64,7 +65,7 @@
   color: var(--grayScale-color-hardest);
 }
 
-.notice{
+.notice {
   height: fit-content;
 }
 
@@ -77,7 +78,6 @@
   padding: 8px;
 }
 
-.total__price__without__discount{
+.total__price__without__discount {
   text-decoration: line-through;
 }
-
