@@ -15,9 +15,10 @@ export const Tabs = ({
   setValue = null,
   label = null,
   className = null,
+  defaultActiveIndex = 0,
   ...props
 }) => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(defaultActiveIndex);
   const [hover, setHover] = useState(null);
   const ref = useClickOutside(() => setHover(null));
 
