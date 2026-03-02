@@ -32,14 +32,15 @@ import { Spinner } from './components/UI/spinner/Spinner';
 export const App = () => {
   const dispatch = useDispatch();
 
-  const { isLoading: authIsLoading, error } = useQuery('checkAuth', () => dispatch(checkAuth()));
+  const { isLoading: authIsLoading, error } = useQuery('checkAuth', () => dispatch(checkAuth()), {
+    onSuccess: (response) => {
+      console.log(response.user.id);
+      dispatch(getOrders(response.user.id));
+    },
+  });
   const { isAuth, user } = useSelector((state) => state.account);
 
-  const { isLoading: ordersIsLoading } = useQuery([authIsLoading], () =>
-    dispatch(getOrders(user.id)),
-  );
-
-  if (authIsLoading || ordersIsLoading) return <Spinner />;
+  if (authIsLoading) return <Spinner />;
 
   return (
     <BrowserRouter>
