@@ -65,19 +65,19 @@ export const Header = () => {
         </div>
         <div className='header__right'>
           <NavLink
-            className={({ isActive }) => isActive && 'header__link__current'}
+            className={({ isActive }) => (isActive ? 'header__link__current' : '')}
             to={ROUTES.FAVORITES}
           >
             <MenuButton Icon={FavoritesIcon}>Избранное</MenuButton>
           </NavLink>
           <NavLink
-            className={({ isActive }) => isActive && 'header__link__current'}
+            className={({ isActive }) => (isActive ? 'header__link__current' : '')}
             to={ROUTES.ORDERS}
           >
             <MenuButton Icon={OrderIcon}>Заказы</MenuButton>
           </NavLink>
           <NavLink
-            className={({ isActive }) => isActive && 'header__link__current'}
+            className={({ isActive }) => (isActive ? 'header__link__current' : '')}
             to={ROUTES.CART}
           >
             <MenuButton type='cart' Icon={CartIcon}>
