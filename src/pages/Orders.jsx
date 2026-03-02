@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { MainContainer } from '../components/Layout/MainContainer/MainContainer';
 import { Typography } from '../components/UI/Typography/Typography';
@@ -11,7 +11,6 @@ import '../styles/pages/Orders.css';
 const limitPageWeight = 4;
 
 export const Orders = () => {
-  const dispatch = useDispatch();
 
   const orders = useSelector((state) => state.orders.items);
 

@@ -8,10 +8,10 @@ import { IconButton } from '../buttons/IconButton/IconButton';
 import { Calendar } from '../calendar/Calendar';
 import { CloseIcon } from '../icons/header/CloseIcon';
 import { Tabs } from '../tabs/Tabs';
+import { Button } from '../buttons/Button/Button';
 import { Typography } from '../Typography/Typography';
 
 import styles from './CalendarChangeTimeOfDelivery.module.css';
-import { Button } from '../buttons/Button/Button';
 
 const TIMES_TABS = [
   { title: '11:00', id: 1 },
@@ -22,6 +22,7 @@ const TIMES_TABS = [
 
 export const CalendarChangeTimeOfDelivery = ({
   selectDate,
+  defaultTime = TIMES_TABS[0].title,
   selectedDate,
   setIsShow,
   locale = 'default',
@@ -32,7 +33,9 @@ export const CalendarChangeTimeOfDelivery = ({
   const date = createDate({ date: dateRaw });
 
   const ref = useClickOutside(closeCalendar);
-  const [timeOfDelivery, setTimeOfDelivery] = useState(TIMES_TABS[0]);
+  const [timeOfDelivery, setTimeOfDelivery] = useState(
+    TIMES_TABS.find((tab) => tab.title === defaultTime),
+  );
 
   return (
     <div className={styles.calendar__change__container} ref={ref}>
@@ -52,6 +55,7 @@ export const CalendarChangeTimeOfDelivery = ({
       </div>
       <Calendar locale={locale} selectedDate={selectedDate} selectDate={selectDate} />
       <Tabs
+        defaultActiveIndex={timeOfDelivery.id - 1}
         size='m'
         className={styles.calendar__change__tabs}
         setValue={setTimeOfDelivery}

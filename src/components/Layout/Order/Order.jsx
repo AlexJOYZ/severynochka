@@ -2,12 +2,18 @@ import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { useHover } from '../../../hooks';
+import { useHover, useMutation } from '../../../hooks';
 
 import { addManyCartAction } from '../../../store/reducers/cartReducer';
-import { classNames, findUniqueItemsById, formateDate } from '../../../utils/helpers';
+import {
+  checkDateIsEqual,
+  classNames,
+  findUniqueItemsById,
+  formateDate,
+} from '../../../utils/helpers';
 import { ORDER_STATUS, ROUTES } from '../../../const';
 import { OrderService } from '../../../API/entities/order';
+import { changeOrderAction } from '../../../store/reducers/ordersReducer';
 
 import { IconButton } from '../../UI/buttons/IconButton/IconButton';
 import { Button } from '../../UI/buttons/Button/Button';
@@ -19,6 +25,7 @@ import { EyeIcon } from '../../UI/icons/inputIcons/EyeIcon';
 import { Grid } from '../Grid';
 import { CalendarChangeTimeOfDelivery } from '../../UI/calendarChangeTimeOfDelivery/calendarChangeTimeOfDelivery';
 import { ModalStatusMessage } from '../../UI/modals/modalStatusMessage/ModalStatusMessage';
+import { Spinner } from '../../UI/spinner/Spinner';
 
 import styles from './Order.module.css';
 
@@ -47,14 +54,36 @@ export const Order = ({ order }) => {
   const [modalData, setModalData] = useState(null);
   const [isModal, setIsModal] = useState(false);
 
+  const defaultDeliveryTime = order.timeOfDelivery.slice(0, 5);
+
+  const { mutate: orderChangeMutation, isLoading } = useMutation(
+    'changeOrder',
+    (changedOrder) => OrderService.changeDeliveryTimeAndDateOrder(changedOrder),
+    {
+      onSuccess: (response) => {
+        dispatch(changeOrderAction(response.data.order));
+        setIsModal(true);
+        setModalData({
+          title: 'Успешно!',
+          subTitle: 'Дата и время доставки  были изменены!',
+          type: 'success',
+        });
+      },
+      onFailure: (e) => {
+        setModalData({
+          title: 'Дата и время доставки не были изменены!',
+          subTitle: e.data.message,
+          type: 'failure',
+        });
+      },
+    },
+  );
+
   const changeDateOfDelivery = (date) => {
     const datePrev = new Date(order.dateOfDelivery);
-    console.log(date, order.userId);
-    console.log('@order.dateOfDelivery',order.timeOfDelivery);
-    console.log('@date.timeOfDelivery', date.timeOfDelivery);
     if (
-      datePrev === date.dateOfDelivery ||
-      (datePrev === date.dateOfDelivery && order.timeOfDelivery === date.timeOfDelivery)
+      checkDateIsEqual(datePrev, date.dateOfDelivery) &&
+      order.timeOfDelivery === date.timeOfDelivery
     ) {
       setIsModal(true);
       setModalData({
@@ -64,8 +93,10 @@ export const Order = ({ order }) => {
       });
       return;
     }
-    OrderService.changeDeliveryTimeAndDateOrder({ ...order, ...date });
+    console.log(1);
+    orderChangeMutation({ ...order, ...date });
   };
+
   return (
     <article ref={articleRef}>
       <div className={styles.order__header}>
@@ -120,6 +151,7 @@ export const Order = ({ order }) => {
                 selectDate={selectDate}
                 selectedDate={selectedDate}
                 changeDateOfDelivery={changeDateOfDelivery}
+                defaultTime={defaultDeliveryTime}
               />
             )}
 
@@ -167,6 +199,7 @@ export const Order = ({ order }) => {
           type={modalData?.type}
         />
       )}
+      {isLoading && <Spinner />}
     </article>
   );
 };
