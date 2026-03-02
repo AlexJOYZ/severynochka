@@ -12,19 +12,25 @@ export const patchOrderDeliveryTimeConfig = {
         setStatusCode(404);
         return { success: false, message: 'Пользователь не найден' };
       }
-      const order = DATABASE.orders.forEach((order, i) => {
+      const order = DATABASE.orders.find((order) => order.id === body.id);
+      if (!order) {
+        setStatusCode(404);
+        return { success: false, message: 'Заказ не найден' };
+      }
+      DATABASE.orders.forEach((order, i) => {
         if (order.id === body.id) {
-          return (DATABASE.orders[i] = {
+          DATABASE.orders[i] = {
             ...order,
             dateOfDelivery: body.dateOfDelivery,
             timeOfDelivery: body.timeOfDelivery,
-          });
+          };
         }
       });
+      const changedOrder = DATABASE.orders.find((order) => order.id === body.id);
       return {
         success: true,
         message: 'Дата и время доставки заказа были успешно изменены',
-        order,
+        order: changedOrder,
       };
     },
   },
