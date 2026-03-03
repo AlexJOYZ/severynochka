@@ -11,7 +11,7 @@ export const FailureAnimationIcon = ({ size = 80 }) => {
         </filter>
       </defs>
 
-      <circle cx='40' cy='40' r='18' fill='none' stroke='#ef4444' stroke-width='3' opacity='0.4'>
+      <circle cx='40' cy='40' r='18' fill='none' stroke='#ef4444' strokeWidth='3' opacity='0.4'>
         <animate attributeName='r' from='18' to='34' dur='0.6s' begin='0.2s' fill='freeze' />
         <animate attributeName='opacity' from='0.4' to='0' dur='0.6s' begin='0.2s' fill='freeze' />
       </circle>
@@ -41,10 +41,10 @@ export const FailureAnimationIcon = ({ size = 80 }) => {
           d='M30 30 L50 50'
           fill='none'
           stroke='#ffffff'
-          stroke-width='4'
-          stroke-linecap='round'
-          stroke-dasharray='30'
-          stroke-dashoffset='30'
+          strokeWidth='4'
+          strokeLinecap='round'
+          strokeDasharray='30'
+          strokeDashoffset='30'
         >
           <animate
             attributeName='stroke-dashoffset'
@@ -60,10 +60,10 @@ export const FailureAnimationIcon = ({ size = 80 }) => {
           d='M50 30 L30 50'
           fill='none'
           stroke='#ffffff'
-          stroke-width='4'
-          stroke-linecap='round'
-          stroke-dasharray='30'
-          stroke-dashoffset='30'
+          strokeWidth='4'
+          strokeLinecap='round'
+          strokeDasharray='30'
+          strokeDashoffset='30'
         >
           <animate
             attributeName='stroke-dashoffset'
