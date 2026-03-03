@@ -1,17 +1,23 @@
 .card {
-  /* width: 25%; */
   background-color: var(--main-color-surface);
   border-radius: 4px;
   box-shadow: var(--shadow-default-xs);
-  /* align-items: stretch; */
 }
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .card__active {
   box-shadow: var(--shadow-primary-m);
 }
+
 .card__img {
   position: relative;
   display: flex;
   justify-content: center;
+
   img {
     border-radius: 4px 4px 0px 0px;
     object-fit: cover;

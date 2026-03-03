@@ -18,7 +18,7 @@ import { Typography } from '../../Typography/Typography';
 import cardStyles from '../card.module.css';
 import cl from './ProductCardTable.module.css';
 
-export const ProductCardTable = ({ item }) => {
+export const ProductCardTable = ({ item, disabled = false }) => {
   const [isSelected, setIsSelected] = useState(item.isSelectedAll);
   const itemRef = useRef();
 
@@ -42,7 +42,7 @@ export const ProductCardTable = ({ item }) => {
   useEffect(() => {
     if (item.isSelectedAll) {
       setIsSelected(true);
-      if (item.selectedProductsIds.includes(item.id)) return
+      if (item.selectedProductsIds.includes(item.id)) return;
       item.setSelectedProductsIds((mas) => [...mas, item.id]);
     }
   }, [item.isSelectedAll]);
@@ -54,6 +54,7 @@ export const ProductCardTable = ({ item }) => {
         cardStyles.card,
         cl.card__table,
         isItemHovering ? cardStyles.card__active : '',
+        disabled ? cardStyles.disabled : '',
         item.discount ? '' : cl.card__prod,
       )}
     >
@@ -66,8 +67,8 @@ export const ProductCardTable = ({ item }) => {
             setValue={(value) => {
               if (!value) {
                 item.setIsSelectedAll(false);
-                item.setSelectedProductsIds((mas)=>[...mas.filter((id)=>id !==item.id)]);
-              } else item.setSelectedProductsIds((mas)=>[...mas, item.id]);
+                item.setSelectedProductsIds((mas) => [...mas.filter((id) => id !== item.id)]);
+              } else item.setSelectedProductsIds((mas) => [...mas, item.id]);
               setIsSelected(value);
             }}
             size='l'
@@ -118,27 +119,44 @@ export const ProductCardTable = ({ item }) => {
         </div>
       </div>
       <div className={cl.card__right}>
-        <div className={classNames(cl.card__table__button)}>
-          <IconButton
-            position='both'
-            IconLeft={MinusIconBtn}
-            leftClick={removeProductInCart}
-            rightClick={addProductInCart}
-            IconRight={PlusIconBtn}
-            size='m'
-            decoration='default'
-            accent='secondary'
-          >
-            {countProduct}
-          </IconButton>
-        </div>
+        {!disabled && (
+          <div className={classNames(cl.card__table__button)}>
+            <IconButton
+              position='both'
+              IconLeft={MinusIconBtn}
+              leftClick={removeProductInCart}
+              rightClick={addProductInCart}
+              IconRight={PlusIconBtn}
+              size='m'
+              decoration='default'
+              accent='secondary'
+            >
+              {countProduct}
+            </IconButton>
+          </div>
+        )}
+
         <div className={cl.card__table__total__price}>
-          <Typography as='p' variant='text-bold' size='m'>
-            {(countProduct * itemPriceWithDiscount).toFixed(2)} ₽
-          </Typography>
-          <Typography className={cl.total__price__without__discount} as='p' variant='text' size='s'>
-            {(countProduct * item.price).toFixed(2)} ₽
-          </Typography>
+          {!disabled && (
+            <>
+              <Typography as='p' variant='text-bold' size='m'>
+                {(countProduct * itemPriceWithDiscount).toFixed(2)} ₽
+              </Typography>
+              <Typography
+                className={cl.total__price__without__discount}
+                as='p'
+                variant='text'
+                size='s'
+              >
+                {(countProduct * item.price).toFixed(2)} ₽
+              </Typography>
+            </>
+          )}
+          {disabled && (
+            <Typography className={cl.cart__table__text__disabled} as='p' variant='text' size='s'>
+              Нет в наличии
+            </Typography>
+          )}
         </div>
       </div>
     </article>

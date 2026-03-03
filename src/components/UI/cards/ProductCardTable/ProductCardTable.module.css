@@ -2,12 +2,15 @@
   .notice {
     display: none;
   }
+
   .price__with__discount {
     display: none;
   }
+
   .price__discount__text {
     display: none;
   }
+
   .total__price__without__discount {
     display: none;
   }
@@ -19,6 +22,9 @@
   gap: 8px;
   width: 100%;
   position: relative;
+  &:disabled {
+    background-color: red;
+  }
 }
 
 .card__left {
@@ -80,4 +86,9 @@
 
 .total__price__without__discount {
   text-decoration: line-through;
+}
+
+.cart__table__text__disabled {
+  position: absolute;
+  right: 8px;
 }
