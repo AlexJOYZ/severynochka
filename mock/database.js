@@ -68,7 +68,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
@@ -168,7 +168,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
@@ -232,7 +232,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
@@ -296,7 +296,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
@@ -360,7 +360,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
@@ -424,7 +424,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
@@ -497,7 +497,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
@@ -561,7 +561,7 @@ export const DATABASE = {
       apartmentNumber: '11',
       additionally: '',
       dateOfDelivery: '2026-01-30T11:00:55.458Z',
-      timeOfDelivery: '8:00 - 14:00',
+      timeOfDelivery: '11:00 - 14:00',
       userId: 4,
       userCardDetails: null,
       products: [
