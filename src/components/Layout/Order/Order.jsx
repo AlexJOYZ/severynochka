@@ -81,6 +81,18 @@ export const Order = ({ order }) => {
 
   const changeDateOfDelivery = (date) => {
     const datePrev = new Date(order.dateOfDelivery);
+    const today = new Date();
+
+    if (date.dateOfDelivery < today) {
+      setIsModal(true);
+      setModalData({
+        title: 'Дата и время доставки не корректны',
+        subTitle: 'Указанная дата доставки уже прошла. Пожалуйста, выберите корректную дату.',
+        type: 'failure',
+      });
+      return;
+    }
+
     if (
       checkDateIsEqual(datePrev, date.dateOfDelivery) &&
       order.timeOfDelivery === date.timeOfDelivery
@@ -93,7 +105,6 @@ export const Order = ({ order }) => {
       });
       return;
     }
-    console.log(1);
     orderChangeMutation({ ...order, ...date });
   };
 
