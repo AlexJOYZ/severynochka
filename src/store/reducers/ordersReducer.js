@@ -17,7 +17,7 @@ export const orderReducer = (state = initialOrders, action) => {
         ...state,
         items: state.items.map((order) => {
           if (order.id === action.payload.id) return action.payload;
-          else order;
+          else return order;
         }),
       };
     default:

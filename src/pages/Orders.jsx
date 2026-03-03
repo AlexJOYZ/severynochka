@@ -11,7 +11,6 @@ import '../styles/pages/Orders.css';
 const limitPageWeight = 4;
 
 export const Orders = () => {
-
   const orders = useSelector((state) => state.orders.items);
 
   const [limitPageOrders, setLimitPageOrders] = useState(1);
