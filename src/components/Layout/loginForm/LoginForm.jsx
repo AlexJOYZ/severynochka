@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import './styles.css';
 
-import { useForm, useMutation } from '../../../hooks';
+import { useForm, useMutation, useQueryLazy } from '../../../hooks';
 
 import { AuthService } from '../../../API/entities/auth';
 import { loginFormValidateSchema } from '../../../utils';
@@ -18,6 +18,8 @@ import { Button } from '../../UI/buttons/Button/Button';
 import { ArrowFullIcon } from '../../UI/icons/inputIcons/ArrowFullIcon';
 import { LoginStepThreeForm } from './steps/LoginStepThreeForm';
 import { Spinner } from '../../UI/spinner/Spinner';
+import { OrderService } from '../../../API/entities/order';
+import { addManyOrdersAction } from '../../../store/reducers/ordersReducer';
 
 export const LoginForm = ({ setStage, setIsModal }) => {
   const [step, setStep] = useState(0);
@@ -35,12 +37,23 @@ export const LoginForm = ({ setStage, setIsModal }) => {
     onSubmit: async () => loginMutation(state.values),
   });
 
+  const { query, isLoading: orderIsLoading } = useQueryLazy(
+    'getOrders',
+    (userId) => OrderService.getOrdersByUserId(userId),
+    {
+      onSuccess: (response) => {
+        dispatch(addManyOrdersAction(response.data.orders));
+      },
+    },
+  );
+
   const { isLoading: loginIsLoading, mutate: loginMutation } = useMutation(
     'login',
     (body) => AuthService.login(body),
     {
       onSuccess: (response) => {
         dispatch(addUserAction(response.data.user));
+        query(response.data.user.id);
         setIsModal(false);
       },
       onFailure: (e) => functions.setFieldsErrors('phoneCode', e?.response?.data?.message),
@@ -72,8 +85,8 @@ export const LoginForm = ({ setStage, setIsModal }) => {
         )}
 
         {step !== 0 && (
-          <IconButton 
-          className='login__button__small'
+          <IconButton
+            className='login__button__small'
             accent='grayscale'
             decoration='no'
             Icon={ArrowFullIcon}
@@ -95,7 +108,7 @@ export const LoginForm = ({ setStage, setIsModal }) => {
           </Button>
         )}
       </div>
-      {loginIsLoading && <Spinner />}
+      {(loginIsLoading || orderIsLoading) && <Spinner />}
     </form>
   );
 };
