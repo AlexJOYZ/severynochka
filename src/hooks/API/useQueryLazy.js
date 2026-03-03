@@ -5,9 +5,9 @@ export const useQueryLazy = (deps, request, config = null) => {
   const [error, setError] = useState('');
 
   const query = useCallback(
-    () => {
+    (body) => {
       setIsLoading(true);
-      return request()
+      return request(body)
         .then((response) => {
           if (config?.onSuccess) config?.onSuccess(response);
           setIsLoading(false);

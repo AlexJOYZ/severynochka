@@ -2,11 +2,15 @@
 import './styles/App.css';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useQuery } from './hooks';
+import { useQuery, useQueryLazy } from './hooks';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { checkAuth } from './store/asyncActions/auth';
+import { addUserAction } from './store/reducers/accountReducer';
+import { UserService } from './API/entities/user';
+import { OrderService } from './API/entities/order';
+import { addManyOrdersAction } from './store/reducers/ordersReducer';
+import { ROUTES } from './const';
 
 import {
   About,
@@ -22,25 +26,34 @@ import {
   Category,
 } from './pages';
 
-import { ROUTES } from './const';
-
-import { getOrders } from './store/asyncActions/order';
-
 import { Layout } from './components/Layout/Layout';
 import { Spinner } from './components/UI/spinner/Spinner';
 
 export const App = () => {
   const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.account);
 
-  const { isLoading: authIsLoading, error } = useQuery('checkAuth', () => dispatch(checkAuth()), {
-    onSuccess: (response) => {
-      console.log(response.user.id);
-      dispatch(getOrders(response.user.id));
+  const { query, isLoading: orderIsLoading } = useQueryLazy(
+    'getOrders',
+    (userId) => OrderService.getOrdersByUserId(userId),
+    {
+      onSuccess: (response) => {
+        dispatch(addManyOrdersAction(response.data.orders));
+      },
     },
-  });
-  const { isAuth, user } = useSelector((state) => state.account);
+  );
+  const { isLoading: authIsLoading, error } = useQuery(
+    'checkAuth',
+    () => UserService.getProfile(),
+    {
+      onSuccess: (response) => {
+        dispatch(addUserAction(response.data));
+        query(response.data.id);
+      },
+    },
+  );
 
-  if (authIsLoading) return <Spinner />;
+  if (authIsLoading || orderIsLoading) return <Spinner />;
 
   return (
     <BrowserRouter>
