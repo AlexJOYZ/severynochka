@@ -1,0 +1,21 @@
+.favorites__header {
+  margin-bottom: 60px;
+}
+
+.favorites__content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.favorites__filter__panel {
+  width: min(33%, 272px);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.favorites__filter__panel__header {
+  background-color: var(--grayScale-color-lightest);
+  padding: 10px;
+  border-radius: 4px;
+}
