@@ -81,13 +81,14 @@ export const Order = ({ order }) => {
 
   const changeDateOfDelivery = (date) => {
     const datePrev = new Date(order.dateOfDelivery);
+    const dateNew = new Date(date.dateOfDelivery);
     const today = new Date();
 
-    if (date.dateOfDelivery < today) {
+    if (dateNew.getTime() < today.getTime()) {
       setIsModal(true);
       setModalData({
         title: 'Дата и время доставки не корректны',
-        subTitle: 'Указанная дата доставки уже прошла. Пожалуйста, выберите корректную дату.',
+        subTitle: 'Указанная дата доставки уже прошла.',
         type: 'failure',
       });
       return;
