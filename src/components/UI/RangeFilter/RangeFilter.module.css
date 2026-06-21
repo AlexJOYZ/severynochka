@@ -1,0 +1,28 @@
+.range__filter__header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 13px;
+}
+
+.range__filter__title{
+  color: #000;
+}
+
+.range__filter__clear__btn{
+  flex-basis: 25%;
+  flex-shrink: 0;
+  flex-grow: 0; 
+}
+
+.range__filter__inputs{
+  margin-bottom: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.range__filter__minus{
+  flex-shrink: 0;
+  flex-grow: 0; 
+}
