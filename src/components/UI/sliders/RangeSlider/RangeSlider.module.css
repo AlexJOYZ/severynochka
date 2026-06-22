@@ -1,48 +1,139 @@
 .slider__container {
   width: 100%;
+  height: 24px;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 12px; 
 }
 
 .input__wrapper {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  right: 0;
   height: 24px;
+}
+
+.control__wrapper {
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 24px;
+  pointer-events: none;
 }
 
 .input {
   position: absolute;
-  appearance: none;
-  opacity: 0;
-  z-index: 6;
-  height: 100%;
-}
-
-.control__wrapper {
+  top: 0;
+  left: 0;
   width: 100%;
   height: 24px;
-  display: flex;
-  position: relative;
-  align-items: center;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.input::-webkit-slider-runnable-track {
+  appearance: none;
+  background: transparent;
+  border: transparent;
+}
+
+.input::-moz-range-track {
+  appearance: none;
+  background: transparent;
+  border: transparent;
+}
+
+.input::-ms-track {
+  appearance: none;
+  background: transparent;
+  border: transparent;
+  color: transparent;
+}
+
+.input::-webkit-slider-thumb {
+  /* appearance: none; */
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 0;
+  cursor: grab;
+  background: transparent;
+  background-color: red;
+
+}
+
+.input::-moz-range-thumb {
+  appearance: none;
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 0;
+  cursor: grab;
+  background: transparent;
+
+}
+
+.input::-ms-thumb {
+  appearance: none;
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 0;
+  cursor: grab;
+  background: transparent;
+}
+
+.input:active::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+
+.input:active::-moz-range-thumb {
+  cursor: grabbing;
+}
+
+.input:active::-ms-thumb {
+  cursor: grabbing;
+}
+
+.rail {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--grayScale-color-lightest);
+  transform: translateY(-50%);
+}
+
+.rail__inner {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: var(--main-color-secondary);
+  border-radius: 2px;
 }
 
 .thumb {
   position: absolute;
-  height: 24px;
+  top: 50%;
   width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  transform: translateY(-50%);
   border-radius: 50%;
   background-color: var(--main-color-secondary);
   border: 1px solid var(--main-color-surface);
   box-shadow: var(--shadow-secondary-s);
-  z-index: 5;
-}
-
-.rail {
-  background-color: var(--grayScale-color-lightest);
-  width: 100%;
-  height: 4px;
-  border-radius: 2px;
-}
-.rail__inner {
-  background-color: var(--main-color-secondary);
-  position: relative;
-  height: 100%;
-  z-index: 4;
+  z-index: 2;
 }
