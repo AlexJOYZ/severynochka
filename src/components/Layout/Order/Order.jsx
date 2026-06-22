@@ -25,7 +25,7 @@ import { EyeIcon } from '../../UI/icons/inputIcons/EyeIcon';
 import { Grid } from '../Grid';
 import { ModalStatusMessage } from '../../UI/modals/modalStatusMessage/ModalStatusMessage';
 import { Spinner } from '../../UI/spinner/Spinner';
-import { CalendarChangeTimeOfDelivery } from '../../UI/calendarChangeTimeOfDelivery/calendarChangeTimeOfDelivery';
+import { CalendarChangeTimeOfDelivery } from '../../UI/calendarChangeTimeOfDelivery/CalendarChangeTimeOfDelivery';
 
 import styles from './Order.module.css';
 
