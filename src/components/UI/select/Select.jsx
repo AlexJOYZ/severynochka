@@ -4,7 +4,7 @@ import { Option } from './options/option/Option';
 import { ArrowIcon } from '../icons/inputIcons/ArrowIcon';
 import { Typography } from '../Typography/Typography';
 import { useClickOutside } from '../../../hooks/useClickOutside';
-import { SelectedOption } from './options/selectedOption/selectedOption';
+import { SelectedOption } from './options/selectedOption/SelectedOption';
 
 export const Select = ({
   options,

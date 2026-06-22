@@ -1,8 +1,7 @@
+import { CurrencyIcon } from '../../icons/card/CurrencyIcon';
+import { PlusIcon } from '../../icons/card/PlusIcon';
+
 import styles from './BannerCard.module.css';
-
-
-import { CurrencyIcon } from "../../icons/card/currencyIcon";
-import { PlusIcon } from "../../icons/card/PlusIcon";
 
 export const DesignPromotion = () => {
   return (

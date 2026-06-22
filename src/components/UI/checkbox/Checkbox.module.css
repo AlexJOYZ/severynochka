@@ -29,27 +29,27 @@
   svg {
     color: var(--main-color-onSecondary);
   }
-  &__disabled {
-    background-color: var(--grayScale-color-lightest);
-  }
+}
+.checkbox__disabled {
+  background-color: var(--grayScale-color-lightest);
 }
 .checkbox__active {
   background-color: var(--main-color-secondary);
   border-color: var(--main-color-onSecondary);
 }
-.xl{
+.xl {
   width: 32px;
   height: 32px;
 }
-.l{
+.l {
   width: 24px;
   height: 24px;
 }
-.m{
+.m {
   width: 20px;
   height: 20px;
 }
-.s{
+.s {
   width: 16px;
   height: 16px;
 }
