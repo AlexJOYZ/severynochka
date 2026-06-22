@@ -1,4 +1,4 @@
-export const CurrencyIcon = ({...props}) => {
+export const CurrencyIcon = (props) => {
   return (
     <svg {...props}  viewBox='0 0 31 33' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <path
