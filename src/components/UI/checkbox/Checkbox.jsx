@@ -19,14 +19,17 @@ export const Checkbox = ({
     <Typography
       className={classNames(style.checkbox__wrapper, className)}
       as='label'
-      size={`${size === 'm' ? 's' : 'xs'}`}
+      size={`${size !== 's' ? 's' : 'xs'}`}
       variant='text'
     >
       <input
         className={style.input__checkbox}
         type='checkbox'
         value={value}
-        onChange={() => setValue(!value)}
+        onChange={() => {
+          if (typeof value === 'boolean') return setValue(!value);
+          setValue();
+        }}
       />
       <span
         aria-hidden='true'
