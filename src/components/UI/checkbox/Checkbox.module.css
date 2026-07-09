@@ -26,6 +26,7 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  flex-shrink: 0;
   svg {
     color: var(--main-color-onSecondary);
   }

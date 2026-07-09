@@ -1,5 +1,5 @@
-export class ProductsService {
-  static getAll = async () => {
-    api.get();
-  };
+import { api } from '../instance';
+
+export class ProductService {
+  static getAllFiltered = (filters = '') => api.get('/products' + filters);
 }

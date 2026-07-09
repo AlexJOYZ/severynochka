@@ -1,5 +1,8 @@
 import { createElement } from 'react';
-import './Typography.css';
+
+import { classNames } from '../../../utils/helpers';
+
+import styles from './Typography.module.css';
 
 export const Typography = ({
   children,
@@ -13,7 +16,12 @@ export const Typography = ({
   return createElement(
     as,
     {
-      className: `typography ${variant} ${size} ${!!className ? className.toString() : ''}`,
+      className: classNames(
+        styles.typography,
+        styles[variant],
+        styles[size],
+        className ? className : '',
+      ),
       style: { color },
       ...props,
     },
