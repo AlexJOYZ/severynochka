@@ -18,7 +18,7 @@ export const Footer = () => {
           {FOOTER_LINKS.map((link) => (
             <NavLink
               key={link.path}
-              className={({ isActive }) => isActive && 'footer__link__current'}
+              className={({ isActive }) => (isActive ? 'footer__link__current' : '')}
               to={link.path}
             >
               <Typography className='footer__navigate__link' as='p' variant='text' size='xs'>
